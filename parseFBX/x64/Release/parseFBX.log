@@ -1,0 +1,708 @@
+﻿  Commom.cpp
+  DLLInterface.cpp
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(107,1): warning C4099: “Quaternionf”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(106): message : 参见“Quaternionf”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(172,1): warning C4099: “Matrix4x4f”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(224,1): warning C4099: “Matrix3x3f”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(223): message : 参见“Matrix3x3f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(230,47): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(231): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(231,21): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(265,46): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\ProcessFBX.h(296,26): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Triangulate.h(63,9): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Triangulate.h(184,69): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\FBXFileIO.h(96,47): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\FBXFileIO.h(138,65): warning C4244: “参数”: 从“__int64”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=uint32_t
+          ]
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\FBXFileIO.h(195,47): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\MikkTSpace.h(17,40): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\MikkTSpace.h(1723,50): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\MikkTSpace.h(1723,50): warning C4267: “初始化”: 从“size_t”转换到“const uint32_t”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\MikkTSpace.h(1725,32): warning C4018: “<”: 有符号/无符号不匹配
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\dynamic_bitset.h(477,44): warning C4267: “初始化”: 从“size_t”转换到“dynamic_bitset::block_type”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\dynamic_bitset.h(477,44): warning C4267: “初始化”: 从“size_t”转换到“const dynamic_bitset::block_type”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\dynamic_bitset.h(535,44): warning C4267: “初始化”: 从“size_t”转换到“dynamic_bitset::block_type”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\dynamic_bitset.h(535,44): warning C4267: “初始化”: 从“size_t”转换到“const dynamic_bitset::block_type”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(295,68): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(358,51): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(358,51): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(372,48): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(372,48): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(443,54): warning C4267: “参数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(615,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(615,1): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(616,1): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(646,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(675,1): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(709,53): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(745,47): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(745,47): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(771,62): warning C4267: “参数”: 从“size_t”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=uint32_t
+          ]
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(858,53): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(249,55): warning C4267: “初始化”: 从“size_t”转换到“_Ty2”，可能丢失数据
+          with
+          [
+              _Ty2=int
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(707): message : 查看对正在编译的函数 模板 实例化“std::pair<const SubsetKey,int>::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64,0>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&) noexcept”的引用
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(714): message : 查看对正在编译的函数 模板 实例化“std::pair<const SubsetKey,int>::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64,0>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&) noexcept”的引用
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(811): message : 查看对正在编译的函数 模板 实例化“void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(_Alloc &,_Objty *const ,std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<std::allocator<std::pair<const SubsetKey,int>>>::void_pointer>>,
+              _Ty=std::pair<const SubsetKey,int>,
+              _Objty=std::pair<const SubsetKey,int>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(812): message : 查看对正在编译的函数 模板 实例化“void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(_Alloc &,_Objty *const ,std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<std::allocator<std::pair<const SubsetKey,int>>>::void_pointer>>,
+              _Ty=std::pair<const SubsetKey,int>,
+              _Objty=std::pair<const SubsetKey,int>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(1007): message : 查看对正在编译的函数 模板 实例化“std::_Tree_temp_node<std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_Tree_temp_node<_Ty>(_Alnode &,std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer> *,_Ty &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>,
+              _Ty=std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>,
+              _Alnode=std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<std::allocator<std::pair<const SubsetKey,int>>>::void_pointer>>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(1020): message : 查看对正在编译的函数 模板 实例化“std::_Tree_temp_node<std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_Tree_temp_node<_Ty>(_Alnode &,std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer> *,_Ty &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>,
+              _Ty=std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>,
+              _Alnode=std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<std::allocator<std::pair<const SubsetKey,int>>>::void_pointer>>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(1044): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer> *,bool> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::_Emplace<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>,
+              _Kty=SubsetKey,
+              _Ty=int,
+              _Pr=std::less<SubsetKey>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(1045): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer> *,bool> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::_Emplace<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>,
+              _Kty=SubsetKey,
+              _Ty=int,
+              _Pr=std::less<SubsetKey>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(165): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const SubsetKey,int>>>>,bool> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::emplace<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Kty=SubsetKey,
+              _Ty=int,
+              _Pr=std::less<SubsetKey>,
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(165): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const SubsetKey,int>>>>,bool> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::emplace<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Kty=SubsetKey,
+              _Ty=int,
+              _Pr=std::less<SubsetKey>,
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>
+          ]
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(701): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const SubsetKey,int>>>>,bool> std::map<SubsetKey,int,std::less<SubsetKey>,std::allocator<std::pair<const SubsetKey,int>>>::insert<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>,0>(_Valty &&)”的引用
+          with
+          [
+              _Valty=std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>
+          ]
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\DLLInterface.cpp(701): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const SubsetKey,int>>>>,bool> std::map<SubsetKey,int,std::less<SubsetKey>,std::allocator<std::pair<const SubsetKey,int>>>::insert<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>,0>(_Valty &&)”的引用
+          with
+          [
+              _Valty=std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>
+          ]
+  parseFBX.cpp
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(107,1): warning C4099: “Quaternionf”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(106): message : 参见“Quaternionf”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(172,1): warning C4099: “Matrix4x4f”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(224,1): warning C4099: “Matrix3x3f”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(223): message : 参见“Matrix3x3f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(230,47): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(231): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(231,21): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(265,46): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\parseFBX.cpp(12,1): warning C4326: “main”的返回类型应为“int”而非“void”
+  Utility.cpp
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(107,1): warning C4099: “Quaternionf”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(106): message : 参见“Quaternionf”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(172,1): warning C4099: “Matrix4x4f”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(224,1): warning C4099: “Matrix3x3f”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(223): message : 参见“Matrix3x3f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(230,47): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(231): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(231,21): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(265,46): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\importfbx\parseFBX\Utility.h(171): message : 参见“Matrix4x4f”的声明
+    正在创建库 E:\parseFBXNew\fbxbinary\importfbx\x64\Release\ImportFBX.lib 和对象 E:\parseFBXNew\fbxbinary\importfbx\x64\Release\ImportFBX.exp
+  正在生成代码
+  2223 of 2247 functions (98.9%) were compiled, the rest were copied from previous compilation.
+    28 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+libfbxsdk-md.lib(OArchive.cpp.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(OArchive.cpp.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IArchive.cpp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IArchive.cpp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(OrImpl.cpp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(OrImpl.cpp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(CprImpl.cpp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(CprImpl.cpp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ArImpl.cpp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ArImpl.cpp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IArchive.cpp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IArchive.cpp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(OrImpl.cpp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(OrImpl.cpp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(CprImpl.cpp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(CprImpl.cpp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ArImpl.cpp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ArImpl.cpp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(OStream.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(OStream.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(OGroup.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(OGroup.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(OData.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(OData.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IStreams.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(IStreams.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IGroup.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IGroup.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IData.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(IData.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(InternalUtil.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(InternalUtil.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IMaterial.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IMaterial.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(XformSample.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(XformSample.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(XformOp.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(XformOp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IXform.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IXform.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ISubD.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ISubD.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IPolyMesh.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IPolyMesh.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(INuPatch.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(INuPatch.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IFaceSet.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IFaceSet.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ICurves.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(ICurves.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(Read.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(Read.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IFactory.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IFactory.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IScalarProperty.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IScalarProperty.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ISampleSelector.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ISampleSelector.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IObject.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IObject.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ICompoundProperty.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(ICompoundProperty.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IArrayProperty.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IArrayProperty.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ErrorHandler.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(ErrorHandler.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ArchiveInfo.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ArchiveInfo.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(WriteUtil.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(WriteUtil.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(StreamManager.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(StreamManager.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(SpwImpl.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(SpwImpl.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(SprImpl.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(SprImpl.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ReadWrite.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(ReadWrite.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ReadUtil.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ReadUtil.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(OwImpl.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(OwImpl.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(OwData.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(OwData.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(OrData.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(OrData.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(MetaDataMap.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(MetaDataMap.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(CpwImpl.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(CpwImpl.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(CpwData.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(CpwData.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(CprData.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(CprData.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(AwImpl.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(AwImpl.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ApwImpl.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ApwImpl.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(AprImpl.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(AprImpl.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(TimeSamplingType.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(TimeSamplingType.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(TimeSampling.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(TimeSampling.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ScalarPropertyWriter.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ScalarPropertyWriter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ScalarPropertyReader.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ScalarPropertyReader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ObjectWriter.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ObjectWriter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ObjectReader.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ObjectReader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(Foundation.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(Foundation.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(CompoundPropertyWriter.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(CompoundPropertyWriter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(CompoundPropertyReader.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(CompoundPropertyReader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(BasePropertyWriter.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(BasePropertyWriter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(BasePropertyReader.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(BasePropertyReader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ArraySample.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ArraySample.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ArrayPropertyWriter.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ArrayPropertyWriter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ArrayPropertyReader.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ArrayPropertyReader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ArchiveWriter.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ArchiveWriter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ArchiveReader.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ArchiveReader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(TokenMap.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(TokenMap.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(SpookyV2.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(SpookyV2.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(Murmur3.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(Murmur3.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ImathExc.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(ImathExc.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(IexBaseExc.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(IexBaseExc.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(half.obj) : warning LNK4099: 未找到 PDB“alembic-md.pdb”(使用“libfbxsdk-md.lib(half.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\alembic-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSTmpFilename.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSTmpFilename.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSLocalFileTransport.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSLocalFileTransport.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSIOStream.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSIOStream.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSFilename.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(awOSFilename.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSFileTransport.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSFileTransport.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSFileStatus.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSFileStatus.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSFileOps.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSFileOps.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSFileFactory.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSFileFactory.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSFile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSFile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awOSFSAllocator.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awOSFSAllocator.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awPointCache2IO.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awPointCache2IO.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awCacheFileInterface.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awCacheFileInterface.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awCacheFileIffIO.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awCacheFileIffIO.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awCacheFileIO.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awCacheFileIO.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awCacheFileAccessor.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awCacheFileAccessor.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awCacheDescriptionIO.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awCacheDescriptionIO.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awCacheData.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awCacheData.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awCacheChannel.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awCacheChannel.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awUtilInitializer.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(awUtilInitializer.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awUtilError.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awUtilError.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awStringConvert.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awStringConvert.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awStringCType.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awStringCType.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awString.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awString.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(xmlHelper.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(xmlHelper.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(unzip.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(unzip.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(ioapi.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(ioapi.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_write8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_write8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_write.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_write.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_work.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_work.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_wait.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_wait.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_unread8.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(iff_unread8.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_unread.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_unread.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_tmpname.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_tmpname.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_skipgroup8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_skipgroup8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_skipgroup.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_skipgroup.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_sget8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_sget8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_sget.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_sget.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_settmp8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_settmp8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_settmp.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_settmp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_setdelay.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_setdelay.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_seek8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_seek8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_seek.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_seek.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_scanlist.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_scanlist.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_readchunk8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_readchunk8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_readchunk.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_readchunk.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_read8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_read8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_read.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_read.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_puts8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_puts8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_puts.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_puts.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_putchunk8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_putchunk8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_putchunk.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_putchunk.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_oserror.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_oserror.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_nodes.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_nodes.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_minfo8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_minfo8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_minfo.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_minfo.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_marks8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_marks8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_marks.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_marks.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_list.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_list.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_istty8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_istty8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_istty.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_istty.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_gettype.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_gettype.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_gets8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_gets8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_gets.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_gets.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_getext.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_getext.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_getchunk8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_getchunk8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_getchunk.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_getchunk.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_fmemory.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_fmemory.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_flush8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_flush8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_flush.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_flush.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_flsetid8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_flsetid8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_flsetid.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_flsetid.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_flpath.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_flpath.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_flibopen8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_flibopen8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_flibopen.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_flibopen.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_findfile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_findfile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_filter8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_filter8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_filter.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(iff_filter.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_fdwrite.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_fdwrite.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_exec.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_exec.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_errno.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_errno.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_edit8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_edit8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_edit.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_edit.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_context8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_context8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_context.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_context.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnwrite8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnwrite8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnwrite.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(iff_bgnwrite.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnwgroup8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnwgroup8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnwgroup.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnwgroup.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnwbchunk8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnwbchunk8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnwbchunk.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnwbchunk.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnrgroup8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnrgroup8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnrgroup.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnrgroup.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnread8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnread8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnread.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnread.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnput8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnput8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnput.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnput.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnget8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnget8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(iff_bgnget.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(iff_bgnget.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awIffTag.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awIffTag.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awIffFile8.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awIffFile8.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awIffFile4.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awIffFile4.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awIffFile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awIffFile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awTess2dConstrainedTriangulate.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awTess2dConstrainedTriangulate.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awGeomTopoMeshIterators.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awGeomTopoMeshIterators.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awGeomTopoMesh.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awGeomTopoMesh.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awhashfunction.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awhashfunction.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(al_nprintf.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(al_nprintf.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearVector2.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearVector2.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearVector.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearVector.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearRange3d.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearRange3d.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearRange2d.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearRange2d.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearRange1d.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearRange1d.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearPoint2.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearPoint2.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearPoint.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearPoint.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearPlane.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearPlane.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearParamPlane.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearParamPlane.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearParamLine.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearParamLine.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearNormal.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinearNormal.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearLine.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(awLinearLine.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinearAffineMatrix.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(awLinearAffineMatrix.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(awLinear.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(awLinear.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxusernotification.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxusernotification.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxscenecheckutility.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxscenecheckutility.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxrootnodeutility.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxrootnodeutility.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxrenamingstrategyutilities.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxrenamingstrategyutilities.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxrenamingstrategyfbx6.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxrenamingstrategyfbx6.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxrenamingstrategyfbx5.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxrenamingstrategyfbx5.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxrenamingstrategybase.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxrenamingstrategybase.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxrenamingstrategy.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxrenamingstrategy.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxprocessorxrefuserlib.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxprocessorxrefuserlib.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxprocessorxref.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxprocessorxref.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxprocessorshaderdependency.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxprocessorshaderdependency.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxprocessor.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxprocessor.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnodefinderduplicatename.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxnodefinderduplicatename.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnodefinder.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxnodefinder.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnamehandler.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxnamehandler.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmessage.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmessage.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmaterialconverter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmaterialconverter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmanipulators.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmanipulators.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlog.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlog.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlocale.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlocale.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlimitsutilities.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlimitsutilities.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxgeometryconverter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxgeometryconverter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxembeddedfilesaccumulator.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxembeddedfilesaccumulator.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxdependencieshelper.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxdependencieshelper.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxdeformationsevaluator.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxdeformationsevaluator.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxclonemanager.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxclonemanager.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxtexture.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxtexture.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsurfacephong.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsurfacephong.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsurfacematerial.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsurfacematerial.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsurfacelambert.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsurfacelambert.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsemanticentryview.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsemanticentryview.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxpropertyentryview.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxpropertyentryview.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxproceduraltexture.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxproceduraltexture.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxoperatorentryview.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxoperatorentryview.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlayeredtexture.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlayeredtexture.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbximplementationfilter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbximplementationfilter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbximplementation.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbximplementation.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfiletexture.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxfiletexture.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxentryview.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxentryview.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstantentryview.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstantentryview.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxbindingtableentry.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxbindingtableentry.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxbindingtablebase.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxbindingtablebase.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxbindingtable.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxbindingtable.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxbindingoperator.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxbindingoperator.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxweightedmapping.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxweightedmapping.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxvertexcachedeformer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxvertexcachedeformer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxuniformsurfaceutils.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxuniformsurfaceutils.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxtrimnurbssurface.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxtrimnurbssurface.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsurfaceevaluator.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsurfaceevaluator.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsubdiv.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsubdiv.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsubdeformer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsubdeformer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxskin.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxskin.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxskeleton.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxskeleton.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxshape.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxshape.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxproceduralgeometry.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxproceduralgeometry.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxpatch.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxpatch.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxopticalreference.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxopticalreference.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnurbssurfaceevaluator.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxnurbssurfaceevaluator.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnurbssurface.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxnurbssurface.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnurbscurveevaluator.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxnurbscurveevaluator.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnurbscurve.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxnurbscurve.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnurbs.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxnurbs.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnull.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxnull.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnodeattribute.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxnodeattribute.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxnode.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxnode.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmesh.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxmesh.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmarker.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmarker.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlodgroup.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlodgroup.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxline.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxline.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlight.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlight.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlayercontainer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlayercontainer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlayer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlayer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxgeometryweightedmap.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxgeometryweightedmap.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxgeometrybase.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxgeometrybase.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxgeometry.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxgeometry.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxgenericnode.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxgenericnode.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxdeformer.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxdeformer.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcluster.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcluster.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcameraswitcher.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcameraswitcher.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcamerastereo.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcamerastereo.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcamera.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcamera.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcachedeffect.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcachedeffect.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcache.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcache.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxblendshapechannel.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxblendshapechannel.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxblendshape.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxblendshape.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcontrolset.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcontrolset.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstraintsinglechainik.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstraintsinglechainik.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstraintscale.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstraintscale.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstraintrotation.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstraintrotation.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstraintposition.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstraintposition.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstraintparent.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstraintparent.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstraintcustom.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstraintcustom.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstraintaim.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstraintaim.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconstraint.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconstraint.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcharacterpose.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcharacterpose.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcharacter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcharacter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurveutils.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurveutils.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurvenode.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurvenode.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurveglobal.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurveglobal.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurvefilterunroll.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurvefilterunroll.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurvefilterkeysync.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurvefilterkeysync.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurvefiltergimblekiller.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurvefiltergimblekiller.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurvefilterconstkeyredu.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurvefilterconstkeyredu.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurvefilter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurvefilter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfcurve.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfcurve.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kdatatypes.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kdatatypes.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimutilities.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimutilities.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimstack.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimstack.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimlayer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimlayer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimevaluator.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimevaluator.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimevalstate.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimevalstate.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimevalclassic.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxanimevalclassic.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvenode.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvenode.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvekfcurve.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvekfcurve.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefilterunroll.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefilterunroll.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefiltertss.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefiltertss.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefilterscalecompensate.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefilterscalecompensate.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefilterscale.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefilterscale.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefilterresample.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefilterresample.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefiltermatrixconverter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefiltermatrixconverter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefilterkeysync.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefilterkeysync.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefilterkeyreducer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefilterkeyreducer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefiltergimblekiller.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefiltergimblekiller.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefilterconstkeyredu.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefilterconstkeyredu.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvefilter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvefilter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurvebase.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurvebase.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxanimcurve.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxanimcurve.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxvideo.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxvideo.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxthumbnail.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxthumbnail.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxtakeinfo.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxtakeinfo.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxselectionset.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxselectionset.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxselectionnode.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxselectionnode.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxscene.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxscene.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreference.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreference.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxpose.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxpose.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxobjectscontainer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxobjectscontainer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxobjectmetadata.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxobjectmetadata.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmediaclip.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmediaclip.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlibrary.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxlibrary.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxenvironment.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxenvironment.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxdocumentinfo.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxdocumentinfo.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxdocument.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxdocument.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxdisplaylayer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxdisplaylayer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcontainertemplate.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcontainertemplate.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcontainer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcontainer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcollectionexclusive.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcollectionexclusive.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcollection.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcollection.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxaxissystem.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxaxissystem.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxaudiolayer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxaudiolayer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxaudio.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxaudio.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderzip.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderzip.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwritervicon.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwritervicon.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxviconbase.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxviconbase.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreadervicon.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreadervicon.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfilevicon.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxfilevicon.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriterobj.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriterobj.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderobj.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderobj.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwritermotionanalysistrc.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxwritermotionanalysistrc.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwritermotionanalysishtr.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwritermotionanalysishtr.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreadermotionanalysistrc.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreadermotionanalysistrc.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreadermotionanalysishtr.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreadermotionanalysishtr.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfilemotionanalysistrc.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxfilemotionanalysistrc.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfilemotionanalysishtr.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxfilemotionanalysishtr.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwritermotionbase.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwritermotionbase.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxuniquenameobjectlist.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxuniquenameobjectlist.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxtextfile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxtextfile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreadermotionbase.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxreadermotionbase.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriterfbx7.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriterfbx7.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriterfbx6.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxwriterfbx6.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriterfbx5.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriterfbx5.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderfbx7.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxreaderfbx7.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderfbx6.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderfbx6.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderfbx5.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderfbx5.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmemoryfile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmemoryfile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxiofieldzlib.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxiofieldzlib.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxiofieldlist.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxiofieldlist.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxiofield.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxiofield.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxio.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxio.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxencryptedfile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxencryptedfile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcrcfile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcrcfile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxchainedfile.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxchainedfile.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcachedfile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcachedfile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriterdxf.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriterdxf.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderdxf.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderdxf.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwritercollada14.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwritercollada14.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreadercollada14.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreadercollada14.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcolladautils.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcolladautils.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcolladanamespace.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcolladanamespace.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcolladaiostream.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxcolladaiostream.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcolladaelement.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcolladaelement.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcolladaanimationelement.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcolladaanimationelement.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriterbiovision.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriterbiovision.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderbiovision.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderbiovision.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfilebiovision.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxfilebiovision.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxalembicxform.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxalembicxform.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxalembicutils.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxalembicutils.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxalembicreader.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxalembicreader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxalembicobject.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxalembicobject.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxalembicmaterial.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxalembicmaterial.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxalembicinterface.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxalembicinterface.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxalembicgeometry.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxalembicgeometry.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriteradaptiveoptics.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriteradaptiveoptics.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderadaptiveoptics.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderadaptiveoptics.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfileadaptiveoptics.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxfileadaptiveoptics.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriteracclaimasf.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriteracclaimasf.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriteracclaimamc.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriteracclaimamc.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderacclaimasf.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderacclaimasf.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreaderacclaimamc.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreaderacclaimamc.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfileacclaimasf.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxfileacclaimasf.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfileacclaimamc.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxfileacclaimamc.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(swapbyte.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(swapbyte.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(strdup.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(strdup.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(smartall.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(smartall.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(seekchil.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(seekchil.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(kfutils.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(kfutils.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(dbase3ds.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(dbase3ds.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(chunk3ds.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(chunk3ds.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsvers.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsvers.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsutil.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsutil.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsstrlf.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsstrlf.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dssptm.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dssptm.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsrobj.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsrobj.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsprim.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsprim.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsomnm.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(3dsomnm.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsobjm.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsobjm.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsmset.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsmset.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsmobj.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsmobj.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsmatr.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsmatr.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dslites.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dslites.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dskey.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dskey.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsiobj.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsiobj.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dshier.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dshier.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsfile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsfile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dserr.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dserr.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dscamr.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dscamr.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dscamm.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dscamm.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(3dsbgnd.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(3dsbgnd.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriter3ds.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriter3ds.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreader3ds.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreader3ds.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxwriter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxwriter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxstatistics.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxstatistics.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxreader.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxreader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxprogress.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxprogress.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxiosettings.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxiosettings.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxiopluginregistry.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxiopluginregistry.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxiobase.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxiobase.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxinternalfileio.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxinternalfileio.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbximporter.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbximporter.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxglobalsettings.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxglobalsettings.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxgloballightsettings.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxgloballightsettings.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxglobalcamerasettings.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxglobalcamerasettings.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxexporter.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxexporter.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcallbacks.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxcallbacks.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxbase64coder.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxbase64coder.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxthread.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxthread.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsync.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsync.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxclock.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxclock.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxatomic.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxatomic.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxvector4.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxvector4.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxvector2.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxvector2.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxtransforms.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxtransforms.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxquaternion.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxquaternion.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmatrix.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmatrix.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmath.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmath.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxdualquaternion.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxdualquaternion.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxaffinematrix.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxaffinematrix.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxutils.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxutils.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxtimecode.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxtimecode.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxtime.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxtime.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxstringlist.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxstringlist.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxstring.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxstring.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxstatus.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxstatus.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmultimap.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmultimap.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmemorypool.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmemorypool.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfolder.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxfolder.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxfile.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxfile.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxcharptrset.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxcharptrset.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxbitset.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxbitset.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxalloc.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxalloc.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxxref.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxxref.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsystemunit.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsystemunit.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxsymbol.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxsymbol.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxstream.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxstream.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxscopedloadingfilename.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxscopedloadingfilename.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxscopedloadingdirectory.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxscopedloadingdirectory.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxquery.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxquery.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxpropertytypes.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxpropertytypes.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxpropertypage.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxpropertypage.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxpropertyhandle.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxpropertyhandle.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxpropertydef.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxpropertydef.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxproperty.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxproperty.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxplugincontainer.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxplugincontainer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxplugin.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxplugin.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxperipheral.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxperipheral.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxobject.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxobject.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmodule.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmodule.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxmanager.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxmanager.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxloadingstrategy.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxloadingstrategy.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxlistener.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxlistener.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxevents.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxevents.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxemitter.obj) : warning LNK4099: 未找到 PDB“”(使用“libfbxsdk-md.lib(fbxemitter.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxdatatypes.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxdatatypes.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxconnectionpoint.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxconnectionpoint.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libfbxsdk-md.lib(fbxclassid.obj) : warning LNK4099: 未找到 PDB“libfbxsdk-md.pdb”(使用“libfbxsdk-md.lib(fbxclassid.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libfbxsdk-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(buf.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(buf.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(chvalid.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(chvalid.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(dict.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(dict.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(encoding.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(encoding.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(entities.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(entities.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(error.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(error.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(globals.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(globals.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(hash.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(hash.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(list.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(list.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(parser.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(parser.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(parserInternals.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(parserInternals.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(pattern.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(pattern.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(relaxng.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(relaxng.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(SAX2.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(SAX2.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(threads.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(threads.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(tree.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(tree.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(uri.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(uri.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(valid.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(valid.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xinclude.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xinclude.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlIO.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlIO.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlmemory.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlmemory.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlreader.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlreader.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlregexp.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlregexp.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlsave.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlsave.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlschemas.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlschemas.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlschemastypes.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlschemastypes.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlstring.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlstring.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xmlunicode.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xmlunicode.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xpath.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xpath.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+libxml2-md.lib(xpointer.obj) : warning LNK4099: 未找到 PDB“libxml2-md.pdb”(使用“libxml2-md.lib(xpointer.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\libxml2-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+zlib-md.lib(adler32.obj) : warning LNK4099: 未找到 PDB“zlib-md.pdb”(使用“zlib-md.lib(adler32.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\zlib-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+zlib-md.lib(crc32.obj) : warning LNK4099: 未找到 PDB“zlib-md.pdb”(使用“zlib-md.lib(crc32.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\zlib-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+zlib-md.lib(deflate.obj) : warning LNK4099: 未找到 PDB“zlib-md.pdb”(使用“zlib-md.lib(deflate.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\zlib-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+zlib-md.lib(inflate.obj) : warning LNK4099: 未找到 PDB“zlib-md.pdb”(使用“zlib-md.lib(inflate.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\zlib-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+zlib-md.lib(inftrees.obj) : warning LNK4099: 未找到 PDB“zlib-md.pdb”(使用“zlib-md.lib(inftrees.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\zlib-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+zlib-md.lib(inffast.obj) : warning LNK4099: 未找到 PDB“zlib-md.pdb”(使用“zlib-md.lib(inffast.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\zlib-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+zlib-md.lib(trees.obj) : warning LNK4099: 未找到 PDB“zlib-md.pdb”(使用“zlib-md.lib(trees.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\zlib-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+zlib-md.lib(zutil.obj) : warning LNK4099: 未找到 PDB“zlib-md.pdb”(使用“zlib-md.lib(zutil.obj)”或在“E:\parseFBXNew\fbxbinary\importfbx\x64\Release\zlib-md.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+  parseFBX.vcxproj -> E:\parseFBXNew\fbxbinary\importfbx\x64\Release\ImportFBX.exe

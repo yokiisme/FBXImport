@@ -1,0 +1,246 @@
+﻿  DLLInterface.cpp
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(71,1): warning C4099: “Quaternionf”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(70): message : 参见“Quaternionf”的声明
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(105,1): warning C4099: “Matrix4x4f”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(104): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(157,1): warning C4099: “Matrix3x3f”: 类型名称以前使用“class”现在使用的是“struct”
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(156): message : 参见“Matrix3x3f”的声明
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(163,47): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(104): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(164): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(104): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(164,21): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(104): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(198,46): warning C4099: “Matrix4x4f”: 类型名称以前使用“struct”现在使用的是“class”
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\Utility.h(104): message : 参见“Matrix4x4f”的声明
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\MikkTSpace.h(17,40): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\MikkTSpace.h(1723,50): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\MikkTSpace.h(1723,50): warning C4267: “初始化”: 从“size_t”转换到“const uint32_t”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\MikkTSpace.h(1725,32): warning C4018: “<”: 有符号/无符号不匹配
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\dynamic_bitset.h(477,44): warning C4267: “初始化”: 从“size_t”转换到“dynamic_bitset::block_type”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\dynamic_bitset.h(477,44): warning C4267: “初始化”: 从“size_t”转换到“const dynamic_bitset::block_type”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\dynamic_bitset.h(535,44): warning C4267: “初始化”: 从“size_t”转换到“dynamic_bitset::block_type”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\dynamic_bitset.h(535,44): warning C4267: “初始化”: 从“size_t”转换到“const dynamic_bitset::block_type”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(214,47): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(235,103): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(235,80): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(235,57): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(248,114): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(248,91): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(248,68): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(266,114): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(266,91): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(266,68): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(296,37): warning C4244: “初始化”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(297,37): warning C4244: “初始化”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(299,38): warning C4244: “初始化”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(300,38): warning C4244: “初始化”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(306,157): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(306,107): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(314,37): warning C4244: “初始化”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(315,37): warning C4244: “初始化”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(320,37): warning C4244: “初始化”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(321,37): warning C4244: “初始化”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(322,157): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(322,107): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(404,59): warning C4267: “参数”: 从“size_t”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=uint32_t
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(519,47): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(744,65): warning C4244: “参数”: 从“__int64”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=uint32_t
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(794,47): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1156,26): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1385,68): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1446,9): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1565,69): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1630,51): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1630,51): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1644,48): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1644,48): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1712,54): warning C4267: “参数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1878,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1878,1): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1879,1): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1907,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1936,1): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1970,53): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(2002,47): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(2002,47): warning C4267: “初始化”: 从“size_t”转换到“const int”，可能丢失数据
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(2028,62): warning C4267: “参数”: 从“size_t”转换到“_Ty”，可能丢失数据
+          with
+          [
+              _Ty=uint32_t
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(2102,53): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\utility(249,55): warning C4267: “初始化”: 从“size_t”转换到“_Ty2”，可能丢失数据
+          with
+          [
+              _Ty2=int
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(707): message : 查看对正在编译的函数 模板 实例化“std::pair<const SubsetKey,int>::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64,0>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&) noexcept”的引用
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xmemory(714): message : 查看对正在编译的函数 模板 实例化“std::pair<const SubsetKey,int>::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64,0>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&) noexcept”的引用
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(811): message : 查看对正在编译的函数 模板 实例化“void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(_Alloc &,_Objty *const ,std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<std::allocator<std::pair<const SubsetKey,int>>>::void_pointer>>,
+              _Ty=std::pair<const SubsetKey,int>,
+              _Objty=std::pair<const SubsetKey,int>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(812): message : 查看对正在编译的函数 模板 实例化“void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(_Alloc &,_Objty *const ,std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<std::allocator<std::pair<const SubsetKey,int>>>::void_pointer>>,
+              _Ty=std::pair<const SubsetKey,int>,
+              _Objty=std::pair<const SubsetKey,int>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(1007): message : 查看对正在编译的函数 模板 实例化“std::_Tree_temp_node<std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_Tree_temp_node<_Ty>(_Alnode &,std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer> *,_Ty &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>,
+              _Ty=std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>,
+              _Alnode=std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<std::allocator<std::pair<const SubsetKey,int>>>::void_pointer>>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(1020): message : 查看对正在编译的函数 模板 实例化“std::_Tree_temp_node<std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_Tree_temp_node<_Ty>(_Alnode &,std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer> *,_Ty &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>,
+              _Ty=std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>,
+              _Alnode=std::allocator<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<std::allocator<std::pair<const SubsetKey,int>>>::void_pointer>>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(1044): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer> *,bool> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::_Emplace<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>,
+              _Kty=SubsetKey,
+              _Ty=int,
+              _Pr=std::less<SubsetKey>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xtree(1045): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_node<std::pair<const SubsetKey,int>,std::_Default_allocator_traits<_Alloc>::void_pointer> *,bool> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::_Emplace<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>,
+              _Kty=SubsetKey,
+              _Ty=int,
+              _Pr=std::less<SubsetKey>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(165): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const SubsetKey,int>>>>,bool> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::emplace<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Kty=SubsetKey,
+              _Ty=int,
+              _Pr=std::less<SubsetKey>,
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(165): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const SubsetKey,int>>>>,bool> std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>::emplace<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>>(std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64> &&)”的引用
+          with
+          [
+              _Kty=SubsetKey,
+              _Ty=int,
+              _Pr=std::less<SubsetKey>,
+              _Alloc=std::allocator<std::pair<const SubsetKey,int>>
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1962): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const SubsetKey,int>>>>,bool> std::map<SubsetKey,int,std::less<SubsetKey>,std::allocator<std::pair<const SubsetKey,int>>>::insert<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>,0>(_Valty &&)”的引用
+          with
+          [
+              _Valty=std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>
+          ]
+E:\parseFBXNew\fbxbinary\parseFBX\parseFBX\DLLInterface.cpp(1962): message : 查看对正在编译的函数 模板 实例化“std::pair<std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<const SubsetKey,int>>>>,bool> std::map<SubsetKey,int,std::less<SubsetKey>,std::allocator<std::pair<const SubsetKey,int>>>::insert<std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>,0>(_Valty &&)”的引用
+          with
+          [
+              _Valty=std::pair<std::pair<int,GfxPrimitiveType>,unsigned __int64>
+          ]
+  parseFBX.vcxproj -> E:\parseFBXNew\fbxbinary\parseFBX\x64\Debug\ImportFBX.exe
