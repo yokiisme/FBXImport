@@ -1,0 +1,456 @@
+syntax = "proto3";
+
+import "ProtoBuffCommon.proto";
+
+package message;
+
+//资产:碰撞Mesh资源结构 UGCColliderMesh,为了gs能读取,采用了自定义资源
+message UGCColliderMeshData
+{
+    repeated float Vertexs=1;
+    //uint16 encode
+    repeated int32 Indices=2;
+}
+enum EUGCColliderType
+{
+    Box=0;
+    Sphere=1;
+    Capsule=2;
+    MeshCollider=3;
+}
+//UGCGameObjectData 里记录的碰撞信息
+message UGCColliderInfoData
+{
+    EUGCColliderType ColliderType=1;
+    ProtoBuffVector3 Offset=2;
+    ProtoBuffVector3 Scale=3;
+    ProtoBuffQuaternion Rotation=4;
+    bool IsTrigger = 5;
+    bool IsConvexIfMesh = 6;
+    string MeshColliderUUID=7;
+}
+enum EUGCRendererDataSource
+{
+    SourceMeshAndMaterial=0;
+    SourceABGameObject=1;
+}
+//资产: UGCGameObject
+message UGCGameObjectData
+{
+    string EngineMeshUUID=1;
+    repeated string UGCMaterialUUIDList=2;
+    //碰撞信息
+    repeated UGCColliderInfoData ColliderList=3;
+    //Renderer的数据来源,0=EngineMeshUUID+UGCMaterialUUIDList组合而成;1=ABResUUID 指向的资源
+    EUGCRendererDataSource RendererDataSource = 4;
+    //AssetBundle里的资源 ID
+    string ABGameObjectResUUID=5;
+    //关闭 ABResUUID 资源 里的碰撞
+    bool DisableABResCollision=6;
+    // 是否是蒙皮模型
+    bool IsSkinnedMesh = 7;
+}
+//资产: UGCResourceCollider
+message UGCResourceColliderData
+{
+    //碰撞信息
+    repeated UGCColliderInfoData ColliderList=3;
+}
+
+/*
+enum EUGCMaterialParamDataType
+{
+    float=0;
+    vector=1;
+    texture=2;
+    color=3;
+    integer=4;
+}
+*/
+message ProtoBuffVector4 
+{
+	float X = 1;
+	float Y = 2;
+	float Z = 3;
+	float W = 4;
+}
+//具体包含哪些值,需要扩充
+message UGCMaterialParamData
+{
+    string Name=1;
+    //EUGCMaterialParamDataType DataType=2;
+    oneof Value{
+        float FloatValue=2;
+        string TextureUUID=3;
+        ProtoBuffVector4 Vector=4;
+        int32 IntValue=5;
+        int32 ColorValue=6;
+        string EnableKeyword=7;
+    }
+}
+//资产:UGCMaterial
+message UGCMaterialData
+{
+    string ShaderName=1;
+    repeated UGCMaterialParamData ShaderParamList=2;
+}
+
+//资源:UGCResourceUIAtlasData,图集资源
+message UGCResourceUIAtlasData
+{
+    string MaterialResUUID = 1;
+    float PixelSize = 2;
+    repeated UGCResourceUISpriteData Sprites = 3;
+
+}
+//资源:UGCResourceUISpriteData,图集精灵资源
+message UGCResourceUISpriteData
+{
+	string Name = 1;
+	int32 X = 2;
+	int32 Y = 3;
+	int32 Width = 4;
+	int32 Height = 5;
+
+	int32 BorderLeft = 6;
+	int32 BorderRight = 7;
+	int32 BorderTop = 8;
+	int32 BorderBottom = 9;
+
+	int32 PaddingLeft = 10;
+	int32 PaddingRight = 11;
+	int32 PaddingTop = 12;
+	int32 PaddingBottom = 13;
+}
+
+
+enum EUGCPackageShareType
+{
+    Private=0;
+    Public=1;
+}
+enum EUGCPackageType
+{
+    Custom=0;
+    UnityBundle=1;
+    FFBuildinResource=2;
+    WebCustom=3;
+    VirtualResource=4;
+}
+enum EUGCPackagePlatform
+{
+    Any=0;
+    Android=1;
+    IOS=2;
+    Desktop=3;
+}
+enum EUGCPackageUseableType
+{
+    ClientOnly=0;
+    ServerOnly=1;
+    ClientServer=2;
+}
+
+enum EUGCResourceType
+{
+    GameObject = 0;
+    Texture2D = 1;
+    Mesh = 2;
+    Material=3;
+    AnimationClip=4;
+    AudioClip=5;
+    //骨骼模型
+    SkeletonMesh=6;
+    //骨架
+    Skeleton = 7;
+    //UGCMeshPrefab=9;
+    ColliderMesh=10;
+    Text=11;
+    //植被系统
+    GrassSystem=12;
+    CSV = 13;
+    UIAtlas = 14;
+    ABGameObjectRes = 15;
+    //碰撞信息
+    Collider=16;
+    //
+    AnimationController=17;
+    //带事件信息的AnimationClip
+    EventAnimationClip = 18;
+    //Avatar 换装资源
+    Avatar = 19;
+    Other = 29;
+    Folder=30;
+}
+
+message UGCResourcePackageItem
+{
+    string UUID = 1;
+    EUGCResourceType Type = 2;
+    string Path = 3;
+    bytes Data = 4;
+    //是否是UnityAssetBundle里的资源
+    bool IsUnityAssetBundleRes = 5;
+}
+message UGCAssetBundleData
+{
+    string Path = 1;
+    string Hash = 2;
+    int32 Size=3;
+    repeated string DependencesBundle = 4;
+}
+message UGCAllUnityBundle
+{
+    repeated UGCAssetBundleData BundleList = 1;
+}
+//UGC资产打包文件
+message UGCResourcePackageData
+{
+    string Name=1;
+    string UUID=2;
+    EUGCPackageShareType ShareType=3;
+    EUGCPackageType PackageType = 4;
+    //Client/Server 是否需要
+    EUGCPackageUseableType UseableType = 5;
+    EUGCPackagePlatform Platform=6;
+    string Version=7;
+    int32 DataFormatVersion=8;
+    UGCAllUnityBundle AllUnityBundles=9;
+    repeated UGCResourcePackageItem ResourceList=10;
+}
+
+enum EUGCPackageRefVersionType
+{
+    //使用指定版本
+    SpecialVersion=0;
+    //始终使用最新版本
+    AlwaysNewestVersion=1;    
+}
+
+
+message UGCResourcePackageRefInfo
+{
+    string Name=1;
+    string UUID=2;
+    EUGCPackageRefVersionType RefVersionType=3;
+    //使用的Package版本(为了跨Game使用同一个Package,因此使用MD5作为版本号)
+    string UseVersionMD5=4;
+    //Client/Server 是否需要
+    EUGCPackageUseableType WhoRequire = 5;
+    //根据不同平台下载不同的资源Package
+    bool PlatformSpecial=6;
+}
+
+//下载ResourcePackage所需要的描述信息
+message UGCResourcePackageDownloadDesc
+{
+    //ResourcePackage 的UUID
+    string PackageUUID=1;
+    //下载url的类型标签
+    string DownloadPackageUrlTag=2;
+    //下载package的url相关信息
+    string DownloadPackageUrlInfo=3;
+    //下载url的类型标签
+    string DownloadExtUrlTag=4;
+    //下载扩张资源(例如AssetBundle)的url地址相关信息列表
+    repeated string DownloadExtUrlInfoList=5;
+    //Package文件大小
+    int32 FileBytes=6;
+}
+
+message UGCGameDataResourcePackageInfo
+{
+    uint32 DataFormatVersion=1;
+    repeated UGCResourcePackageRefInfo RefPackages=3;
+    repeated UGCResourcePackageData BuildinPackages=4;
+    repeated UGCResourcePackageDownloadDesc DownloadDescs=5;
+}
+
+enum EUGCFilePlatformRequire
+{
+    //不需要
+    EFPRSkip = 0;
+    //安卓客户端需要
+    EFPRClientAndroid=1;
+    //ios客户端需要
+    EFPRClientIOS=2;
+    //桌面(含webgl)客户端需要
+    EFPRClientDesktop=4;
+    //服务器需要
+    EFPRServer=8;
+}
+
+message UGCResourceFileDownloadDesc
+{
+    //AssetBundle的带平台的相对路径(Android/antlibrary/ws_house_a2.ab);平台相关的pck的平台名字(Client/Server/Android/IOS/Desktop)
+    string SubFileID=1;
+    string SHA1=2;
+    int32 FileSize=3;
+    string URL=4;
+    int32 PlatformRequireMask=5;
+}
+message UGCPackageDownloadDesc
+{
+    //ResourcePackage 的UUID
+    string PackageUUID=1;
+    repeated UGCResourceFileDownloadDesc FileList = 2;
+    //0:地图必需资源；1-n：文件下载优先级（越小越先）
+    int32 DownloadPriority=3;
+}
+message UGCGameDataDownloadDesc
+{
+    repeated UGCPackageDownloadDesc PackageList = 1;
+}
+
+message UGCCSVRowData
+{
+    repeated string RowData = 1;
+}
+
+message UGCCSVData
+{
+    repeated UGCCSVRowData CSVData = 1;
+}
+message UGCResFFBuildin
+{
+    string FFResourceName = 1;
+}
+
+//
+message UGCResAnimationStateClipData
+{
+    string  ClipUUID = 1;
+    string  ClipName = 2;
+    bool    IsLoop = 3;
+    float   PlaySpeed = 4;
+    float   Length = 5;
+}
+message UGCResAnimationStateData
+{
+    string  StateName = 1;
+    bool    IsLoop = 2;
+    repeated UGCResAnimationStateClipData Clips = 3;
+}
+message UGCResAnimationControllerData
+{
+    repeated UGCResAnimationStateData States = 1;
+}
+
+//UGCGameObjectData 里记录的碰撞信息
+message UGCResBoneNodeCapsuleData
+{
+    ProtoBuffVector3 Center=1;
+    float Radius = 2;
+    float Height = 3;
+    int32  Direction = 4;
+    int32  BodyType = 5;
+}
+//单个骨骼信息
+message UGCResBoneNodeData
+{
+    string BoneName = 1;
+    ProtoBuffVector3 LocalPosition = 2;
+    ProtoBuffVector3 LocalScale = 3;
+    ProtoBuffQuaternion LocalRotation = 4;
+    UGCResBoneNodeCapsuleData CapsuleInfo = 5;
+    repeated UGCResBoneNodeData ChildBones = 6;
+}
+
+//骨架文件
+message UGCResSkeletonData
+{
+    UGCResBoneNodeData RootBone = 1;
+}
+
+// UGCResAvatarOneMeshData是一个结构，用于描述一个Avatar的一部分Mesh数据。
+message UGCResAvatarOnePartData
+{
+    // Name是Mesh的名称。
+    string Name = 1;
+    // GroupID是Mesh所属的组ID。
+    int32 GroupID = 2;
+    // RepBitIndex是用于同步的位索引。
+    int32 RepBitIndex = 3;
+    // GameObjResUUID是对应的GameObjectData的UUID。
+    string GameObjResUUID = 4;
+    // Bone是Mesh绑定的骨骼名称。
+    string Bone = 5;
+    // BindType是Mesh的绑定类型，0表示蒙皮，1表示链接。
+    int32 BindType = 6;
+    
+    // LocalPosition是Mesh的本地坐标。
+    ProtoBuffVector3 LocalPosition = 7;
+    // LocalScale是Mesh的本地缩放。
+    ProtoBuffVector3 LocalScale = 8;
+    // LocalRotation是Mesh的本地旋转。
+    ProtoBuffQuaternion LocalRotation = 9;
+}
+
+//一套avatar组合文件
+message UGCResOneAvatarData
+{
+    //骨架资源ID
+    string SkeletonResUUID = 1;
+    //预先加载所有部件
+    bool PreloadAllPart = 2;
+    //默认显示的掩码
+    int32 DefaultVisableMask1 = 3;
+    int32 DefaultVisableMask2 = 4;
+    int32 DefaultVisableMask3 = 5;
+    int32 DefaultVisableMask4 = 6;
+    //部件列表
+    repeated UGCResAvatarOnePartData PartList = 7;
+    //运行时是否合并模型
+    bool AutoCombineMesh = 8;
+}
+
+//fbx导入的蒙皮mesh需要的扩展数据.
+message UGCResSkinnedMeshExtData
+{
+    //SkinnedMesh需要的骨骼名字列表
+    repeated string BoneNames = 1;
+    
+}
+
+message UGCResAnimKeyFrameFloat
+{
+    float Time = 1;
+    int32 WeightedMode = 2;
+    float Value = 3;
+    float InSlope = 4;
+    float OutSlope = 5;
+    float InWeight = 6;
+    float OutWeight = 7;
+}
+
+message FBXAnimationCurve
+{
+    repeated UGCResAnimKeyFrameFloat Keyframes = 1;
+}
+
+message UGCResAnimFloatCurves
+{
+    repeated FBXAnimationCurve Curve = 1;
+    string ClassName = 2;
+    string PropertyName = 3;
+}
+
+message UGCResAnimNodeCurves
+{
+    string Name = 1;
+    repeated FBXAnimationCurve Rotation = 2;
+    repeated FBXAnimationCurve Translation = 3;
+    repeated FBXAnimationCurve Scale = 4;
+}
+
+message UGCResAnimClipData
+{
+    string Name = 1;
+    double BakeStart = 2;
+    double BakeStop = 3;
+    float SampleRate = 4;
+    repeated UGCResAnimFloatCurves FloatAnim = 5;
+    repeated UGCResAnimNodeCurves NodeAnim = 6;
+}
+
+

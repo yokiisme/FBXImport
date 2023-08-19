@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{308279b8-a9fd-4246-94f8-82a68e3df979}</ProjectGuid>
     <RootNamespace>parseFBX</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -79,6 +79,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>ImportFBX</TargetName>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -121,13 +123,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\include;E:\parseFBXNew\fbxbinary\parseFBX\libs\glfw-3.2.1\x64\include;E:\parseFBXNew\fbxbinary\parseFBX\libs\SDL2-2.0.9\include;E:\parseFBXNew\fbxbinary\parseFBX\libs\glm-0.9.9.3;E:\parseFBXNew\fbxbinary\parseFBX\libs\glew-2.1.0\include;E:\parseFBXNew\fbxbinary\parseFBX\libs\freeglut-MSVC-3.0.0-2.mp\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\include;$(ProjectDir);$(ProjectDir)..\libs\glfw-3.2.1\x64\include;$(ProjectDir)..\libs\SDL2-2.0.9\include;$(ProjectDir)..\libs\glm-0.9.9.3;$(ProjectDir)..\libs\glew-2.1.0\include;$(ProjectDir)..\libs\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\lib\vs2019\x64\debug;E:\parseFBXNew\fbxbinary\parseFBX\libs\freeglut-MSVC-3.0.0-2.mp\freeglut\lib\x64;E:\parseFBXNew\fbxbinary\parseFBX\libs\glew-2.1.0\lib\Release\x64;E:\parseFBXNew\fbxbinary\parseFBX\libs\glfw-3.2.1\x64\lib-vc2015;E:\parseFBXNew\fbxbinary\parseFBX\libs\SDL2-2.0.9\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;opengl32.lib;freeglut.lib;glew32s.lib;glfw3.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\lib\vs2019\x64\debug;$(ProjectDir)..\libs\freeglut\lib\x64;$(ProjectDir)..\libs\glew-2.1.0\lib\Release\x64;$(ProjectDir)..\libs\glfw-3.2.1\x64\lib-vc2015;$(ProjectDir)..\libs\SDL2-2.0.9\lib\x64;$(ProjectDir)..\libs\protobuf\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;opengl32.lib;freeglut.lib;glew32s.lib;glfw3.lib;SDL2.lib;SDL2main.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,7 +140,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\glfw-3.2.1\x64\include;E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\SDL2-2.0.9\include;E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\glm-0.9.9.3;E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\glew-2.1.0\include;E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\freeglut-MSVC-3.0.0-2.mp\freeglut\include;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\libs\freeglut\include;$(ProjectDir)..\libs\glfw-3.2.1\x64\include\;$(ProjectDir)..\libs\SDL2-2.0.9\include\;$(ProjectDir)..\libs\glm-0.9.9.3\;$(ProjectDir)..\libs\glew-2.1.0\include\;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\include\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>DISABLE_LOG;</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -146,26 +148,58 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;opengl32.lib;freeglut.lib;glew32s.lib;glfw3.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\lib\vs2019\x64\release;E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\freeglut-MSVC-3.0.0-2.mp\freeglut\lib\x64;E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\glew-2.1.0\lib\Release\x64;E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\glfw-3.2.1\x64\lib-vc2015;E:\parseFBXNew\fbxbinary\reconf-parseFBX\libs\SDL2-2.0.9\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;opengl32.lib;freeglut.lib;glew32s.lib;glfw3.lib;SDL2.lib;SDL2main.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\libs\freeglut\lib\x64;$(ProjectDir)..\libs\glew-2.1.0\lib\Release\x64;$(ProjectDir)..\libs\glfw-3.2.1\x64\lib-vc2015;$(ProjectDir)..\libs\SDL2-2.0.9\lib\x64;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\lib\vs2019\x64\release;D:\parseFBX\libs\protobuf\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationImporter.cpp" />
     <ClCompile Include="Commom.cpp" />
+    <ClCompile Include="Components.cpp" />
+    <ClCompile Include="Constraints.cpp" />
     <ClCompile Include="DLLInterface.cpp" />
     <ClCompile Include="parseFBX.cpp" />
+    <ClCompile Include="proto\ProtoBuffCommon.pb.cc" />
+    <ClCompile Include="proto\ProtoBuffUGCResource.pb.cc" />
+    <ClCompile Include="proto\ugccommon.pb.cc" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationCurveUtility.h" />
+    <ClInclude Include="AnimationImporter.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="Components.h" />
+    <ClInclude Include="ConstrainEnums.h" />
+    <ClInclude Include="Constraints.h" />
+    <ClInclude Include="Conversion.h" />
+    <ClInclude Include="DataGenerate.h" />
     <ClInclude Include="DLLInterface.h" />
-    <ClInclude Include="dynamic_bitset.h" />
+    <ClInclude Include="EnumFlags.h" />
     <ClInclude Include="FBXFileIO.h" />
+    <ClInclude Include="FBXImporterDef.h" />
+    <ClInclude Include="FloatConversion.h" />
+    <ClInclude Include="Hash.h" />
+    <ClInclude Include="HashUtilities.h" />
+    <ClInclude Include="ImportMeshDef.h" />
+    <ClInclude Include="Lighting.h" />
+    <ClInclude Include="MathBasic.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="MikkTSpace.h" />
     <ClInclude Include="ParseContentOld.h" />
+    <ClInclude Include="PlatformEnvironment.h" />
     <ClInclude Include="ProcessFBX.h" />
-    <ClInclude Include="Triangulate.h" />
+    <ClInclude Include="proto\ProtoBuffCommon.pb.h" />
+    <ClInclude Include="proto\ProtoBuffUGCResource.pb.h" />
+    <ClInclude Include="proto\ugccommon.pb.h" />
+    <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="RotationOrder.h" />
+    <ClInclude Include="SerializaitonMetaFlag.h" />
+    <ClInclude Include="SerializeUtility.h" />
+    <ClInclude Include="UnionTuple.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

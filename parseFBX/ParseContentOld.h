@@ -1,6 +1,7 @@
 #pragma once
 #include <fbxsdk.h>
 #include "Utility.h"
+#include "FBXImporterDef.h"
 #include "ProcessFBX.h"
 
 FbxAMatrix GetNodeLOCTransform(FbxNode* pNode, float scalefactor)

@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\Anim">
+      <UniqueIdentifier>{2e42812d-638a-41ff-b4ba-7563ddba1e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Anim">
+      <UniqueIdentifier>{34a72639-186b-409c-adf1-c1fd6b87244a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\base">
+      <UniqueIdentifier>{cd99bd2a-c9ac-437c-9d45-d511f55e3c6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protobuf">
+      <UniqueIdentifier>{849e5bb9-2241-41ac-ab9e-bb08ce9ff8a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parseFBX.cpp">
@@ -26,6 +38,27 @@
     </ClCompile>
     <ClCompile Include="Utility.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationImporter.cpp">
+      <Filter>源文件\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Components.cpp">
+      <Filter>源文件\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Constraints.cpp">
+      <Filter>源文件\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\ProtoBuffCommon.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\ProtoBuffUGCResource.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\ugccommon.pb.cc">
+      <Filter>protobuf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,9 +74,6 @@
     <ClInclude Include="MikkTSpace.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="dynamic_bitset.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="FBXFileIO.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -53,7 +83,85 @@
     <ClInclude Include="ParseContentOld.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Triangulate.h">
+    <ClInclude Include="FBXImporterDef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumFlags.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatConversion.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationImporter.h">
+      <Filter>头文件\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="Conversion.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationOrder.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="MathBasic.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationCurveUtility.h">
+      <Filter>头文件\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializaitonMetaFlag.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Lighting.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformEnvironment.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializeUtility.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="HashUtilities.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Constraints.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstrainEnums.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportMeshDef.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="UnionTuple.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\ProtoBuffUGCResource.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\ProtoBuffCommon.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\ugccommon.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="DataGenerate.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

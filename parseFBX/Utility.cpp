@@ -304,6 +304,3 @@ inline bool InvertMatrix4x4_Full(const float* m, float* out)
 
 	return true;
 }
-
-
-

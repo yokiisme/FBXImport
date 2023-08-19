@@ -1,15 +1,27 @@
 #pragma once
 #include <fbxsdk.h>
 #include "Utility.h"
+#include "FBXImporterDef.h"
+#include "DataGenerate.h"
+#include <fstream>
+
+#include "proto/ProtoBuffUGCResource.pb.h"
 
 
 void WriteMeshFile(FBXGameObject* gameObj, const char* outdir);
 void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir);
 
+//Write All Mesh Data
+void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir);
+//Write Sk File
+void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename);
+//Write Anim Clip File
+void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir);
 //-----------------------------------Output test-----------------------------------
 void WriteMeshOutputFiles(FBXMesh& mesh, std::vector<int>& lodMeshMaterials, char* outdir);
 void WriteFBXMeshOutputFiles(const FBXImportMesh& mesh, char* outdir);
 void WriteSceneOutputFiles(FBXImportScene& outputScene, char* outdir);
+void WriteSkeletonFileTest(FBXImportScene& scene, const char* outdir);
 //-----------------------------------Output test-----------------------------------
 
 
@@ -105,7 +117,6 @@ void WriteMeshFile(FBXGameObject* gameObj, const char* outdir)
         std::cout << "import fbx success" << std::endl;
     }
 }
-
 void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir)
 {
     if (_access(outdir, 0) == -1)
@@ -126,7 +137,6 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
             materialname += importScene.materials[i] + "\n";
         }
     }
-
     for (int i = 0; i < meshcount; i++)
     {
         gameObj->meshList[i].materialindex.clear();
@@ -151,22 +161,17 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
     for (int i = 0; i < meshcount; i++)
     {
         std::string meshfilename(gameObj->meshList[i].name);
+
         meshfilename = directory + "/" + meshfilename + ".~@FFFUB";
         meshname += meshfilename + "\n";
         std::ofstream osData(meshfilename, std::ios_base::out | std::ios_base::binary);
-        std::string version = "vernum";
-        uint32_t versioncode = 1;
-        osData.write(version.c_str(), version.length());
-        osData.write(reinterpret_cast<char*>(&versioncode), sizeof(versioncode));
+        osData.precision(8);
         uint64_t namecount = strlen(gameObj->meshList[i].name) + 1;
         osData.write(reinterpret_cast<char*>(&namecount), 8);
         osData.write(gameObj->meshList[i].name, namecount);
         uint64_t vertexcount = gameObj->meshList[i].vertices.size();
         osData.write(reinterpret_cast<char*>(&vertexcount), 8);
         osData.write(reinterpret_cast<char*>(gameObj->meshList[i].vertices.data()), vertexcount * sizeof(Vector3f));
-        uint64_t colorcount = gameObj->meshList[i].colors.size();
-        osData.write(reinterpret_cast<char*>(&colorcount), 8);
-        osData.write(reinterpret_cast<char*>(gameObj->meshList[i].colors.data()), colorcount * sizeof(ColorRGBA32));
         uint64_t normalcount = gameObj->meshList[i].normals.size();
         osData.write(reinterpret_cast<char*>(&normalcount), 8);
         osData.write(reinterpret_cast<char*>(gameObj->meshList[i].normals.data()), normalcount * sizeof(Vector3f));
@@ -185,13 +190,14 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
         uint64_t matcount = gameObj->meshList[i].materialindex.size();
         osData.write(reinterpret_cast<char*>(&matcount), 8);
         osData.write(reinterpret_cast<char*>(gameObj->meshList[i].materialindex.data()), matcount * sizeof(uint32_t));
+
         meshtomatindex.insert(meshtomatindex.end(), gameObj->meshList[i].materialindex.begin(), gameObj->meshList[i].materialindex.end());
         meshtomatindex.push_back(-1);
         osData.close();
     }
 
-    std::cout << meshname << std::endl;
-    std::cout << materialname << std::endl;
+    std::cout <<"MeshName: " << meshname << std::endl;
+    std::cout <<"MaterialName: " << materialname << std::endl;
     int meshtoindexlen = meshtomatindex.size();
     for (int i = 0; i < meshtoindexlen; i++)
     {
@@ -204,6 +210,132 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
         std::cout << "import fbx success" << std::endl;
     }
 
+}
+void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir)
+{
+	if (_access(outdir, 0) == -1)
+	{
+		_mkdir(outdir);
+	}
+
+	uint64_t meshcount = gameObj->meshCount;
+	std::string materialname = "";
+
+	std::vector < std::string > materialnamelist;
+
+	for (int i = 0; i < importScene.materials.size(); i++)
+	{
+		if (std::find(materialnamelist.begin(), materialnamelist.end(), importScene.materials[i]) == materialnamelist.end())
+		{
+			materialnamelist.push_back(importScene.materials[i]);
+			materialname += importScene.materials[i] + "\n";
+		}
+	}
+	for (int i = 0; i < meshcount; i++)
+	{
+		gameObj->meshList[i].materialindex.clear();
+		for (int j = 0; j < gameObj->meshList[i].materials.size(); j++)
+		{
+			auto it = std::find(materialnamelist.begin(), materialnamelist.end(), gameObj->meshList[i].materials[j]);
+			if (it != materialnamelist.end())
+			{
+				gameObj->meshList[i].materialindex.push_back(it - materialnamelist.begin());
+			}
+			else
+			{
+				gameObj->meshList[i].materialindex.push_back(0);
+			}
+		}
+	}
+
+	std::string meshname = "";
+	std::vector<int32_t> meshtomatindex;
+	std::string directory(outdir);
+
+	for (int i = 0; i < meshcount; i++)
+	{
+        std::string meshfilename;
+        BuildSingleMesh(gameObj->meshList[i], meshfilename, outdir);
+        meshname += meshfilename + "\n";
+		meshtomatindex.insert(meshtomatindex.end(), gameObj->meshList[i].materialindex.begin(), gameObj->meshList[i].materialindex.end());
+		meshtomatindex.push_back(-1);
+	}
+
+	std::cout << "MeshName: " << meshname << std::endl;
+	std::cout << "MaterialName: " << materialname << std::endl;
+	int meshtoindexlen = meshtomatindex.size();
+	for (int i = 0; i < meshtoindexlen; i++)
+	{
+		std::cout << meshtomatindex[i] << std::endl;
+	}
+
+	if (meshcount > 0)
+	{
+		std::cout << std::endl;
+		std::cout << "import fbx success" << std::endl;
+	}
+}
+void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename)
+{
+    message::UGCResSkeletonData* sk = new message::UGCResSkeletonData();
+
+    message::UGCResBoneNodeData* root = new message::UGCResBoneNodeData();
+    message::UGCResBoneNodeCapsuleData* root_capsule = new message::UGCResBoneNodeCapsuleData();
+    root->set_bonename("root");
+    //root->set_allocated_capsuleinfo(root_capsule);
+    sk->set_allocated_rootbone(root);
+    message::ProtoBuffVector3* pos = new message::ProtoBuffVector3();
+    message::ProtoBuffVector3* scale = new message::ProtoBuffVector3();
+    message::ProtoBuffQuaternion* quat = new message::ProtoBuffQuaternion();
+    pos->set_x(0.0f); pos->set_y(0.0f); pos->set_z(0.0f);
+    scale->set_x(1.0f); scale->set_y(1.0f); scale->set_z(1.0f);
+    quat->set_x(0.0f); quat->set_y(0.0f); quat->set_z(0.0f); quat->set_w(1.0f);
+    root->set_allocated_localposition(pos);
+    root->set_allocated_localscale(scale);
+    root->set_allocated_localrotation(quat);
+    auto allnodes = scene.nodes;
+    for (auto i = 0; i < allnodes.size(); i++)
+    {
+        BuildBoneNodeData(allnodes[i], root);
+    }
+
+    std::string directory(outdir);
+
+    auto OutputFileName = directory + "/" + filename + ".sk";
+    //Serialize
+    std::fstream output(OutputFileName, std::ios::out | std::ios::trunc | std::ios::binary);
+    bool flag = sk->SerializePartialToOstream(&output);
+    if (!flag)
+    {
+        std::cout << "Error when Serializing" << std::endl;
+    }
+    output.close();
+    //std::string ss;
+    //sk->SerializeToString(&ss);
+    //std::cout << "The size of sk is : " << ss.size() << std::endl;
+    //message::UGCResSkeletonData* sk_new = new message::UGCResSkeletonData();
+    //std::string ss1;
+    //sk_new->SerializeToString(&ss1);
+    //std::cout << "The size of sknew is : " << ss1.size() << std::endl;
+
+    //message::UGCResSkeletonData* sk_new = new message::UGCResSkeletonData();
+    //message::UGCResBoneNodeData* root_new = new message::UGCResBoneNodeData();
+    //std::fstream input(filename, std::ios::in|std::ios::binary);
+    //sk_new->ParseFromIstream(&input);
+    //input.close();
+    //*root_new = sk_new->rootbone();
+    //DisplayBone(*root_new);
+    google::protobuf::ShutdownProtobufLibrary();
+}
+void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
+{
+    auto& anim = scene.animationClips;
+    auto sampleRate = scene.sceneInfo.sampleRate;
+
+    for (auto i = 0; i < anim.size(); i++)
+    {
+        BuildSingleAnimProtoFile(anim[i], sampleRate, outdir);
+    }
 }
 
 
@@ -389,4 +521,236 @@ void WriteSceneOutputFiles(FBXImportScene& outputScene, char* outdir)
         osData.close();
     }
 }
+
+void WriteAnimClipFileTest(FBXImportScene& scene, const char* outdir)
+{
+	auto anim = scene.animationClips;
+	for (auto i = 0; i < anim.size(); i++)
+	{
+		auto clip = anim[i];
+		auto floatcurves = clip.floatAnimations;
+		auto nodecurves = clip.nodeAnimations;
+
+		std::string directory(outdir);
+		std::string filename(clip.name);
+		filename = directory + "/" + filename + ".txt";
+		std::ofstream osData(filename, std::ios_base::out | std::ios_base::trunc);
+        osData << "Curve Count: " << nodecurves.size()<< std::endl;
+        for (auto it=nodecurves.begin();it!=nodecurves.end();it++)
+        {
+            osData << "    propName: " << it->node->name << std::endl;
+            auto rotation_curve = it->rotation;
+            auto translation_curve = it->translation;
+            auto scale_curve = it->scale;
+            auto rot_count = rotation_curve[0].m_Curve.size();
+            if (rot_count > 0)
+            {
+                osData << "      Rotation Curve Count: " << rot_count << std::endl;
+                for (auto k = 0; k < rot_count; k++)
+                {
+                    auto keyframes_x = rotation_curve[0].m_Curve[k];
+                    auto keyframes_y = rotation_curve[1].m_Curve[k];
+                    auto keyframes_z = rotation_curve[2].m_Curve[k];
+                    auto keyframes_w = rotation_curve[3].m_Curve[k];
+
+                    osData << "        Rotation Quaternion Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: " 
+                        << keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value  << " ," << keyframes_w.value << std::endl;
+
+                }
+            }
+
+			auto trans_count = translation_curve[0].m_Curve.size();
+			if (trans_count > 0)
+			{
+				osData << "      Translation Curve Count: " << trans_count << std::endl;
+				for (auto k = 0; k < trans_count; k++)
+				{
+					auto keyframes_x = translation_curve[0].m_Curve[k];
+					auto keyframes_y = translation_curve[1].m_Curve[k];
+					auto keyframes_z = translation_curve[2].m_Curve[k];
+
+
+					osData << "        Translation Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: "
+						<< keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value << std::endl;
+
+				}
+			}
+
+			auto scale_count = scale_curve[0].m_Curve.size();
+			if (scale_count > 0)
+			{
+				osData << "      Scale Curve Count: " << scale_count << std::endl;
+				for (auto k = 0; k < scale_count; k++)
+				{
+					auto keyframes_x = scale_curve[0].m_Curve[k];
+					auto keyframes_y = scale_curve[1].m_Curve[k];
+					auto keyframes_z = scale_curve[2].m_Curve[k];
+					osData << "        Scale Quaternion Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: "
+						<< keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value <<  std::endl;
+
+				}
+			}
+
+        }
+	}
+}
+void PrintBone(const message::UGCResBoneNodeData& node)
+{
+	auto name = node.bonename();
+	auto pos = node.localposition();
+	auto scale = node.localscale();
+	auto quat = node.localrotation();
+	auto childsize = node.childbones_size();
+
+	std::cout << " Bone Name: " << name << " Has " << childsize << " Children" << std::endl;
+	std::cout << "      Pos:" << pos.x() << " , " << pos.y() << " , " << pos.z() << std::endl;
+	std::cout << "      Scale:" << scale.x() << " , " << scale.y() << " , " << scale.z() << std::endl;
+	std::cout << "      Quat:" << quat.x() << " , " << quat.y() << " , " << quat.z() << " , " << quat.w() << std::endl;
+
+	for (auto i = 0; i < childsize; i++)
+	{
+        const message::UGCResBoneNodeData& next = node.childbones(i);
+        PrintBone(next);
+	}
+}
+void PrintAnimFile(FBXImportScene& importScene, const char* outdir)
+{
+	if (_access(outdir, 0) == -1)
+	{
+		_mkdir(outdir);
+	}
+
+	auto anims = importScene.animationClips;
+	for (auto i = 0; i < anims.size(); i++)
+	{
+		auto clip = anims[i];
+		auto floatcurves = clip.floatAnimations;
+		auto nodecurves = clip.nodeAnimations;
+
+		std::string directory(outdir);
+		std::string filename(clip.name);
+		filename = directory + "/" + filename + ".anim";
+
+		std::ofstream osData(filename, std::ios_base::out | std::ios_base::binary);
+		osData.precision(8);
+
+		uint64_t CurveCount = nodecurves.size();
+		osData.write(reinterpret_cast<char*>(&CurveCount), 8);
+
+		for (auto it = nodecurves.begin(); it != nodecurves.end(); it++)
+		{
+			osData << "    propName: " << it->node->name << std::endl;
+			auto rotation_curve = it->rotation;
+			auto translation_curve = it->translation;
+			auto scale_curve = it->scale;
+			auto rot_count = rotation_curve[0].m_Curve.size();
+			if (rot_count > 0)
+			{
+				osData << "      Rotation Curve Count: " << rot_count << std::endl;
+				for (auto k = 0; k < rot_count; k++)
+				{
+					auto keyframes_x = rotation_curve[0].m_Curve[k];
+					auto keyframes_y = rotation_curve[1].m_Curve[k];
+					auto keyframes_z = rotation_curve[2].m_Curve[k];
+					auto keyframes_w = rotation_curve[3].m_Curve[k];
+
+					osData << "        Rotation Quaternion Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: "
+						<< keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value << " ," << keyframes_w.value << std::endl;
+
+				}
+			}
+
+			auto trans_count = translation_curve[0].m_Curve.size();
+			if (trans_count > 0)
+			{
+				osData << "      Translation Curve Count: " << trans_count << std::endl;
+				for (auto k = 0; k < trans_count; k++)
+				{
+					auto keyframes_x = translation_curve[0].m_Curve[k];
+					auto keyframes_y = translation_curve[1].m_Curve[k];
+					auto keyframes_z = translation_curve[2].m_Curve[k];
+
+
+					osData << "        Translation Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: "
+						<< keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value << std::endl;
+
+				}
+			}
+
+			auto scale_count = scale_curve[0].m_Curve.size();
+			if (scale_count > 0)
+			{
+				osData << "      Scale Curve Count: " << scale_count << std::endl;
+				for (auto k = 0; k < scale_count; k++)
+				{
+					auto keyframes_x = scale_curve[0].m_Curve[k];
+					auto keyframes_y = scale_curve[1].m_Curve[k];
+					auto keyframes_z = scale_curve[2].m_Curve[k];
+					osData << "        Scale Quaternion Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: "
+						<< keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value << std::endl;
+
+				}
+			}
+
+		}
+		osData << "Curve Count: " << nodecurves.size() << std::endl;
+		for (auto it = nodecurves.begin(); it != nodecurves.end(); it++)
+		{
+			osData << "    propName: " << it->node->name << std::endl;
+			auto rotation_curve = it->rotation;
+			auto translation_curve = it->translation;
+			auto scale_curve = it->scale;
+			auto rot_count = rotation_curve[0].m_Curve.size();
+			if (rot_count > 0)
+			{
+				osData << "      Rotation Curve Count: " << rot_count << std::endl;
+				for (auto k = 0; k < rot_count; k++)
+				{
+					auto keyframes_x = rotation_curve[0].m_Curve[k];
+					auto keyframes_y = rotation_curve[1].m_Curve[k];
+					auto keyframes_z = rotation_curve[2].m_Curve[k];
+					auto keyframes_w = rotation_curve[3].m_Curve[k];
+
+					osData << "        Rotation Quaternion Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: "
+						<< keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value << " ," << keyframes_w.value << std::endl;
+
+				}
+			}
+
+			auto trans_count = translation_curve[0].m_Curve.size();
+			if (trans_count > 0)
+			{
+				osData << "      Translation Curve Count: " << trans_count << std::endl;
+				for (auto k = 0; k < trans_count; k++)
+				{
+					auto keyframes_x = translation_curve[0].m_Curve[k];
+					auto keyframes_y = translation_curve[1].m_Curve[k];
+					auto keyframes_z = translation_curve[2].m_Curve[k];
+
+
+					osData << "        Translation Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: "
+						<< keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value << std::endl;
+
+				}
+			}
+
+			auto scale_count = scale_curve[0].m_Curve.size();
+			if (scale_count > 0)
+			{
+				osData << "      Scale Curve Count: " << scale_count << std::endl;
+				for (auto k = 0; k < scale_count; k++)
+				{
+					auto keyframes_x = scale_curve[0].m_Curve[k];
+					auto keyframes_y = scale_curve[1].m_Curve[k];
+					auto keyframes_z = scale_curve[2].m_Curve[k];
+					osData << "        Scale Quaternion Curve [" << k << "]: Time: " << keyframes_x.time << " , Value: "
+						<< keyframes_x.value << " ," << keyframes_y.value << " ," << keyframes_z.value << std::endl;
+
+				}
+			}
+
+		}
+	}
+}
+
 //-----------------------------------Output test-----------------------------------

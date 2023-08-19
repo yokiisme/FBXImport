@@ -1,6 +1,6 @@
 #pragma once
 #include "Utility.h"
-
+#include "FBXImporterDef.h"
 
 
 int FindGridCell(const float fMin, const float fMax, const float fVal)

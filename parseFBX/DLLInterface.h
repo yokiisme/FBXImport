@@ -1,5 +1,6 @@
 #pragma once
 #include "Utility.h"
+#include "FBXImporterDef.h"
 #include <wingdi.h>
 #include <GL/glu.h>
 #define TESS_FUNCTION_CALLCONV CALLBACK

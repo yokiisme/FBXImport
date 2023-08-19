@@ -1,0 +1,1817 @@
+syntax = "proto3";
+
+import "ProtoBuffCommon.proto";
+import "ProtoBuffUGCResource.proto";
+
+package message;
+
+message UGCDebugSettingData{
+    uint64 AccountID = 1;
+    uint32 GameMode = 2;
+    uint32 MapID = 3;
+    bool GotoPositionAfterStart=4;
+    ProtoBuffVector3 GotoPosition=5;
+    repeated uint32 BotCountByTeam=6;
+    string NickName=7;
+    repeated string Breakpoints=8;
+    uint32 GroupMode=9;
+    bool IsStrictMode=10;
+    repeated uint32 TokensValidId=11;
+}
+
+enum EUGCModuleType{
+    EUGCModuleType_Unknown = 0;
+    EUGCModuleType_Workflow = 1;
+    EUGCModuleType_ConditionBlackboard = 2;
+    EUGCModuleType_RoundBlackboard = 3;
+    EUGCModuleType_FactionRound = 4;
+    EUGCModuleType_ScoreBlackboard = 5;
+    EUGCModuleType_SpawnPosMgr = 6;
+    EUGCModuleType_RankBlackboard = 7;
+    EUGCModuleType_HudStateMgr = 8;
+    EUGCModuleType_SafeZone = 9;
+	EUGCModuleType_GenerateSpawnPosMgr = 10;
+    EUGCModuleType_EntityRepDataBlackboard = 11;
+    //obsolete
+	//EUGCModuleType_TriggerPriority = 12;
+	EUGCModuleType_CheckPoint = 13;
+	EUGCModuleType_Team = 14;
+    EUGCModuleType_MatchResult = 15;
+    EUGCModuleType_HudPrefabMgr = 16;
+    EUGCModuleType_StatisticalReport = 17;
+    EUGCModuleType_PropertyFormulaMgr = 18;
+    EUGCModuleType_ShopMgr = 19;
+    EUGCModuleType_WalletModule = 20;
+    EUGCModuleType_LevelObjectMgr = 21;
+    EUGCModuleType_MorphMgr = 22;
+    EUGCModuleType_ArchTypeMgr = 23;
+    EUGCModuleType_ChatChannelMgr = 24;
+    EUGCModuleType_Faction = 25;
+    EUGCModuleType_Hostility = 26;
+    EUGCModuleType_KDA = 27;
+    EUGCModuleType_Transform = 28;
+    EUGCModuleType_Playable = 29;
+    EUGCModuleTyppe_Database = 30;
+    EUGCModuleTyppe_InternalHudMgr = 31;
+	EUGCModuleType_Dyeing = 32;
+    EUGCModuleType_Physics = 33;
+    EUGCModuleType_MiniMap = 34;
+    EUGCModuleType_Animation = 35;
+    EUGCModuleType_BehaviourTree = 36;
+    EUGCModuleType_PathFinding = 37;
+}
+
+enum EUGCDamageType{
+    EUGCDamageType_Unknown = 0;
+    EUGCDamageType_Melee = 1;
+    EUGCDamageType_Gun = 2;
+    EUGCDamageType_Grenade = 3;
+}
+
+enum EUGCScoreType{
+    EUGCScoreType_Unknown = 0;
+    EUGCScoreType_Kill_Count = 1;
+    EUGCScoreType_Damage_Amount = 2;
+    EUGCScoreType_Assist_Count = 3;
+    EUGCScoreType_Finish_Order = 4; // 1,2,3...
+    EUGCScoreType_Finish_TimeScore = 5; // ms
+    EUGCScoreType_Finish_Count = 6;// for team, it's about all teammate's EUGCScoreType_Finish_Count
+    EUGCScoreType_Checkpoint_Amount = 7;
+    EUGCScoreType_RankScore = 8; // used in racing mode
+    EUGCScoreType_Survival_TimeScore = 9; // ms, for some modes, same as EUGCScoreType_Finish_TimeScore
+    EUGCScoreType_MainScore = 10; // used in score mode
+    EUGCScoreType_Zombie_Kill_Count = 11;
+    EUGCScoreType_Zombie_Assist_Count = 12;
+    EUGCScoreType_Zombie_Damage_Amount = 13;
+}
+
+enum EUGCPlayerStateType{
+    EUGCPlayerStateType_Unknown = 0;
+    EUGCPlayerStateType_Alive = 1;
+    EUGCPlayerStateType_KnockDown = 2;
+    EUGCPlayerStateType_Dead = 3;
+}
+
+enum EUGCArithmeticType{
+    EUGCArithmeticType_Unknown = 0;
+    EUGCArithmeticType_Add = 1;
+    EUGCArithmeticType_Subtract = 2;
+    EUGCArithmeticType_Multiply = 3;
+    EUGCArithmeticType_Divide = 4;
+    EUGCArithmeticType_Remainder = 5;
+}
+
+enum EUGCCompareType{
+    EUGCCompareType_Unknown = 0;
+    EUGCCompareType_Less = 1;
+    EUGCCompareType_LessEqual = 2;
+    EUGCCompareType_GreaterEqual = 3;
+    EUGCCompareType_Greater = 4;
+    EUGCCompareType_Equal = 5;
+    EUGCCompareType_NotEqual = 6;
+    EUGCCompareType_And = 7;
+    EUGCCompareType_Or = 8;
+}
+
+//Obsolete, OB39 is expected to remove the definition
+enum EUGCValueType{
+    EUGCValueType_Unknown = 0;
+    EUGCValueType_List = 1;
+    EUGCValueType_Bool = 2;
+    EUGCValueType_Int = 3;
+    EUGCValueType_Float = 4;
+    EUGCValueType_String = 5;
+    EUGCValueType_Vector3 = 6;
+    EUGCValueType_Interface = 7;
+}
+
+//Obsolete, OB39 is expected to remove the definition
+enum EMetaConfigParamType{
+    //to EUGCValueType
+    EMetaConfigParamType_Unknown        = 0;
+    //to EUGCValueType
+    EMetaConfigParamType_List          = 1;
+    //to EUGCValueType
+    EMetaConfigParamType_Bool           = 2;
+    //to EUGCValueType
+    EMetaConfigParamType_Int            = 3;
+    //to EUGCValueType
+    EMetaConfigParamType_Float          = 4;
+    //to EUGCValueType
+    EMetaConfigParamType_String         = 5;
+    //to EUGCValueType
+    EMetaConfigParamType_Vector3        = 6;
+    //to EUGCValueType
+    EMetaConfigParamType_Interface      = 7;
+    EMetaConfigParamType_BoolList      = 50;
+    EMetaConfigParamType_IntList       = 51;
+    EMetaConfigParamType_FloatList     = 52;
+    EMetaConfigParamType_StringList    = 53;
+    EMetaConfigParamType_Vector3List   = 54;
+    //to EUGCValueType_Bool
+    EMetaConfigParamType_Condition      = 55;
+    EMetaConfigParamType_ConditionArray = 56;
+    //to EUGCValueType_Int
+    EMetaConfigParamType_EntityType     = 57;
+    EMetaConfigParamType_Entity         = 58;
+    EMetaConfigParamType_EntityList    = 59;
+    EMetaConfigParamType_Player         = 60;
+    EMetaConfigParamType_PlayerList    = 61;
+    EMetaConfigParamType_Team           = 62;
+    EMetaConfigParamType_TeamList      = 63;
+    EMetaConfigParamType_LevelObj       = 64;
+    EMetaConfigParamType_LevelObjList  = 65;
+    EMetaConfigParamType_DirectedPoint  = 66;
+    //to EUGCValueType_Int
+    EMetaConfigParamType_InternalHudType  = 67;
+    EMetaConfigParamType_Hud            = 68;
+    EMetaConfigParamType_HudList        = 69;
+    //to EUGCValueType_Int
+    EMetaConfigParamType_LevelObjType     = 70;
+    //to EUGCValueType_Int
+    EMetaConfigParamType_DamageType     = 71;
+    EMetaConfigParamType_Phase     = 72;
+    //to EUGCValueType_Int
+    EMetaConfigParamType_ScoreType     = 73;
+    //to EUGCValueType_Interface
+    EMetaConfigParamType_FloatOrInt     = 74;
+    //to EUGCValueType_String
+    EMetaConfigParamType_EffectType     = 75;
+    //to EUGCValueType_String
+    EMetaConfigParamType_IconType     = 76;
+    //to EUGCValueType_Int
+    EMetaConfigParamType_PlayerStateType     = 77;
+    //to EUGCValueType_String
+    EMetaConfigParamType_AudioType     = 78;
+    //to EUGCValueType_Int
+    EMetaConfigParamType_SortType     = 79;
+    //to EUGCValueType_Int
+    EMetaConfigParamType_ItemGoodsIDType     = 80;
+    EMetaConfigParamType_AIType     = 81;
+    EMetaConfigParamType_InventoryType = 82;
+}
+
+//Obsolete, OB39 is expected to remove the definition
+enum EUGCLogicEntityType{
+    EUGCLogicEntityType_Unknown = 0;
+    // The 1~999 interval segment is a logical entity reserved for FF code to implement entity mapping
+    EUGCLogicEntityType_Global = 1;
+    EUGCLogicEntityType_Player = 2;
+    EUGCLogicEntityType_Team = 3;
+    // The 1000~1009 interval segment is reserved for the logical entity related to the workflow
+    EUGCLogicEntityType_Round = 1000;
+    EUGCLogicEntityType_Phase = 1001;
+    // The interval from 1010 to 1999 is a logical entity reserved for the internal HUD
+    EUGCLogicEntityType_CountdownHud = 1010;
+    EUGCLogicEntityType_OpeningBannerHud = 1011;
+    EUGCLogicEntityType_TwoTeamRoundStartBannerHud = 1012;
+    EUGCLogicEntityType_NormalRoundStartBannerHud = 1013;
+    EUGCLogicEntityType_TeamRoundScoreBannerHud = 1014;
+    EUGCLogicEntityType_CheckPointMgrHud = 1015;
+    EUGCLogicEntityType_RoundResultShowTimeHud = 1016;
+    EUGCLogicEntityType_TwoTeamFactionHud = 1017;
+    EUGCLogicEntityType_TwoTeamRoundScoreBannerHud = 1018;
+    EUGCLogicEntityType_ResultBannerHud = 1019;
+    EUGCLogicEntityType_RoundNumHud = 1020;
+    EUGCLogicEntityType_PhaseCountDownHud = 1021;
+    EUGCLogicEntityType_MatchInfoSubTitleHud = 1022;
+    EUGCLogicEntityType_TwoTeamMatchInfoHud = 1023;
+    EUGCLogicEntityType_TeamMatchInfoHud = 1024;
+    EUGCLogicEntityType_TwoTeamLeaderboardHud = 1025;
+    EUGCLogicEntityType_MoreTeamLeaderboardHud = 1026;
+    EUGCLogicEntityType_FactionInfoHud= 1028;
+    EUGCLogicEntityType_IconNotificationHud = 1029;
+    EUGCLogicEntityType_TwoTeamMatchInfoSimpleHud = 1030;
+    EUGCLogicEntityType_CountdownReminderHud = 1031;
+    EUGCLogicEntityType_TweenTipsHud = 1032;
+    EUGCLogicEntityType_RoundTransitionHud = 1033;
+    EUGCLogicEntityType_SingleLeaderboardHud = 1034;
+    EUGCLogicEntityType_LeaderboardButtonHud = 1035;
+    EUGCLogicEntityType_ZombieLevelHud = 1036;
+    EUGCLogicEntityType_AddScoreVFXHud = 1037;
+    EUGCLogicEntityType_ZombieVFXHud = 1038;
+    EUGCLogicEntityType_TimeTweenTipsHud = 1039;
+    EUGCLogicEntityType_ChooseCardHud = 1040;
+    EUGCLogicEntityType_IdentityNotifyHud = 1041;
+    EUGCLogicEntityType_FiveSecondCountDownHud = 1042;
+    EUGCLogicEntityType_TitleBannerHud = 1043;
+    EUGCLogicEntityType_CommonHudSwitchHud = 1044;
+    EUGCLogicEntityType_SkillButtonHud = 1045;
+    // The interval 2000~2299 is reserved for general, non-LevelObject logical entities
+    EUGCLogicEntityType_IconEntity = 2000;
+    EUGCLogicEntityType_TextEntity = 2001;
+    EUGCLogicEntityType_EffectEntity = 2002;
+    EUGCLogicEntityType_CustomHud = 2003;
+    EUGCLogicEntityType_HudEmptyWidget = 2004;
+    EUGCLogicEntityType_HudImageWidget = 2005;
+    EUGCLogicEntityType_HudLabelWidget = 2006;
+    EUGCLogicEntityType_HudButtonWidget = 2007;
+    EUGCLogicEntityType_HudInputWidget = 2008;
+    EUGCLogicEntityType_SoundEntity = 2009;
+    // The interval 2300~2499 is reserved for base or abstract, non-LevelObject logical entities
+    EUGCLogicEntityType_Entity = 2300;
+    EUGCLogicEntityType_CombatableEntity = 2301;
+    EUGCLogicEntityType_Hud = 2302;
+    EUGCLogicEntityType_LevelObject = 2303;
+    EUGCLogicEntityType_HudWidget = 2304;
+    // After 2500, the interval segment is a logical entity reserved for LevelObject
+    EUGCLogicEntityType_SpawnPos = 2500;
+    EUGCLogicEntityType_CustomizeTrigger = 2501;
+    EUGCLogicEntityType_KillOrGodZoneTrigger = 2502;
+    EUGCLogicEntityType_CheckPointTrigger = 2503;
+    EUGCLogicEntityType_EndPointTrigger = 2504;
+    EUGCLogicEntityType_DynamicCollider = 2505;
+    EUGCLogicEntityType_SupplyBoxTrigger = 2506;
+    EUGCLogicEntityType_UGCMinisentry = 2507;
+    EUGCLogicEntityType_BotGenerator = 2508;
+    EUGCLogicEntityType_EntityGenerator = 2509;
+}
+
+enum EUGCParamSettingMethodType{
+    EUGCParamSettingMethodType_Unknown = 0;
+    EUGCParamSettingMethodType_Override = 1;
+    EUGCParamSettingMethodType_Add = 2;
+    EUGCParamSettingMethodType_Subtract = 3;
+    EUGCParamSettingMethodType_Multiply = 4;
+    EUGCParamSettingMethodType_Divide = 5;
+}
+
+enum UGCSpawnPointSpawnType {
+    UGCSpawnPointSpawnType_Default = 0;
+    UGCSpawnPointSpawnType_Random = 1;
+    UGCSpawnPointSpawnType_UserAssign = 2;
+}
+
+enum ESort {
+    ESort_AscZ = 0; // sort ascending but put 0 at last
+    ESort_Desc = 1;
+    ESort_Asc = 2;
+}
+
+message UGCPhaseData{
+    uint32 PhaseIndex = 1;
+    int32 Duration = 2;
+}
+
+message UGCRoundData{
+    uint32 PhaseIndex = 1;
+    int32 RoundNumMax = 2;
+    repeated UGCPhaseData PhaseData = 3;
+}
+
+enum EUGCWorkflowSequenceItemType{
+    EUGCWorkflowSequenceItemType_Phase = 0;
+    EUGCWorkflowSequenceItemType_Round = 1;
+}
+
+message UGCWorkflowSequenceItem{
+    EUGCWorkflowSequenceItemType DataType = 1;
+    int32 DataIndex = 2;
+}
+
+message UGCWorkflowSequence{
+    repeated UGCWorkflowSequenceItem Items = 1;
+}
+
+enum EUGCKeyword{
+    Keyword_Unknown = 0;
+    Keyword_Enum = 1;
+    Keyword_Class = 2;
+    Keyword_TypeAlias = 4;
+    Keyword_Abstract = 8;
+    Keyword_Generics = 16;
+}
+
+enum EUGCAttribute{
+    UGCAttribute_Unknown = 0;
+    UGCAttribute_BridgingComponent = 1;
+    UGCAttribute_Max = 2;
+}
+
+enum EUGCLocLanguage{
+    UGCLANGUAGE_Unknown = 0;
+    UGCLANGUAGE_ENGLISH = 1;
+    UGCLANGUAGE_SIMPLIFIED_CHINESE = 2;
+    UGCLANGUAGE_TRADITIONAL_CHINESE = 3;
+    UGCLANGUAGE_THAI = 4;
+    UGCLANGUAGE_VIETNAMESE = 5;
+    UGCLANGUAGE_INDONESIA = 6;
+    UGCLANGUAGE_BRAZILIAN_PORTUGUESE = 7;
+    UGCLANGUAGE_SPANISH = 8;
+    UGCLANGUAGE_RUSSIAN = 9;
+    UGCLANGUAGE_KOREAN = 10;
+    UGCLANGUAGE_FRENCH = 11;
+    UGCLANGUAGE_GERMAN = 12;
+    UGCLANGUAGE_TURKISH = 13;
+    UGCLANGUAGE_HINDI = 14;
+    UGCLANGUAGE_JAPANESE = 15;
+    UGCLANGUAGE_ROMANIAN = 16;
+    UGCLANGUAGE_ARABIC = 17;
+    UGCLANGUAGE_BURMESE = 18;
+    UGCLANGUAGE_URDU = 19;
+    UGCLANGUAGE_BENGALI = 20;
+}
+
+message UGCType{
+    int32 Declare = 1;
+    repeated int32 BaseTypeIDs = 2;
+    repeated int32 AcceptTypeIDs = 3;
+    int32 ID = 4;
+    string Name = 5;
+    int32 GenericsID = 6;
+    int32 T0ID = 7;
+    uint32 Attributes = 8;
+    int32 T1ID = 9;
+}
+
+message UGCTypeTree{
+    repeated UGCType TypeMap = 1;
+    repeated UGCTypeComponentProp CmpProps = 2;
+    repeated UGCTypeComponent Components = 3;
+}
+
+message UGCTypeComponent{
+    int32 ID = 1;
+    repeated int32 Props = 2;
+}
+
+message UGCTypeComponentProp{
+    int32 ID = 1;
+    int32 Type = 2;
+    UGCVarValueDataV2 DefaultValue = 3;
+}
+
+//when export, UGCCustomReplicationDataItemForEditor --> UGCCustomReplicationDataItemV2
+message UGCCustomReplicationDataItemForEditor{
+    string Name = 1;
+    string TypeID = 2;
+    UGCVarValueDataV2 Value = 3;
+}
+
+// when export, UGCLogicEntityDataForEditor --> UGCLogicEntityDataV2
+message UGCLogicEntityDataForEditor{
+    //实例ID
+    string ID = 1;
+    //实体类型名称
+    string Type = 2;
+    //实体绑定的GraphID
+    repeated string GraphIDs = 3;
+    //实体属性实例数�?
+    repeated UGCCustomReplicationDataItemInstanceV2 RepDataItem = 4;
+    string EditorType = 5;
+}
+
+// when export, UGCCustomReplicationDataForEditor --> UGCCustomReplicationDataV2
+message UGCCustomReplicationDataForEditor{
+    string EntityType = 1;
+    repeated UGCCustomReplicationDataItemForEditor ItemData = 2;
+}
+
+//------------------------------------------------Start:OB39 remove------------------------------------------------
+
+//变量的序列化数据，运行时指代一个数据�?
+//Obsolete, OB39 is expected to remove the definition
+message UGCVarValueData{
+    EUGCValueType ValueType = 1;
+    UGCFuncCallerData FuncValue = 2;
+    bool BoolValue = 3;
+    int32 IntValue = 4;
+    float FloatValue = 5;
+    string StringValue = 6;
+    ProtoBuffVector3 Vector3Value = 7;
+    repeated UGCVarValueData ArrayValue = 8;
+}
+
+message UGCFuncCallerData{
+    //唯一ID
+    string ID = 1;
+    //名称
+    string Name = 2;
+    //函数类型，其映射到一个返回数据的API
+    int32 Type = 3;
+    //函数参数列表
+    repeated UGCVarValueData Params = 4;
+    //子过程，当类型含有代码块时（比如流程控制或函数自定义）使�?
+    repeated UGCFuncCallerData SubCallerData = 5;
+    //使用域外局部变�?
+    bool UseUpvalue = 6;
+}
+
+//Obsolete, OB39 is expected to remove the definition
+message UGCVarDefineData{
+    //唯一ID
+    string ID = 1;
+    //变量�?
+    string Name = 2;
+    //变量返回�?
+    UGCVarValueData Value = 3;
+}
+
+//Obsolete, OB39 is expected to remove the definition
+message UGCRuleData{
+    //监听事件类型
+    int32 EventType = 1;
+    //事件响应过程
+    UGCFuncCallerData CallerData = 2;
+}
+
+message UGCGraphData{
+    //Graph实例ID
+    string ID = 1;
+    //事件监听及响应函�?
+    repeated UGCRuleData Rules = 2;
+    //属性定义列�?
+    repeated UGCVarDefineData Variables = 3;
+    //函数定义列表
+    repeated UGCFuncCallerData Functions = 4;
+}
+
+message UGCCustomReplicationDataItemInstance{
+    int32 Index = 1;
+    UGCVarValueData Value = 2;
+}
+
+message UGCLogicEntityData{
+    //实例ID
+    string ID = 1;
+    //实体类型
+    EUGCLogicEntityType Type = 2;
+    //实体绑定的GraphID
+    repeated string GraphIDs = 3;
+    //实体属性实例数�?
+    repeated UGCCustomReplicationDataItemInstance RepDataItem = 4;
+}
+
+//Obsolete, OB39 is expected to remove the definition
+message UGCCustomReplicationDataItem{
+    string Name = 1;
+    UGCVarValueData Value = 2;
+}
+
+message UGCCustomReplicationData{
+    EUGCLogicEntityType EntityType = 1;
+    repeated UGCCustomReplicationDataItem ItemData = 2;
+}
+
+//关卡的可编辑数据（GS会读取一份内置数据，玩家不可编辑的UGCLevelData，是Base�?
+//Obsolete, OB39 is expected to remove the definition
+message UGCLevelData{
+    //关卡的所有Graph
+    repeated UGCGraphData GraphData = 1;
+    //关卡的比赛流程数�?
+    UGCWorkflowData Workflow = 2;
+    //关卡的逻辑实体数据(Global、Player、Team以及HUD都是逻辑实体)
+    repeated UGCLogicEntityData LogicEntityDatas = 3;
+    //实体自定义数�?
+    repeated UGCCustomReplicationData EntityReplicationData = 4;
+    //关卡的场景数�?(物件实体、物件实体属性、关卡常量参�?)
+    UGCMapRuntimeData MapData = 5;
+    //HUD编辑器导出数�?
+    UGCHudPrefabDatas HudPrefabData = 6;
+}
+
+//------------------------------------------------End  :OB39 remove------------------------------------------------
+
+//------------------------------------------------Start:OB40 remove------------------------------------------------
+
+message UGCLogicEntityDataV2{
+    //实例ID
+    string ID = 1;
+    //实体类型
+    int32 Type = 2;
+    //实体绑定的GraphID
+    repeated string GraphIDs = 3;
+    //实体属性实例数�?
+    repeated UGCCustomReplicationDataItemInstanceV2 RepDataItem = 4;
+}
+
+//关卡的可编辑数据（GS会读取一份内置数据，玩家不可编辑的UGCLevelData，是Base�?
+message UGCLevelDataV2{
+    //关卡的所有Graph
+    repeated UGCGraphDataV2 GraphData = 1;
+    //关卡的比赛流程数�?
+    UGCWorkflowData Workflow = 2;
+    //关卡的逻辑实体数据(Global、Player、Team以及HUD都是逻辑实体)
+    repeated UGCLogicEntityDataV2 LogicEntityDatas = 3;
+    //实体自定义数�?
+    repeated UGCCustomReplicationDataV2 EntityReplicationData = 4;
+    //HUD编辑器导出数�?
+    UGCHudPrefabDatas HudPrefabData = 5;
+    //用户自定义类型数�?
+    UGCTypeTree CustomTypeMap = 6;
+    SceneEditModeProtoData ModeSetting = 7;
+    //全部子关卡列�?
+    UGCAllSceneRuntimeData AllSceneData = 8;
+}
+
+//------------------------------------------------End  :OB40 remove------------------------------------------------
+
+enum EUGCVersionCode{
+    EUGCVersionCode_Unknown = 0;
+    //Major version number, when the online data has compatibility risks, raise the constant value for differentiated processing
+    EUGCVersionCode_CompatibleVersion = 6;
+    //Release version number, incremented by 1 for each version
+    EUGCVersionCode_PublicVersion = 104;
+}
+
+//UGC版本控制结构，为数据结构提供版本号封装
+message UGCVersionControlData{
+    int32 CompatibleVersion = 1;
+    bytes ContentData = 2;
+    int32 PublicVersion = 3;
+    bytes DownloadDesc = 4;
+}
+
+message UGCMapValue {
+    repeated UGCVarValueDataV2 Keys = 1;
+    repeated UGCVarValueDataV2 Values = 2;
+}
+
+//变量的序列化数据，运行时指代一个数据值
+message UGCVarValueDataV2{
+    oneof Value{
+        bool IsList = 1;
+        UGCFuncCallerDataV2 FuncValue = 3;
+        bool BoolValue = 4;
+        int32 IntValue = 5;
+        float FloatValue = 6;
+        string StringValue = 7;
+        ProtoBuffVector3 Vector3Value = 8;
+        string EntityRefValue = 9;
+        ProtoBuffQuaternion QuaternionValue = 10;
+        ProtoBuffVector2 Vector2Value = 11;
+        string LocStringValue = 12;
+        bool IsMap = 13;
+    }
+    repeated UGCVarValueDataV2 ListValue = 2;
+    UGCMapValue MapValue = 14;
+}
+
+message UGCFuncDefParamData {
+    //函数参数域外变量声明列表
+    bool IsUpvalue = 1;
+    //函数参数类型列表(仅当作为函数定义时有效)
+    int32 Type = 2;
+    //函数参数out类型列表
+    int32 OutType = 3;
+}
+
+//函数代码块
+message UGCFuncCallerDataV2{
+    //唯一ID
+    string ID = 1;
+    //名称
+    string Name = 2;
+    //函数类型，其映射到一个API
+    int32 Type = 3;
+    //函数参数列表（作为定义时是形参名，作为调用时是实参值）
+    repeated UGCVarValueDataV2 Params = 4;
+    //子过程，当类型含有代码块时（比如流程控制或函数自定义）使用
+    repeated UGCFuncCallerDataV2 SubCallerData = 5;
+    //使用域外局部变量
+    bool UseUpvalue = 6;
+    //OB40废弃字段，转移到DefParamInfos结构中,请使用新结构替代,计划于OB44删除该定义
+    repeated int32 ParamTypes = 7;
+    //函数定义形参声明列表
+    repeated UGCFuncDefParamData DefParamInfos = 8;
+}
+
+//定义的变量
+message UGCVarDefineDataV2{
+    //唯一ID
+    string ID = 1;
+    //变量名
+    string Name = 2;
+    //类型ID
+    int32 TypeID = 3;
+    //变量初始值
+    UGCVarValueDataV2 Value = 4;
+}
+
+//事件监听的注册
+message UGCRuleDataV2{
+    //监听事件类型
+    int32 EventType = 1;
+    //事件响应过程
+    UGCFuncCallerDataV2 CallerData = 2;
+}
+
+enum EUGCGraphKeyword{
+    GraphKeyword_Unknown = 0;
+    GraphKeyword_Static = 1;
+    GraphKeyword_Partial = 2;
+}
+
+message UGCGraphDataV2{
+    //Graph实例ID
+    string ID = 1;
+    //事件监听及响应函数
+    repeated UGCRuleDataV2 Rules = 2;
+    //属性定义列列表
+    repeated UGCVarDefineDataV2 Variables = 3;
+    //函数定义列表
+    repeated UGCFuncCallerDataV2 Functions = 4;
+    //脚本名
+    string Name = 5;
+    //声明关键字
+    int32 declare = 6;
+}
+
+message UGCCustomReplicationDataItemInstanceV2{
+    int32 PropID = 1;
+    UGCVarValueDataV2 Value = 2;
+}
+
+message UGCLogicEntityDataV3{
+    //实例ID
+    string ID = 1;
+    //实体原型(组件ID列表)
+    repeated int32 ComponentIDs = 2;
+    //实体绑定的GraphID
+    repeated string GraphIDs = 3;
+    //实体属性实例数据
+    repeated UGCCustomReplicationDataItemInstanceV2 RepDataItem = 4;
+    //引用PrefabID
+    string RefPrefabID = 5;
+}
+
+message UGCCustomReplicationDataItemV2{
+    string Name = 1;
+    int32 TypeID = 2;
+    UGCVarValueDataV2 Value = 3;
+    int32 Index = 4;
+    bool OnlyServer = 5;
+}
+
+message UGCCustomReplicationDataV2{
+    int32 ComponentTypeID = 1;
+    repeated UGCCustomReplicationDataItemV2 ItemData = 2;
+}
+
+//UGC内置代码库，运行时和玩家编译导出数据合并使用
+message UGCInternalLibrary{
+    //所有内置脚本
+    repeated UGCGraphDataV2 GraphData = 1;
+    //内置逻辑实体数据
+    repeated UGCLogicEntityDataV3 LogicEntityDatas = 2;
+}
+
+message UGCWorkflowData{
+    repeated UGCPhaseData PhaseData = 1;
+    repeated UGCRoundData RoundData = 2;
+    UGCWorkflowSequence WorkflowSequence = 3;
+}
+
+message UGCLocItem{
+    EUGCLocLanguage Lang = 1;
+    string Translation = 2;
+}
+message UGCLocKeyData{
+    string Key = 1;
+    repeated UGCLocItem LocList = 2;
+}
+message UGCLocData{
+    EUGCLocLanguage DefaultLang = 1;
+    repeated UGCLocKeyData KeyList = 2;
+}
+
+message UGCPrefabData{
+    //预制件ID（根节点实体ID）
+    string ID = 1;
+    // pre-order traversal
+    repeated UGCTransformNodeData EntityHierachy = 2;
+}
+
+//自定义事件
+message UGCCustomEventData{
+    //事件ID
+    int32 ID = 1;
+    //事件名
+    string Name = 2;
+}
+
+message UGCBTreeData
+{
+    string ID = 1;
+    bytes Data = 2;
+}
+
+//UGC游戏编译数据（GS会读取一份内置代码库，两份数据会进行合并）
+message UGCGameData{
+    //所有脚本数据
+    repeated UGCGraphDataV2 GraphData = 1;
+    //比赛流程数据
+    UGCWorkflowData Workflow = 2;
+    //逻辑实体实例数据（脚本绑定和实例属性值）
+    repeated UGCLogicEntityDataV3 LogicEntityDatas = 3;
+    //组件自定义数据
+    repeated UGCCustomReplicationDataV2 ComponentRepData = 4;
+    //HUD编辑器导出数据
+    UGCHudPrefabDatas HudPrefabData = 5;
+    //用户自定义类型数数据
+    UGCTypeTree CustomTypeMap = 6;
+    //游戏全局设定数据
+    SceneEditModeProtoData ModeSetting = 7;
+    //全部子关卡列表
+    UGCAllSceneRuntimeData AllSceneData = 8;
+    //多语言数据
+    UGCLocData LocData = 9;
+    //资源列表
+    UGCResourceData ResourceData = 10;
+    //静态预制实体数据（可被实体实例数据引用）
+    repeated UGCPrefabData PrefabData = 11;
+    //自定义事件列表
+    repeated UGCCustomEventData CustomEventData = 12;
+    //自定义行为树
+    repeated UGCBTreeData BTreeData = 13;
+}
+
+
+message UGCSubLevelItemRuntimeData {
+    uint32 static_type_id = 1;
+    float  pos_x=3;
+    float  pos_y=4;
+    float  pos_z=5;
+    float  scale_x=6;
+    float  scale_y=7;
+    float  scale_z=8;
+    float  rot_yaw=9;
+    float  rot_pitch=10;
+    float  rot_roll=11;
+    uint32 extra_base_info_instance_id = 12;//used to find attributedata
+    uint32 levelobject_id_by_tag = 13; //each tag will manage id seperately
+    string logic_entity_id = 14;
+    string customized_name = 15;
+    uint32 reset_per_round= 16;
+    string obj_color= 17 [deprecated = true];
+    int32 group_id = 18;
+    int32 surColor = 19;
+    int32 borderColor = 20;
+    string surTex = 21;
+    string borTex = 22;
+	bool isStatic = 23;
+}
+message UGCSubLevelDescData{
+    float GridWidth=1;
+    float GridHeight=2;
+    float GridCenterX=3;
+    float GridCenterZ=4;
+    float GridUnit=5;
+}
+message UGCSubLevelSkyEnvData{
+    bool IsAdvanceMode=1;
+    string BaseSkyEnvRes=2;
+    int32 LightColor=3;
+    float LightIntensity=4;
+    float Darkness=5;
+    float ShadowStrength=6;
+    float TerrainWetness=7;
+    float LensFlare=8;
+    int32 FogColor=9;
+    int32 AmbientColor=10;
+    bool NightMode=11;
+}
+
+message UGCSubLevelResourceData{
+    string SubLevelName=1;
+    string GUID=2;
+    bool IsMainLevel=3;
+    uint32 BaseMapID=4;
+    bool IsUseLevelDescData=5;
+    UGCSubLevelDescData DescInfo=6;
+    repeated UGCSubLevelItemRuntimeData ObjectList = 7;
+    SceneEditEntityAttributeProtoData ObjectAttrList = 8;
+    UGCSubLevelSkyEnvData SkyEnv = 9;
+    repeated UGCTransformNodeData ObjectHierachy= 10; // Pre-Order serialize of scene hierachy
+    string GrassResourceUUID=11;//植被数据
+}
+
+// ID can be logic entity id, or any unique id
+// Children's ids are not saved, need to ensure Pre-order tranverse to serialize tree
+// If no parent, ParentID should be ""
+// Do not use pos,scale,rot in UGCGameData.LogicEntityDatas since they are global, not local
+message UGCTransformNodeData{
+    string ID = 1;
+    string ParentID = 2;
+    ProtoBuffVector3 LocalPosition = 3;
+    ProtoBuffVector3 LocalScale = 4;
+    ProtoBuffQuaternion LocalRotation = 5;
+}
+
+message UGCAllSceneRuntimeData{
+    repeated UGCSubLevelResourceData SubLevelList=1;
+}
+
+// Obsolete and delete in OB39
+message UGCMapRuntimeData{
+    SceneEditEntityProtoData Entities = 1;
+    SceneEditModeProtoData ModeSetting = 2;
+    SceneEditEntityAttributeProtoData EntityAttributes = 3;
+}
+
+message SceneEditObjectProtoData {
+    uint32 id_dir_posy = 1;
+    uint32 pos_xz = 2;
+    uint32 extra_base_info_instance_id = 3;
+    uint32 extra_base_info_free_dir = 4;
+    uint32 levelobject_id_by_tag = 5; //each tag will manage id seperately
+    string logic_entity_id = 6;
+    string customized_name = 7;
+    uint32 reset_per_round=8;
+    string obj_color=9 [deprecated = true];
+}
+
+message SceneEditEntityProtoData {
+    repeated SceneEditObjectProtoData objects = 1;
+}
+
+message SceneEditTeleportDoorProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 group_id = 2;
+    uint32 teleport_door_type = 3;
+    uint32 target_door_id = 4;
+    uint32 trigger_type = 5;
+    bool teleport_active = 6;
+    bool isvalid_teleport_door_type = 7;
+}
+
+message SceneEditPianoKeyProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 key_id = 2;
+}
+
+message SceneEditBuffProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 buff_type = 2;
+    uint32 buff_refresh_time_sec = 3;
+}
+
+message SceneEditMoveObjectProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 moveConfigID = 2;
+    bool motionEditMode = 3;
+    uint32 motionValue = 4;
+    bool motionCustomized = 5;
+    uint32 motionType = 6;
+    uint32 motionValueX = 7;
+    uint32 motionValueY = 8;
+    uint32 motionValueZ = 9;
+    uint32 motionTime = 10;
+    uint32 StayTime = 11;
+    bool IsReset = 12;
+}
+
+message SceneEditScalableItemProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 ScaleX = 2;
+    uint32 ScaleY = 3;
+    uint32 ScaleZ = 4;
+}
+
+message SceneEditItemBoxProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 dropid = 2;
+    SceneEditCustomItemBoxProtoData customData = 3;
+}
+
+message SceneEditCustomItemBoxProtoData {
+    uint32 refreshCount = 1;
+    repeated SceneEditCustomItemBoxGroupProtoData lootGroups = 2;
+}
+
+message SceneEditCustomItemBoxGroupProtoData {
+    uint32 refreshCount = 1;
+    repeated SceneEditCustomItemBoxItemProtoData lootItems = 2;
+    bool marked = 3;
+}
+
+message SceneEditCustomItemBoxItemProtoData {
+    uint32 itemid = 1;
+    uint32 num = 2;
+    bool marked = 3;
+}
+
+message SceneEditTriggerProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 trigger_type = 2;
+    bool   isShow = 3;
+
+}
+
+message SceneEditShapeTriggerProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    float radius = 2;
+    float height = 3;
+}
+
+message SceneEditBigToyBallProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    float velocity_xz = 2;
+    float velocity_y = 3;
+}
+
+message SceneEditMiniSentryProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 hp = 2;
+    float defense = 3;
+    uint32 attack = 4;
+    float attack_interval = 5;
+    uint32 attack_range = 6;
+    uint32 team_id = 7;
+}
+
+message SceneEditBotGeneratorProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 count_each_batch = 2;
+    uint32 batch_count = 3;
+    uint32 batch_interval = 4;
+    UGCAIConfigParams bot_config = 5;
+    uint32 enable_dead_drop = 6;
+    bool is_continuous = 7;
+	float batch_interval_float = 8;
+	float start_gen_time = 9;
+}
+
+message SceneEditUGCVendingMachineProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    string binding_shop_entity_id = 2;
+    float  trigger_radius = 3;
+    bool   model_show = 4;
+}
+
+message SceneEditUGCWardrobeProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    float  trigger_radius = 2;
+    bool   model_show = 3;
+}
+
+message SceneEditUGCPointLightProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    float  intensity = 2;
+    float  range = 3;
+    uint32 color = 4;
+}
+
+message SceneEditUGCFootballProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    float  radius = 2;
+    float  friction = 3;
+    float  friction_rush = 4;
+    float  shoot_angle_min = 5;
+    float  high_shoot_angle_min = 6;
+    float  hide_time = 7;
+}
+
+message SceneEditUGCCoinGeneratorProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    float coint_cnt = 2;
+}
+
+message SceneEditUGCEntityGeneratorProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 count_each_batch = 2;
+    uint32 batch_count = 3;
+    uint32 batch_interval = 4;
+    string entity_id = 5;
+	float batch_interval_float = 6;
+	bool is_continuous = 7;
+	float start_gen_time = 8;
+}
+
+message SceneEditUGCAIProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    UGCAIConfigParams param = 2;
+}
+
+message UGCAIConfigParams {
+    uint32 hp = 1;
+    uint32 attack = 2;
+    float defense = 3;
+    float move_speed = 4;
+    bool can_chase_enemy = 5;
+    float detect_range = 6;
+    float attack_range = 7;
+    uint32 team_id = 8;
+    uint32 action_type = 9;
+    uint32 ai_type = 10;
+    uint32 path_instance_id = 11;
+    bool enable_dead_drop = 12;
+    float injury_scale = 13;
+}
+
+message SceneEditUGCCustomPathProtoData {
+    uint32 extra_base_info_instance_id = 1;
+    repeated ProtoBuffVector3 control_points = 2;
+}
+
+message SceneEditEntityAttributeProtoData{
+    repeated SceneEditTeleportDoorProtoData teleport_doors = 1;
+    repeated SceneEditPianoKeyProtoData piano_keys = 2;
+    repeated SceneEditBuffProtoData buffs = 3;
+    repeated SceneEditMoveObjectProtoData move_objects = 4;
+    repeated SceneEditScalableItemProtoData scale_items = 5;
+    repeated SceneEditItemBoxProtoData itemboxs = 6;
+    repeated SceneEditTriggerProtoData triggers = 7;
+    repeated SceneEditBigToyBallProtoData big_toy_balls = 8;
+    repeated SceneEditMiniSentryProtoData minisentris = 9;
+    repeated SceneEditUGCCustomPathProtoData custom_paths = 10;
+    repeated SceneEditBotGeneratorProtoData bot_generators = 11;
+    repeated SceneEditUGCVendingMachineProtoData vending_machines = 12;
+    repeated SceneEditUGCAIProtoData ugc_ais = 13;
+    repeated SceneEditUGCEntityGeneratorProtoData entity_generators = 14;
+    repeated SceneEditUGCCoinGeneratorProtoData coin_generators = 15;
+    repeated SceneEditUGCWardrobeProtoData wardrobes = 16;
+    repeated SceneEditSpawnBoxData spawn_boxs = 17;
+    repeated SceneEditUGCFootballProtoData footballs = 18;    
+    repeated SceneEditGoalData goals = 19;
+    repeated SceneEditOildrumData oildrums = 20;
+    repeated SceneEditBasicSphereProtoData basic_sphere = 21;
+    repeated SceneEditCustomLevelObjectProtoData custom_levelobject = 22;
+    repeated SceneEditUGCPointLightProtoData point_lights = 23;
+	repeated SceneEditShapeTriggerProtoData shape_triggers = 24;
+}
+
+// a.k.a. modesetting
+message SceneEditModeProtoData {
+    bytes mode_data = 1;
+    SceneEditGeneralProtoData general_data = 2;
+    uint32 version = 3;
+    repeated uint32 collision_matrix = 4; // 32x32
+}
+
+message SceneEditOildrumData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 hp = 2;
+    float range = 3;
+    float damage = 4;
+}
+
+message SceneEditBasicSphereProtoData
+{
+    uint32 extra_base_info_instance_id = 1;
+    float  radius = 2;
+}
+
+message SceneEditCustomLevelObjectProtoData
+{
+    uint32 extra_base_info_instance_id = 1;
+    string  res_uuid = 2;
+}
+
+message SceneEditGoalData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 team_id = 2;
+}
+
+
+message SceneEditSpawnBoxData {
+    uint32 extra_base_info_instance_id = 1;
+    uint32 x = 2;
+    uint32 y = 3;
+    uint32 z = 4;
+    uint32 spawn_point_count = 5;
+    int32 team_id = 6;
+}
+
+message SceneEditGeneralProtoData {
+    uint32 max_hp = 1;
+    uint32 max_ep = 2;
+    uint32 start_ep = 3;
+    bool auto_healing = 4;
+    uint32 damage = 5;
+    uint32 receive_damage = 6;
+    float move_speed = 7;
+    float jump_height = 8;
+    bool limited_ammo = 9;
+    bool enable_active_skill = 10;
+    bool enable_passive_skill = 11;
+    uint32 global_active_skill_cd_percent = 12;
+    uint32 playerskill_transform_cd_percent = 13;//1201
+    uint32 playerskill_epchangetohp_cd_percent = 14;//1901
+    uint32 playerskill_healingdance_cd_percent = 15;//2201
+    uint32 playerskill_graffitimonitor_cd_percent = 16;//2601
+    uint32 playerskill_detective_cd_percent = 17;//3101
+    uint32 playerskill_epfastandupper_cd_percent = 18;//3401
+    uint32 playerskill_adddamagebycosthp_cd_percent = 19;//3601
+    uint32 playerskill_spaceshield_cd_percent = 20;//3801
+    uint32 playerskill_blowupicewall_cd_percent = 21;//4001
+    uint32 playerskill_tempincreasehp_cd_percent = 22;//4401
+    uint32 playerskill_addhpandrescure_cd_percent = 23;//4701
+    //uint32 playerskill_runspeedup_cd_percent = 24;//5301
+    uint32 playerskill_dwshield_cd_percent = 25;//5401
+    uint32 playerskill_throwsilence_cd_percent = 26;//1901
+    uint32 playerskill_createflightbomb_cd_percent = 27;//5501
+    uint32 playerskill_markicewall_cd_percent = 28;//5601
+    uint32 playerskill_runspeedup_cd_percent = 29;//5801
+    bool unlimited_bullet = 30;
+    bool unlimited_gloowall = 31;
+    bool unlimited_throwables = 32;
+}
+
+// for CS
+message SceneEditCSModeProtoData {
+    SceneEditEndConditionProtoData end_condition = 1;
+    float safe_zone_size = 2;
+    uint32 safe_zone_start_time = 3;
+}
+
+// for TDM
+message SceneEditIntegralModeProtoData {
+    SceneEditEndConditionProtoData end_condition = 1;
+    uint32 kill_score = 2;
+    uint32 revive_rule = 3;
+    uint32 revive_time = 4;
+}
+
+// for Party
+message SceneEditPartyModeProtoData {
+    SceneEditEndConditionProtoData end_condition = 1;
+}
+
+// for template or custom UGC
+message SceneEditCustomModeProtoData{
+    repeated ModeVariable variables = 1;
+}
+
+message SceneEditEndConditionProtoData {
+    uint32 time_up = 1;
+    uint32 score = 2;
+    uint32 cs_rounds = 3;
+}
+
+message UGCMoveObjectExportExtraInfo
+{
+    ProtoBuffVector3 MoveRootLocPos = 1;
+    ProtoBuffQuaternion MoveRooLoctRot = 2;
+}
+
+message UGCCheckPointExportExtraInfo
+{
+    repeated ProtoBuffVector3 spawnPointPos = 1;
+}
+message UGCBigToyBallExportExtraInfo
+{
+    float MoveRange = 1;
+    float TriggerRadius = 2;
+}
+message UGCMiniSentryExportInfo
+{
+    float AngleSpeed = 1;
+    float AngleUp = 2;
+    float AngleDown = 3;
+    ProtoBuffVector3 FirePos = 4;
+    float FireAngle = 5;
+}
+enum UGCMiniSentryRange {
+    UGCMiniSentryRange_Near = 0;
+    UGCMiniSentryRange_Middle = 1;
+    UGCMiniSentryRange_Far = 2;
+}
+
+
+message ModeVariable {
+    int32 id = 1;
+    bool boolValue = 2;
+    int32 intValue = 3;
+    float floatValue = 4;
+    repeated float floatArrValue = 5;
+}
+
+message UGCBlockEditProjectData{
+   bytes Data = 1;
+   int32 SaveType = 2;
+}
+
+// -----------  UGC Hud Prefab  -----------
+
+message UGCHudTransformData{
+    ProtoBuffVector3 LocalPosition = 1;
+    ProtoBuffVector3 LocalEulerAngles = 2;    
+    ProtoBuffVector3 LocalScale = 3;
+}
+
+message UGCHudRectTransformData{
+    UGCHudTransformData Transform = 1;
+    ProtoBuffVector3 AnchorPosition = 2;
+}
+
+message UGCHudWidgetData{
+    int32 Width = 1;
+    int32 Height = 2; 
+    int32 Depth = 3;
+    int32 HorizontalAlignment = 4;
+    int32 VerticalAlignment = 5;
+    int32 Color = 6;
+    ProtoBuffVector2 AnchorMin = 7;
+    ProtoBuffVector2 AnchorMax = 8;
+    ProtoBuffVector2 SizeDelta = 9;
+    ProtoBuffVector2 Pivot = 10;
+}
+
+message UGCHudLabelData{
+    UGCHudWidgetData Widget = 1;
+    string Text = 2;
+    int32 FontSize = 3;
+    int32 Alignment = 4;
+    int32 AlignmentVertical = 5;
+    string Font = 6;
+    bool IsBold = 7;
+    bool IsItalic = 8;
+    bool IsUnderline = 9;
+    float LineSpacing = 10;
+    int32 Overflow = 11;
+    string LocKey = 12;
+}
+
+message UGCHudImageData{
+    UGCHudWidgetData Widget = 1;
+    string SpriteName = 2;
+    int32 SpriteFlip = 3;
+    int32 SpriteType = 4;
+    int32 BorderTop = 5;
+    int32 BorderBottom = 6;
+    int32 BorderLeft = 7;
+    int32 BorderRight = 8;
+    bool CenterInvisible = 9;
+    int32 FillDir = 10;
+    float FillAmount = 11;
+    bool InvertFill = 12;
+    int32 Gradient = 13;
+    int32 GradientTop = 14;
+    int32 GradientBottom = 15;
+}
+
+message UGCHudButtonData{
+    UGCHudWidgetData Widget = 1;
+    string SpriteName = 2;
+    int32 DisableColor = 3;
+    int32 SpriteType = 4;
+    int32 NormalColor = 5;
+    int32 PressedColor = 6;
+    bool IsFEButton = 7;
+    int32 BorderTop = 8;
+    int32 BorderBottom = 9;
+    int32 BorderLeft = 10;
+    int32 BorderRight = 11;
+}
+
+message UGCHudInputData{
+    UGCHudWidgetData Widget = 1;
+    string Font = 2;
+    int32 FontSize = 3;
+    bool IsBold = 4;
+    bool IsItalic = 5;
+    bool IsUnderline = 6;
+    int32 Alignment = 7;
+    int32 AlignmentVertical = 8; 
+    float LineSpacing = 9;
+    int32 WordWrap = 10;
+    int32 MaxLength = 11;
+    string text = 12; 
+    int32 TransitionType = 13;
+    int32 NormalColor = 14; 
+    int32 PressedColor = 15;
+    int32 DisableColor = 16;
+    string LocKey = 17;
+}
+
+message UGCHudLayoutData{
+    UGCHudWidgetData Widget = 1;
+}
+
+message UGCHudGridData{
+    UGCHudPanelData Panel = 1;
+    int32 LayoutType = 2;
+    int32 ContentOrigin = 3;
+    int32 FillDirection = 4;
+    ProtoBuffVector2 CellSize = 5;
+    ProtoBuffVector2 Space = 6;
+    int32 Constraint = 7;
+    ProtoBuffVector2 OffsetUpDown = 8;
+    ProtoBuffVector2 OffsetLeftRight = 9;
+    int32 ConstraintCount = 10;
+}
+
+message UGCHudLayoutNewData{
+    UGCHudWidgetData Widget = 1;
+    int32 LayoutType = 2;
+    int32 ContentOrigin = 3;
+    int32 FillDirection = 4;
+    ProtoBuffVector2 CellSize = 5;
+    ProtoBuffVector2 Space = 6;
+    int32 Constraint = 7;
+    ProtoBuffVector2 OffsetUpDown = 8;
+    ProtoBuffVector2 OffsetLeftRight = 9;
+    int32 ConstraintCount = 10;
+}
+
+message UGCHudPanelData{
+    int32 Width = 1;
+    int32 Height = 2; 
+    int32 Depth = 3;
+    bool BgFill = 4;
+    string BgName = 5;
+    int32 BgColor = 6;
+    ProtoBuffVector2 BgSizeDelta = 7;
+    int32 ClippingType = 8;
+    string MaskName = 9;
+    ProtoBuffVector2 Softness = 10;
+    ProtoBuffVector2 AnchorMin = 11;
+    ProtoBuffVector2 AnchorMax = 12;
+    ProtoBuffVector2 SizeDelta = 13;
+    ProtoBuffVector2 Pivot = 14;
+    float BgAlpha = 15;
+}
+
+message UGCHudScrollViewData{
+    UGCHudPanelData Panel = 1;
+    int32 ContentOrigin = 2;
+    int32 ScrollDirection = 3;
+    ProtoBuffVector2 CustomXY = 4;
+    int32 DragEffect = 5;
+    float ScrollWheelFactor = 6;
+    float MomentumAmount = 7;
+    bool RestrictWithinPanel = 8;
+    bool SmoothDragStart = 9;
+    bool CancelDragIfFits = 10;
+    int32 VerticalBar = 11;
+    int32 HorizontalBar = 12;
+}
+
+message UGCHud3DContainerData{
+    UGCHudWidgetData Widget = 1;
+    string ResourceID = 2;
+    ProtoBuffVector3 Scale = 3;
+    ProtoBuffVector3 Rotation = 4;
+}
+
+message UGCHudTextureData{
+    UGCHudWidgetData Widget = 1;
+    string TextureName = 2;
+    string ShaderName = 3;
+    ProtoBuffVector2 UVRectXY = 4;
+    ProtoBuffVector2 UVRectWH = 5;
+    int32 FillType = 6;
+    ProtoBuffVector2 BorderLR = 7;
+    ProtoBuffVector2 BorderTB = 8;
+    bool CenterInvisible = 9;
+    int32 FillDir = 10;
+    float FillAmount = 11;
+    bool InvertFill = 12;
+    int32 Flip = 13;
+    int32 Gradient = 14;
+    int32 GradientTop = 15;
+    int32 GradientBottom = 16;
+}
+
+message UGCHudProfileInfoData{
+    UGCHudWidgetData Widget = 1;
+    ProtoBuffVector3 Scale = 2;
+    int32 ShowType = 3;
+    int32 ShowRank = 5;
+    bool ShowPin = 4;
+    bool ShowName = 6;
+}
+
+message UGCHudGameObjectCommonData{
+    uint32 ID = 1;
+    bool Actived = 2;
+    UGCHudRectTransformData RectTransform = 3;
+    uint32 WidgetType = 4;
+    UGCHudWidgetData Widget = 5;
+    UGCHudLabelData Label = 6;
+    UGCHudImageData Image = 7;
+    UGCHudButtonData Button = 8;
+    UGCHudInputData Input = 9;
+    UGCHudLayoutData Layout = 10;
+    string Name = 11;
+    UGCHudPanelData Panel = 12;
+    UGCHudScrollViewData ScrollView = 13;
+    UGCHudGridData Grid = 14;
+    UGCHudLayoutNewData LayoutNew = 15;
+    UGCHud3DContainerData Container3D = 16;
+    UGCHudTextureData Texture = 17;
+    UGCHudProfileInfoData ProfileInfo = 18;
+}
+
+message UGCHudGameObjectData{
+    UGCHudGameObjectCommonData CommonData = 1;
+    repeated UGCHudGameObjectData Children = 2;
+}
+
+// 工程文件
+message UGCHudGameObjectDataForEditor{
+    UGCHudGameObjectCommonData CommonData = 1;
+    string Name = 2;
+    repeated UGCHudGameObjectDataForEditor Children = 3;
+    bool CustomAdapt = 4;
+}
+
+// Hud Prefab通用数据
+message UGCHudPrefabCommonData{
+    int32 ScreenWidth = 1;
+    int32 ScreenHeight = 2;
+    uint32 ID = 3;
+    UGCHudTransformData Transform = 4;
+}
+
+// 导出文件：Hud Prefab数据
+message UGCHudPrefabData{
+    UGCHudPrefabCommonData CommonData = 1;
+    repeated UGCHudGameObjectData Children = 2;
+    uint32 MaxWidgetID = 3;
+}
+
+// 工程文件：Hud Prefab数据
+message UGCHudPrefabDataForEditor{
+    UGCHudPrefabCommonData CommonData = 1;
+    repeated UGCHudGameObjectDataForEditor Children = 2;
+    string Name =3;
+    uint32 Index = 4;
+    uint32 MaxWidgetID = 5;
+}
+
+// 导出文件：Hud Prefab列表
+message UGCHudPrefabDatas{
+    repeated UGCHudPrefabData Prefabs = 1;
+}
+
+// 工程文件：Hud Prefab列表
+message UGCHudPrefabDatasForEditor{
+    repeated UGCHudPrefabDataForEditor Prefabs = 1;
+}
+
+// -----------  UGC Hud Prefab  -----------
+
+// project data contains all information of a editable map, 
+// and is serialized into one single file
+message UGCProjectData{
+    bytes GraphEditorProject = 1; //UGCBlockEditProjectData
+    bytes WorkflowEditorProject = 2; // not defined
+    bytes EntityEditorProject = 3; // not defined, ask guojun
+    bytes HudEditorProject = 4; // UGCHudPrefabDatasForEditor
+    bytes MapEditorProject = 5; //UGCMapProjectData
+    bytes ModeSettingEditorProject = 6; //ModeSetting
+    EUGCProjectVersion CompatibleVersion = 999;
+    int32 PublicVersion = 1000;
+}
+
+// project metadata is for preview outside game
+message UGCProjectMetaData{
+    uint32 SlotID = 1;
+    string GameName = 2;
+    string GameDesc = 3;
+    uint32 GameMode = 4; // EGameMode
+    uint32 GroupMode = 5;
+    uint32 TeamCount = 6;
+    uint64 GameResourceCount = 7; // SceneEditGame.ItemMap.Count
+    uint64 GameTotalCost = 8; // All SceneEditPrefabConfigData.Cost
+    uint64 UpdateTime = 9; // Timestamp when this meta data is changed.
+    repeated uint32 Tags = 10;
+    bytes WorkshopBitMap = 11; // minimap, ask wenjie
+    bytes WorkshopIconMap = 12; // minimap, ask wenjie
+    SceneEditModeProtoData ModeSettings = 13;
+    uint64 RuntimeDataLength = 14;
+    uint64 ProjectDataLength = 15;
+    UGCUserDataForCensorship UserDataForCensorship = 16;
+    uint32 MapID = 17; // for old map, mapID is always 10
+    EUGCProjectVersion CompatibleVersion = 18; // for compatibility
+    bytes RuntimeDataMD5 = 19;
+    bytes ProjectDataMD5 = 20;
+    uint32 ModeTemplateId = 21;
+    UGCEditorError.ErrorSeverity Severity = 22; // save error-check tag
+    bool SecEdit = 23; // download rom others, need sec-edit
+    int32 PublicVersion = 24;
+    string OriginalWorkshopCode = 25;
+    string GameNameKey = 26;
+    string GameDescKey = 27;
+    repeated UGCLocData LocData = 28;
+    bytes CustomCover = 29;
+    string CustomCoverUrl = 30;
+    bytes RoomParams = 31;
+	bytes PackageDataMD5 = 32; //for uploading package
+    bytes OpenRoomLocDataMD5 = 33;
+    UGCRoomHalfWayJoinRule halfWayJoinRule = 34;
+	string SubDesc = 35;
+	repeated bytes DataStorage = 36;
+	repeated bytes LeaderBoard = 37;
+	bool notify_subscriber = 38;
+    repeated bytes Statistic = 39;
+}
+
+
+
+enum EUGCProjectVersion {
+    EUGCProjectVersion_Unknown = 0;
+    EUGCProjectVersion_OB35_And_Earlier = 1;
+    EUGCProjectVersion_OB36_To_OB37 = 2;
+    EUGCProjectVersion_OB38_To_OB39 = 3;
+    EUGCProjectVersion_Latest = 4;
+}
+
+message UGCUserDataForCensorship{
+    message BlobOfCustomStrings {
+        repeated string StringList = 1; //Only string in ob38
+        uint32 EntityType = 2; // LogicEntityType, obsolete in ob36, use EntityTypeName instead
+        string EntityTypeName = 3;
+        uint32 WordFilterType = 4;//String type ,no use EntityTypeName for Key in OB38
+        string GraphID = 5;
+        string ID = 6;
+    }
+
+    repeated BlobOfCustomStrings CustomStrings = 1;
+}
+
+// project data for map editor
+message UGCMapProjectData_OB35_And_Earlier{
+    bytes EntityBindingDataBytes = 1; // List<UGCLogicEntityData>
+    bytes RuntimeDataBytes = 2; // UGCMapRuntimeData
+    string GameName = 3;
+    string GameDesc = 4;
+    uint32 GameMode = 5;
+    uint32 GroupMode = 6;
+    uint32 TeamCount = 7;
+}
+message UGCMapProjectData{
+    repeated UGCLogicEntityDataForEditor AllEntityData = 1;
+    bytes RuntimeDataBytes = 2; // UGCAllSceneRuntimeData
+    string GameName = 3;
+    string GameDesc = 4;
+    uint32 GameMode = 5;
+    uint32 GroupMode = 6;
+    uint32 TeamCount = 7;
+}
+
+message UGCEditorError {
+
+    // one specific kind of error, used as primary key
+    enum ErrorCode {
+        ErrorCode_Unknown = 0;
+    
+        // Reserved [1, 100,000,000] for manual escalation from csv
+        ErrorCode_Reserved_MaxValue = 100000000;
+    
+        // Map: [100,000,001, 100,000,000)
+        ErrorCode_Map_InsufficientSpawnPoints = 100000001;
+        ErrorCode_Map_InsufficientTargetPoints = 100000002;
+        ErrorCode_Map_InsufficientMustModeItems = 100000003;
+        ErrorCode_Map_CostExceedLimit = 100000004;
+        ErrorCode_Map_ObjectExceedLimit = 100000005;
+        ErrorCode_Map_InsufficientAllTeamSpawnPointsNum = 100000006;
+        ErrorCode_Map_InsufficientSingleTeamSpawnPoints = 100000007;
+        ErrorCode_Map_InsufficientSingleTeamSpawnPointsNum = 100000008;
+    
+        // Workflow: [101,100,001, 100,200,000]
+    
+        // Graph: [100,200,001, 100,300,000]
+        ErrorCode_Graph_MissingReference = 100200001;
+        ErrorCode_Graph_TypeMismatch = 100200002;
+        ErrorCode_Graph_VariableOutOfScope = 100200003;
+        ErrorCode_Graph_ExceedLimit = 100200004;
+        ErrorCode_Graph_ReturnOutOfScope = 100200005;
+        ErrorCode_Graph_ReturnWithoutValueOutOfScope = 100200006;
+        ErrorCode_Graph_ReturnWithValueOutOfScope = 100200007;
+        ErrorCode_Graph_InvalidEvent = 100200008;
+        ErrorCode_Graph_ForbbidenEmptySlot = 100200009;
+        ErrorCode_Graph_EntityPropertyObsolete = 100200010;
+
+    
+        // Hud: [100,300,001, 100,400,000]
+        ErrorCode_Hud_InterfaceExceedLimit = 100300001;
+        ErrorCode_Hud_ControlExceedLimit = 100300002;
+        // Entity Attribute: [100,400,001, 100,500,000]
+    
+    }
+
+    enum ErrorSeverity {
+        ErrorSeverity_None = 0;
+        ErrorSeverity_Panic = 1;
+        ErrorSeverity_Error = 2;
+        ErrorSeverity_Warning = 3;
+    }
+
+    // read from csv, or assign a default value in code
+    message ErrorCodeData {
+        ErrorCode ErrorCode = 1;
+        ErrorSeverity Severity = 2; // To determin whether error can be ignored during upload/save. Default value is 0. 0 is most serious.
+        uint32 Priority = 3; // To sort different errors. Default value is (int)ErrorCode. 0 is highest priority.
+        string LocKey = 4; // To show tips. Default value is ErrorCode.ToString()
+        string ConsoleKEY = 5; //To show in console
+    }
+
+    // one specific error (type, location, etc)
+    message ErrorEntry {
+        ErrorCode ErrorCode = 1;
+        string EntityType = 2;//EUGCTypeName
+        string EntityID = 3;
+        string GraphID = 4;
+        uint32 SceneEditItemType = 5; //ESceneEditItemType in UDPMessage.proto
+        string BlockID = 6;
+        repeated string ExtraParams = 7;
+    }
+}
+
+enum RoomCustomParamsDataType{
+    ERoomCustomParamsDataType_None = 0;
+    ERoomCustomParamsDataType_Bool = 1;
+    ERoomCustomParamsDataType_SliderInt = 2;
+    ERoomCustomParamsDataType_SliderFloat = 3;
+    ERoomCustomParamsDataType_SingleChooseInt = 4;
+    ERoomCustomParamsDataType_MultiChooseInt = 5;
+    ERoomCustomParamsDataType_SingleChooseFloat = 6;
+}
+
+message RoomCustomParamSingleIntItem{
+    int32 Value = 1;
+    string LabelKey = 2;
+    string DefaultText = 3;
+}
+
+message RoomCustomParamSingleFloatItem{
+    float Value = 1;
+    string LabelKey = 2;
+    string DefaultText = 3;
+}
+
+message RoomCustomParamSliderInt{
+    int32 MinValue = 1;
+    int32 MaxValue = 2;
+    int32 Value = 3;
+}
+
+message RoomCustomParamSliderFloat{
+    float MinValue = 1;
+    float MaxValue = 2;
+    float Value = 3;
+}
+
+message RoomCustomParamSingleChooseInt{
+    int32 Index = 1;
+    repeated RoomCustomParamSingleIntItem items = 2;
+}
+
+message RoomCustomParamSingleChooseFloat{
+    int32 Index = 1;
+    repeated RoomCustomParamSingleFloatItem items = 2;
+}
+
+message RoomCustomParamMultiChooseInt{
+    repeated int32 IndexList = 1;
+    repeated RoomCustomParamSingleIntItem items = 2;
+}
+
+message RoomCustomParamData {
+    int32 ID = 1;
+    string LabelKey = 2;
+    string DefaultText = 3;
+    RoomCustomParamsDataType Type = 4;
+    oneof Value{
+        bool BoolValue = 5;
+        RoomCustomParamSliderInt SliderInt = 7;
+        RoomCustomParamSliderFloat SliderFloat = 8;
+        RoomCustomParamSingleChooseInt SingleChooseInt = 9;
+        RoomCustomParamSingleChooseFloat SingleChooseFloat = 10;
+    }
+    RoomCustomParamMultiChooseInt MultiChooseInt = 6;
+}
+
+message RoomCustomParamsSettingData {
+    repeated RoomCustomParamData Params = 1;
+    string LocCDNURL = 2;
+}
+
+message RoomCustomParamProtoData{
+    int32 ID = 1;
+    RoomCustomParamsDataType Type = 2;
+    oneof Value{
+        bool BoolValue = 3;
+        int32 IntValue = 5;
+        float FloatValue = 6;
+    }
+    repeated int32 ListInt = 4;
+}
+
+message UGCResourceData{
+    enum UGCResourceDataVersion
+    {
+        UGCResourceMetaDataVersion_Unknown = 0;
+        UGCResourceMetaDataVersion_V1 = 1; // OB38: Optional resource reference info only: Content -> UGCResourceContentData
+    }
+    UGCResourceDataVersion Version = 1;
+    bytes Content = 2;
+}
+
+message UGCResourceContentData
+{
+    repeated string OptionalResourceNames = 1;
+    string UrlCache = 2;
+    repeated uint32 MapIds = 3;
+    repeated uint32 ItemIds = 4;
+    UGCGameDataResourcePackageInfo ResourcePackageInfo = 5;
+    int32 ModeTemplateId = 6;
+    UGCResourceContentData NotNecessaryResData = 7;
+    repeated uint32 CSSharedItemID = 8;
+}
+
+message UGCRoomCustomParamLocDatas
+{
+    repeated UGCLocData LocData = 1;
+}
+// Database Data
+// TypeID from TypeMap, include: bool, int32, float32, string, vector2, vector3, quaternion, color, list and object
+// Value is None when TypeID equal object
+message UGCDatabaseData
+{
+    int32 TypeID = 1;
+    repeated UGCDatabaseData ListData = 2;
+    oneof Value 
+    {
+        bool BoolValue = 3;
+        int32 IntValue = 4;
+        float FloatValue = 5;
+        string StringValue = 6;
+        ProtoBuffVector2 Vector2Value = 7;
+        ProtoBuffVector3 Vector3Value = 8;
+        ProtoBuffQuaternion QuaternionValue = 9;
+        ProtoBuffColor ColorValue = 10;
+    }
+}
+
+message UGCRoomHalfWayJoinRule{
+    int32 RecommendStartGameNumber = 1;
+    bool EnableHalfWayJoin = 2;
+    bool EnableHalfWayJoinEffectTime = 3;
+    int32 HalfWayJoinEffectTime = 4;
+    bool HalfWayJoinNumberLimit = 5;
+    int32 HalfWayJoinNumber = 6;
+	bool EnableHalfwaySubmitMatchStats = 7;
+}
+
+
+
+// AnimationClipWithEvent 资源.这个资源引用一个AnimationClip. AnimationClipWithEvent也可以用于动画状态机.
+message UGCResAnimationClipEvent
+{
+    int32 EventID = 1;
+    string EventName = 2;
+    float EventTime = 3;
+    UGCVarValueDataV2 EventParamList = 4;
+}
+
+//message UGCResAnimationClipCurve
+//{
+    //string CurvePath = 1;
+    //repeated float CurveKeyTime = 2;
+    //repeated float CurveKeyValue = 3;
+//}
+
+message UGCResEventAnimationClipData
+{
+    string ClipName = 1;
+    float Length = 2;
+    float FPS = 3;
+    repeated UGCResAnimationClipEvent Events = 4;
+    bytes AnimationClipData = 5;
+    //动画曲线使用另外一个AnimationClip中的曲线数据.
+    string AnimationClipResUUID = 6;
+}

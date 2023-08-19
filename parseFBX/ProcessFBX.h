@@ -1,6 +1,6 @@
 #pragma once
 #include <fbxsdk.h>
-
+#include "AnimationImporter.h"
 
 
 
@@ -275,12 +275,20 @@ void ProcessFBXImport(FbxManager* fbxManager, FbxScene* fbxScene, FBXImportScene
     outputScene.fileScaleFactor = sceneScaleFactor * 0.01f;
     outputScene.fileScaleUnit = sceneUnit.Buffer();
 
+    outputScene.sceneInfo.fileScaleFactor = outputScene.fileScaleFactor;
+    outputScene.sceneInfo.fileScaleUnit = outputScene.fileScaleUnit;
+
     FbxAxisSystem sceneAxisSystem = fbxGlobalSettings.GetAxisSystem();
     FbxAxisSystem unityAxisSystem(FbxAxisSystem::eYAxis, FbxAxisSystem::eParityOdd, FbxAxisSystem::eRightHanded);
     if (sceneAxisSystem != unityAxisSystem)
         unityAxisSystem.ConvertScene(fbxScene);
 
     DetectPotential3dsMaxCrash(fbxScene->GetRootNode());
+
+	//gIsBrokenLightwaveFile = DetectBrokenLightwaveFile(*fbxScene);
+
+	ImportAnimationClipsInfo(*fbxScene, outputScene);
+
     double frameRate;
     FbxTime::EMode timeMode = fbxGlobalSettings.GetTimeMode();
     if (timeMode != FbxTime::eCustom)
@@ -292,9 +300,10 @@ void ProcessFBXImport(FbxManager* fbxManager, FbxScene* fbxScene, FBXImportScene
     {
         frameRate = 1.0;
     }
-
+    outputScene.sceneInfo.sampleRate = frameRate;
     Preprocess(fbxScene, frameRate);
 
     ConvertNurbsAndPatch(*fbxManager, *fbxScene);
 
 }
+
