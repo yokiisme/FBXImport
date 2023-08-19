@@ -12,7 +12,13 @@
 #include "FBXFileIO.h"
 #include "MikkTSpace.h"
 #include "dynamic_bitset.h"
+#include "Components.h"
+#include "Constraints.h"
 
+
+static bool gIsBrokenLightwaveFile = false;
+static std::map<FbxNode*, FBXImportNode*> gFBXNodeMap;
+static std::string gFBXFileName = "";
 
 std::string CodeTUTF8(const char* str, int t)
 {
@@ -60,8 +66,6 @@ void ZeroPivotsForSkinsRecursive(FbxScene* scene, FbxNode* node)
             ZeroPivotsForSkinsRecursive(scene, node->GetChild(i));
     }
 }
-
-
 
 void ImportVertices(const FbxGeometryBase& fbx, const std::vector<Vector3f>* referenceVertices, std::vector<Vector3f>& vertices, std::vector<int>& invalidVertices)
 {
@@ -268,12 +272,6 @@ void ConvertFBXMesh(FbxMesh& fbx, FbxManager* sdkManager, FbxScene& fbxScene, Fb
 
     const int kMainLayer = 0;
     FbxLayer* const layer = fbx.GetLayer(kMainLayer);
-
-    if (layer && layer->GetVertexColors())
-    {
-        ExtractWedgeLayerData(layer->GetVertexColors(), mesh.colors, indices, polygonIndexCount, mesh.polygonSizes, polygonCount, vertexCount, "vertex Colors", meshName);
-    }
-
     if (layer && layer->GetNormals())
     {
         ExtractWedgeLayerData(layer->GetNormals(), mesh.normals, indices, polygonIndexCount, mesh.polygonSizes,
@@ -284,7 +282,7 @@ void ConvertFBXMesh(FbxMesh& fbx, FbxManager* sdkManager, FbxScene& fbxScene, Fb
 
 }
 
-void RecursiveImportNodes(FbxManager* fbxManager, FbxScene& fbxScene, FbxNode* node, FBXImportNode& outNode, FBXImportScene& scene, FBXMaterialLookup& fbxMaterialLookup)
+void RecursiveImportNodes(FbxManager* fbxManager, FbxScene& fbxScene, FbxNode* node, FBXImportNode& outNode, FBXImportScene& scene, const FBXImportSettings& settings, const FBXImportMeshSetting& meshSettings, FBXMeshToInfoMap& fbxMeshToInfoMap, FBXMaterialLookup& fbxMaterialLookup)
 {
 
     FbxVector4 translation, eulerRotation, scale;
@@ -294,32 +292,61 @@ void RecursiveImportNodes(FbxManager* fbxManager, FbxScene& fbxScene, FbxNode* n
     outNode.scale = FBXPointToVector3(node->LclScaling.EvaluateValue(0));
     outNode.visibility = !CompareApproximately(node->Visibility.Get(), 0.0);
     outNode.name = node->GetNameWithoutNameSpacePrefix();
+    gFBXNodeMap[node] = &outNode;
 
     if (node->GetMesh())
     {
         FbxMesh* mesh = node->GetMesh();
-        const int meshIndex = (int)scene.meshes.size();
-        scene.meshes.push_back(FBXImportMesh());
-        ConvertFBXMesh(*mesh, fbxManager, fbxScene, node, scene.meshes.back(), scene, fbxMaterialLookup);
+
+        FBXSharedMeshInfo* smInfo = 0;
+        FBXMeshToInfoMap::iterator it = fbxMeshToInfoMap.find(mesh);
+
+		if (it != fbxMeshToInfoMap.end())
+		{
+			smInfo = &it->second;
+			// this mesh is an instance but might have different materials than its prototype.
+			//if (settings.importMaterials)
+			//{
+			//	const std::string meshName = static_cast<const char*>(node->GetNameWithoutNameSpacePrefix());
+			//	FBXImportMesh importMesh;
+			//	ConvertFBXMeshMaterials(fbxManager, fbxScene, *node, *mesh, meshName, importMesh, scene, mesh->GetPolygonCount(), gIsBrokenLightwaveFile, fbxMaterialLookup);
+			//	scene.meshInstanceMaterialInfos.insert(std::make_pair(&outNode, importMesh.materials));
+			//}
+		}
+		else
+		{
+			const int meshIndex = (int)scene.meshes.size();
+
+			std::pair<FBXMeshToInfoMap::iterator, bool> itInsert = fbxMeshToInfoMap.insert(std::make_pair(mesh, FBXSharedMeshInfo()));
+			
+			smInfo = &itInsert.first->second;
+			smInfo->index = meshIndex;
+
+			scene.meshes.push_back(FBXImportMesh());
+			ConvertFBXMesh(*mesh, fbxManager, fbxScene, node, scene.meshes.back(), scene, fbxMaterialLookup);
+		}
+
+		smInfo->usedByNodes.push_back(node);
+		outNode.meshIndex = smInfo->index;
     }
+
+	if (settings.importCameras || settings.importLights)
+		ConvertComponents(node, outNode, scene, settings);
 
     int count = node->GetChildCount();
     outNode.children.resize(count);
     for (int i = 0; i < count; ++i)
     {
         FbxNode* curChild = node->GetChild(i);
-        RecursiveImportNodes(fbxManager, fbxScene, curChild, outNode.children[i], scene, fbxMaterialLookup);
+        RecursiveImportNodes(fbxManager, fbxScene, curChild, outNode.children[i], scene,settings,meshSettings,fbxMeshToInfoMap, fbxMaterialLookup);
     }
 }
-
-
 
 void InvertWinding(FBXImportMesh& mesh)
 {
     InvertFaceWindings(mesh.polygons, mesh.polygonSizes);
     InvertFaceWindings(mesh.normals, mesh.polygonSizes);
     InvertFaceWindings(mesh.tangents, mesh.polygonSizes);
-    InvertFaceWindings(mesh.colors, mesh.polygonSizes);
     for (int uvIndex = 0; uvIndex < 2; uvIndex++)
     {
         InvertFaceWindings(mesh.uvs[uvIndex], mesh.polygonSizes);
@@ -376,7 +403,6 @@ void RemoveDegenerateFaces(FBXImportMesh& mesh)
 
     temp.tangents.reserve(indexCount);
     temp.normals.reserve(indexCount);
-    temp.colors.reserve(indexCount);
     for (int uvIndex = 0; uvIndex < 2; uvIndex++)
         temp.uvs[uvIndex].reserve(indexCount);
 
@@ -416,7 +442,6 @@ void RemoveDegenerateFaces(FBXImportMesh& mesh)
             AddFace(mesh.polygons, temp.polygons, idx, addIndices, addFaceSize);
             AddFace(mesh.normals, temp.normals, idx, addIndices, addFaceSize);
             AddFace(mesh.tangents, temp.tangents, idx, addIndices, addFaceSize);
-            AddFace(mesh.colors, temp.colors, idx, addIndices, addFaceSize);
             for (int uvIndex = 0; uvIndex < 2; uvIndex++)
                 AddFace(mesh.uvs[uvIndex], temp.uvs[uvIndex], idx, addIndices, addFaceSize);
             if (addFaceSize == 4)
@@ -430,7 +455,6 @@ void RemoveDegenerateFaces(FBXImportMesh& mesh)
     mesh.polygonSizes.swap(temp.polygonSizes);
     mesh.normals.swap(temp.normals);
     mesh.tangents.swap(temp.tangents);
-    mesh.colors.swap(temp.colors);
     for (int uvIndex = 0; uvIndex < 2; uvIndex++)
         mesh.uvs[uvIndex].swap(temp.uvs[uvIndex]);
 
@@ -551,8 +575,6 @@ struct SplitMeshImplementation
     {
         if (!srcMesh.normals.empty())
             dstMesh.normals[dstIndex] = srcMesh.normals[wedgeIndex];
-        if (!srcMesh.colors.empty())
-            dstMesh.colors[dstIndex] = srcMesh.colors[wedgeIndex];
         for (int uvIndex = 0; uvIndex < 2; uvIndex++)
             if (!srcMesh.uvs[uvIndex].empty())
                 dstMesh.uvs[uvIndex][dstIndex] = srcMesh.uvs[uvIndex][wedgeIndex];
@@ -569,8 +591,6 @@ struct SplitMeshImplementation
     {
         if (!srcMesh.normals.empty())
             dstMesh.normals.push_back(srcMesh.normals[srcAttributeIndex]);
-        if (!srcMesh.colors.empty())
-            dstMesh.colors.push_back(srcMesh.colors[srcAttributeIndex]);
         for (int uvIndex = 0; uvIndex < 2; uvIndex++)
             if (!srcMesh.uvs[uvIndex].empty())
                 dstMesh.uvs[uvIndex].push_back(srcMesh.uvs[uvIndex][srcAttributeIndex]);
@@ -596,8 +616,6 @@ struct SplitMeshImplementation
     inline bool NeedsSplitAttributes(int srcIndex, int dstIndex)
     {
         if (!srcMesh.normals.empty() && Dot(srcMesh.normals[srcIndex], dstMesh.normals[dstIndex]) < normalDotAngle)
-            return true;
-        if (!srcMesh.colors.empty() && srcMesh.colors[srcIndex] != dstMesh.colors[dstIndex])
             return true;
         for (int uvIndex = 0; uvIndex < 2; uvIndex++)
             if (!srcMesh.uvs[uvIndex].empty() && !CompareApproximately(srcMesh.uvs[uvIndex][srcIndex], dstMesh.uvs[uvIndex][dstIndex], uvEpsilon))
@@ -628,8 +646,6 @@ struct SplitMeshImplementation
         // Initialize attributes to some sane default values
         if (!srcMesh.normals.empty())
             dstMesh.normals.resize(srcMesh.vertices.size(), Vector3f(1.0F, 1.0F, 1.0F));
-        if (!srcMesh.colors.empty())
-            dstMesh.colors.resize(srcMesh.vertices.size(), ColorRGBA32(0xFFFFFFFF));
         for (int uvIndex = 0; uvIndex < 2; uvIndex++)
         {
             if (!srcMesh.uvs[uvIndex].empty())
@@ -712,10 +728,6 @@ static void FillLodMeshData(const FBXImportMesh& splitMesh, FBXMesh& lodMesh, st
 
     lodMesh.vertices.clear();
     lodMesh.vertices.insert(lodMesh.vertices.end(), splitMesh.vertices.begin(), splitMesh.vertices.end());
-
-    lodMesh.colors.clear();
-    lodMesh.colors.insert(lodMesh.colors.end(), splitMesh.colors.begin(), splitMesh.colors.end());
-
     lodMesh.uv1.clear();
     lodMesh.uv1.insert(lodMesh.uv1.end(), splitMesh.uvs[0].begin(), splitMesh.uvs[0].end());
     if (splitMesh.uvs->size() > 1)
@@ -732,6 +744,7 @@ static void FillLodMeshData(const FBXImportMesh& splitMesh, FBXMesh& lodMesh, st
     lodMesh.indices.clear();
     lodMesh.indicesize.clear();
     lodMesh.topologytype.clear();
+
     if (splitMesh.materials.empty())
     {
         lodMesh.indices.insert(lodMesh.indices.end(), splitMesh.polygons.begin(), splitMesh.polygons.end());
@@ -781,18 +794,18 @@ void GenerateMeshData(const FBXImportMesh& constantMesh, const Matrix4x4f& trans
     const FBXImportMesh* currentMesh = &constantMesh;
     FBXImportMesh tmpMesh;
 
-    ImportMeshSetting importmeshsetting1;
+    FBXImportMeshSetting importmeshsetting1;
     importmeshsetting1.importNormal = true;
-    importmeshsetting1.importTargent = false;
+    importmeshsetting1.importTangent = false;
 
     Triangulate(*currentMesh, tmpMesh, importmeshsetting1, true);
     InvertWinding(tmpMesh); 
     GenerateMikkTSpace(tmpMesh);  
     FBXImportMesh originalMesh;
 
-    ImportMeshSetting importmeshsetting2;
+    FBXImportMeshSetting importmeshsetting2;
     importmeshsetting2.importNormal = true;
-    importmeshsetting2.importTargent = true;
+    importmeshsetting2.importTangent = true;
 
     Triangulate(tmpMesh, originalMesh, importmeshsetting2, false);
 
@@ -819,47 +832,236 @@ void InstantiateImportMesh(int index/*,const Matrix4x4f& transform Identity*/, F
         lodMesh.materials.push_back(importScene.materials[lodMeshesMaterials[i]]);
         
     }
-
     gameobject.meshList.push_back(lodMesh);
 }
 
 
+
+
+//void GetNodePath(FBXImportNode& parent,std::string path = "")
+//{
+//	Bone bone;
+//	bone.name = parent.name;
+//	bone.localposition = parent.position;
+//	bone.localscale = parent.scale;
+//	bone.localRotation = parent.rotation;
+//	gPath2Bone.insert(std::pair<std::string, Bone>(path, bone));
+//    std::cout << bone.name << "contains mesh id = " << parent.meshIndex << std::endl;
+//    for (auto i = 0; i < parent.children.size(); i++)
+//    {
+//        auto node = parent.children[i];
+//        //std::string path = parent.name + "/" + node.name;
+//        std::string newPath = path + "/" + node.name;
+//        std::cout << "Get Node Path: " << newPath << std::endl;
+//
+//        GetNodePath(node, newPath);
+//    }
+//
+//}
+
+void DisplayBones(FBXImportScene& scene)
+{
+	auto mesh = scene.meshes;
+	auto animclips = scene.animationClips;
+	std::cout << "Mesh count is  " << mesh.size() << std::endl;
+	std::cout << "animclips count is  " << animclips.size() << std::endl;
+    std::set<std::string> nameSet;
+	for (int i = 0; i < mesh.size(); i++)
+	{
+		auto bones = mesh[i].bones;
+		std::cout << mesh[i].name << " Has " << bones.size() << " bones"<<std::endl;
+        for (int j = 0;j< bones.size();j++)
+        {
+            std::cout << "   The [" << j << "] bone name:" << bones[j].node->name << std::endl;
+            nameSet.insert(bones[j].node->name);
+        }        
+	}
+    std::cout << "the count is " << nameSet.size() << std::endl;
+    int index = 0;
+    for (auto it = nameSet.begin(); it != nameSet.end(); it++)
+    {
+        std::cout << "Index [ " << index << " ] is " << it->c_str() << std::endl;
+        index++;
+    }
+
+    //std::cout << "gFBXNodeMap count is  " << gFBXNodeMap.size() << std::endl;
+    //for (auto it = gFBXNodeMap.begin(); it != gFBXNodeMap.end(); it++)
+    //{
+    //    std::cout << "gFBXNodeMap:" << it->second->name << std::endl;
+    //}
+
+
+    auto node = scene.nodes;
+    std::cout << "Node count: " << node.size() << std::endl;
+	for (int i = 0; i < node.size(); i++)
+	{
+		auto childrens = node[i].children;
+		std::cout <<"Node: " << node[i].name << " Has " << childrens.size() << " childrens" << std::endl;
+	}
+ //   gPath2Bone.clear();
+ //   for (auto i = 0; i < node.size(); i++)
+	//{
+	//	GetNodePath(node[i], node[i].name);
+ //   }
+
+    auto anim = scene.animationClips;
+    for (auto i = 0;i<anim.size();i++)
+    {
+        auto clip = anim[i];
+        auto floatcurves = clip.floatAnimations;
+        auto nodecurves = clip.nodeAnimations;
+    }
+}
+
+
+void BuildImportSetting(FBXImportSettings& settings)
+{
+    settings.importBlendShapes = true;//m_ImportBlendShapes;
+    settings.importCameras = true;//m_ImportCameras;
+    settings.importLights = true; //m_ImportLights;
+    settings.importAnimations = true;//ShouldImportAnimations();
+    settings.importMaterials = true;// m_ImportMaterials;
+    settings.resampleCurves = true;// m_ResampleCurves;
+    settings.importSkinMesh = true;// ShouldImportSkinnedMesh();
+	// TODO@MECANIM validate new conditions to adjust clips by time range
+    settings.adjustClipsByTimeRange = false;// ShouldAdjustClipsByDeprecatedTimeRange();
+    settings.importVisibility = true;// m_ImportVisibility;
+    settings.useFileScale = true;// m_UseFileScale;
+    settings.importAnimatedCustomProperties = false;// m_ImportAnimatedCustomProperties;
+	//settings.extraUserProperties = m_ExtraUserProperties;
+    settings.importConstraints = false;// m_ImportConstraints;
+}
+
+
+
 void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
 {
+    gFBXNodeMap.clear();
     FBXImportScene outputScene;
     ProcessFBXImport(fbxManager, &fbxScene, outputScene);
-    FBXMaterialLookup fbxMaterialLookup;
+	
+    FBXMeshToInfoMap fbxMeshToInfoMap;
+	FBXMaterialLookup fbxMaterialLookup;
+	FBXImportSettings settings;
+	FBXImportMeshSetting meshSettings;
+
+    BuildImportSetting(settings);
+
     FbxNode* root = fbxScene.GetRootNode();
     outputScene.nodes.resize(root->GetChildCount());
 
     for (int i = 0, c = root->GetChildCount(); i < c; ++i)
     {
-        RecursiveImportNodes(fbxManager, fbxScene, root->GetChild(i), outputScene.nodes[i], outputScene, fbxMaterialLookup);
+        RecursiveImportNodes(fbxManager, fbxScene, root->GetChild(i), outputScene.nodes[i], outputScene,settings,meshSettings,fbxMeshToInfoMap, fbxMaterialLookup);
+		if (root->GetChild(i)->GetSkeleton())
+            outputScene.sceneInfo.hasSkeleton = true;
     }
 
     FBXGameObject gameObject;
-    std::string outIndexMesh = "";
 
     for (int i = 0; i < outputScene.meshes.size(); i++)
     {
         InstantiateImportMesh(i, gameObject, outputScene, outdir);
-
-        if (outputScene.meshes[i].polygons.size() > 90000)
-        {
-            outIndexMesh += "[" + outputScene.meshes[i].name + "]  ";
-        }
-    }
-    if (outIndexMesh != "")
-    {
-        outIndexMesh += "  Mesh Triangular Size Out Of 30000!\n      ! Please Rebuild !";
-        std::string title = "Error";
-        MessageBox(NULL, std::wstring(outIndexMesh.begin(), outIndexMesh.end()).c_str(), std::wstring(title.begin(), title.end()).c_str(), MB_OK);
     }
     gameObject.meshCount = outputScene.meshes.size();
 
     //WriteSceneOutputFiles(outputScene, outdir);
-    WriteMeshFileNew(&gameObject, outputScene, outdir);
+
+    //WriteMeshFileNew(&gameObject, outputScene, outdir);
+
+    //2023.7.26 Add anim parse
+	// BlendShapes have to be imported after we import meshes, because we may need smoothing groups
+	if (settings.importBlendShapes)
+	    ImportAllBlendShapes(meshSettings, fbxMeshToInfoMap, outputScene);
+
+	if (settings.importConstraints)
+	{
+		ImportConstraints(*fbxManager, fbxScene, root, outputScene);
+	}
+
+	if (settings.importCameras)
+	{
+		for (int i = 0, c = fbxScene.GetSrcObjectCount<FbxCamera>(); i < c; ++i)
+		{
+			FbxCamera* cameraComponent = fbxScene.GetSrcObject<FbxCamera>(i);
+			FbxNode* fbxCameraNode = cameraComponent->GetNode();
+			if (!fbxCameraNode)
+				continue;  // when importing stereo camera not every camera has an fbxNode
+			FBXImportNode* importCameraNode = gFBXNodeMap[fbxCameraNode];
+			if (!importCameraNode || importCameraNode->cameraIndex == -1)
+				continue; // if we ignore stereo camera the cameraIndex will be -1 see case 1063235
+			FBXImportCameraComponent& importCameraComponent = outputScene.cameras[importCameraNode->cameraIndex];
+			importCameraComponent.owner = importCameraNode;
+			FbxNode* target = fbxCameraNode->GetTarget();
+			if (target)
+			{
+				importCameraComponent.target = gFBXNodeMap[target];
+				//Assert(importCameraComponent.target != NULL);
+				FbxNode* up = fbxCameraNode->GetTargetUp();
+				if (up)
+				{
+					importCameraComponent.up = gFBXNodeMap[up];
+					//Assert(importCameraComponent.up != NULL);
+				}
+				else
+				{
+					importCameraComponent.roll = cameraComponent->Roll.EvaluateValue(0);
+				}
+			}
+		}
+	}
+
+	if (settings.importAnimations)
+	{
+		AnimationSettings animationSettings;
+		animationSettings.adjustClipsByTimeRange = (settings.adjustClipsByTimeRange != 0);
+		animationSettings.animationOversampling = settings.resampleCurves ? 1 : 0;
+		animationSettings.importBlendShapes = settings.importBlendShapes;
+		animationSettings.importAnimatedCustomProperties = settings.importAnimatedCustomProperties;
+		animationSettings.importVisibility = settings.importVisibility;
+		animationSettings.importCameras = settings.importCameras;
+		animationSettings.importLights = settings.importLights;
+		animationSettings.importConstraints = settings.importConstraints;
+		animationSettings.importMaterials = settings.importMaterials;
+		animationSettings.sampleRate = 1.0 / outputScene.sceneInfo.sampleRate;
+		ImportAllAnimations(*fbxManager, fbxScene, root, outputScene, gFBXNodeMap, fbxMeshToInfoMap, animationSettings);
+	}
+
+	// We import skin after all nodes are imported
+	if (settings.importSkinMesh)
+	{
+		//Assert(scene.meshes.size() == fbxMeshToInfoMap.size());
+
+		// We need to put meshes in stable order (because 3dAssetImport tests depend on that)
+		std::vector<FbxMesh*> orderedFbxMeshToInfoMap(fbxMeshToInfoMap.size(), 0);
+		for (FBXMeshToInfoMap::const_iterator it = fbxMeshToInfoMap.begin(), end = fbxMeshToInfoMap.end(); it != end; ++it)
+		{
+			//Assert(it->second.index < scene.meshes.size());
+			orderedFbxMeshToInfoMap[it->second.index] = it->first;
+		}
+
+		for (unsigned int i = 0; i < orderedFbxMeshToInfoMap.size(); ++i)
+		{
+			FbxMesh* mesh = orderedFbxMeshToInfoMap[i];
+			//Assert(mesh);
+			ImportSkin(mesh, outputScene.meshes[i], gFBXNodeMap, fbxMeshToInfoMap);
+		}
+	}
+
+
+    BuildAllBoneNameMap(outputScene);
+    BuildMeshBoneRefMap(outputScene);
+    //WriteMeshFileNew(&gameObject, outputScene, outdir);
+    WriteMeshAllFile(&gameObject, outputScene, outdir);
+	WriteAnimClipProtoBuf(outputScene, outdir);
+	WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
 }
+
+
+
+
+
+
 
 void ParseFBX(char* fbxpath, char* outdir)
 {
@@ -869,6 +1071,12 @@ void ParseFBX(char* fbxpath, char* outdir)
 
     std::string fbxUTF8 = CodeTUTF8(fbxpath, CP_ACP);
     FbxString lFilePath(fbxUTF8.c_str());
+
+	std::string::size_type iPos = (fbxUTF8.find_last_of('\\') + 1) == 0 ? fbxUTF8.find_last_of('/') + 1 : fbxUTF8.find_last_of('\\') + 1;
+	std::string ImgName = fbxUTF8.substr(iPos, fbxUTF8.length() - iPos);
+	gFBXFileName = ImgName.substr(0, ImgName.rfind("."));
+	
+    
     if (!lFilePath.IsEmpty())
     {
         bool lResult = LoadScene(lSdkManager, lScene, lFilePath.Buffer());
@@ -888,4 +1096,22 @@ void ParseFBX(char* fbxpath, char* outdir)
 }
    
 
-
+//
+//void ImportAnimationClipsInfo(FbxScene& scene, ImportScene& importScene)
+//{
+//    FbxArray<FbxString*> animStacks;
+//
+//    int count = scene.GetSrcObjectCount<FbxAnimStack>();
+//    importScene.animationClips.reserve(count);
+//    for (int i = 0; i < count; ++i)
+//    {
+//        FbxAnimStack* animStack = scene.GetSrcObject<FbxAnimStack>(i);
+//
+//        if (!IsTakeEmpty(*animStack))
+//        {
+//            ImportAnimationClip clip;
+//            clip.name = animStack->GetName();
+//            importScene.animationClips.push_back(clip);
+//        }
+//    }
+//}

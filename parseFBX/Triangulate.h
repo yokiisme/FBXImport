@@ -2,6 +2,7 @@
 
 #include "GL/glut.h"
 #include "Utility.h"
+#include "FBXImporterDef.h"
 #define TESS_FUNCTION_CALLCONV CALLBACK
 
 static bool foundIntersectingEdge;
@@ -27,25 +28,41 @@ void EmitVertex(void* vertexData, void* userData)
     FBXImportMesh& output = *meshes->output;
 
     const bool emitNormals = meshes->setting->importNormal;
-    const bool emitTangents = meshes->setting->importTargent;
+    const bool emitTangents = meshes->setting->importTangent;
 
     output.polygons.push_back(input.polygons[index]);
 
-    // Add wedge data
-    if (emitNormals && !input.normals.empty())
-        output.normals.push_back(input.normals[index]);
-    if (emitTangents && !input.tangents.empty())
-        output.tangents.push_back(input.tangents[index]);
-    for (int uvIndex = 0; uvIndex < 2; uvIndex++)
-        if (!input.uvs[uvIndex].empty())
-            output.uvs[uvIndex].push_back(input.uvs[uvIndex][index]);
-    if (!input.colors.empty())
-        output.colors.push_back(input.colors[index]);
+	// Add wedge data
+	if (emitNormals && !input.normals.empty())
+		output.normals.push_back(input.normals[index]);
+	if (emitTangents && !input.tangents.empty())
+		output.tangents.push_back(input.tangents[index]);
+	for (int uvIndex = 0; uvIndex < FBXImportMesh::kMaxUVs; uvIndex++)
+		if (!input.uvs[uvIndex].empty())
+			output.uvs[uvIndex].push_back(input.uvs[uvIndex][index]);
+	if (!input.colors.empty())
+		output.colors.push_back(input.colors[index]);
+	if (!input.smoothingGroups.empty())
+		output.smoothingGroups.push_back(input.smoothingGroups[index]);
+
+	if (emitNormals || emitTangents)
+	{
+		for (size_t i = 0; i < input.shapes.size(); ++i)
+		{
+			const FBXImportBlendShape& inputShape = input.shapes[i];
+			FBXImportBlendShape& outputShape = output.shapes[i];
+
+			if (emitNormals && !inputShape.normals.empty())
+				outputShape.normals.push_back(inputShape.normals[index]);
+			if (emitTangents && !inputShape.tangents.empty())
+				outputShape.tangents.push_back(inputShape.tangents[index]);
+		}
+	}
 }
 
 
 
-bool Triangulate(const FBXImportMesh& input, FBXImportMesh& output, const ImportMeshSetting& settings, bool keepQuads)
+bool Triangulate(const FBXImportMesh& input, FBXImportMesh& output, const FBXImportMeshSetting& settings, bool keepQuads)
 {
     // We have a triangulated mesh.
     if (input.polygonSizes.empty())
@@ -76,21 +93,39 @@ bool Triangulate(const FBXImportMesh& input, FBXImportMesh& output, const Import
             }
         }
 
-        output.polygons.reserve(vertexCount);
-        if (settings.importNormal && !input.normals.empty())
-            output.normals.reserve(vertexCount);
-        if (settings.importTargent && !input.tangents.empty())
-            output.tangents.reserve(vertexCount);
-        for (int uvIndex = 0; uvIndex < 2; uvIndex++)
-            if (!input.uvs[uvIndex].empty())
-                output.uvs[uvIndex].reserve(vertexCount);
-        if (!input.colors.empty())
-            output.colors.reserve(vertexCount);
-        if (!input.materials.empty())
-            output.materials.reserve(faceCount);
-        output.polygonSizes.reserve(faceCount);
-        output.hasAnyQuads = false;
+		output.polygons.reserve(vertexCount);
+		if (settings.importNormal && !input.normals.empty())
+			output.normals.reserve(vertexCount);
+		if (settings.importTangent && !input.tangents.empty())
+			output.tangents.reserve(vertexCount);
+		for (int uvIndex = 0; uvIndex < FBXImportMesh::kMaxUVs; uvIndex++)
+			if (!input.uvs[uvIndex].empty())
+				output.uvs[uvIndex].reserve(vertexCount);
+		if (!input.colors.empty())
+			output.colors.reserve(vertexCount);
+		if (!input.smoothingGroups.empty())
+			output.smoothingGroups.reserve(vertexCount);
+		if (!input.materials.empty())
+			output.materials.reserve(faceCount);
+		output.polygonSizes.reserve(faceCount);
+		output.hasAnyQuads = false;
 
+		output.shapes.resize(input.shapes.size());
+		output.shapeChannels = input.shapeChannels;
+		for (size_t i = 0; i < input.shapes.size(); ++i)
+		{
+			const FBXImportBlendShape& inputShape = input.shapes[i];
+			FBXImportBlendShape& outputShape = output.shapes[i];
+
+			outputShape.vertices = inputShape.vertices;
+			outputShape.targetWeight = inputShape.targetWeight;
+			outputShape.name = inputShape.name;
+
+			if (settings.importNormal && !inputShape.normals.empty())
+				outputShape.normals.reserve(vertexCount);
+			if (settings.importTangent && !inputShape.tangents.empty())
+				outputShape.tangents.reserve(vertexCount);
+		}
     }
 
 
@@ -201,7 +236,9 @@ bool Triangulate(const FBXImportMesh& input, FBXImportMesh& output, const Import
     gluDeleteTess(tesselator);
 
     output.vertices = input.vertices;
-    output.name = input.name;
+    output.skin = input.skin;
+	output.bones = input.bones;
+	output.name = input.name;
 
     return true;
 }
