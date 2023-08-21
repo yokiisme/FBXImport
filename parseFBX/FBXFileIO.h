@@ -166,12 +166,19 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
         meshname += meshfilename + "\n";
         std::ofstream osData(meshfilename, std::ios_base::out | std::ios_base::binary);
         osData.precision(8);
+		std::string version = "vernum";
+        uint32_t versioncode = 1;
+        osData.write(version.c_str(), version.length());
+        osData.write(reinterpret_cast<char*>(&versioncode), sizeof(versioncode));
         uint64_t namecount = strlen(gameObj->meshList[i].name) + 1;
         osData.write(reinterpret_cast<char*>(&namecount), 8);
         osData.write(gameObj->meshList[i].name, namecount);
         uint64_t vertexcount = gameObj->meshList[i].vertices.size();
         osData.write(reinterpret_cast<char*>(&vertexcount), 8);
         osData.write(reinterpret_cast<char*>(gameObj->meshList[i].vertices.data()), vertexcount * sizeof(Vector3f));
+        uint64_t colorcount = gameObj->meshList[i].colors.size();
+        osData.write(reinterpret_cast<char*>(&colorcount), 8);
+        osData.write(reinterpret_cast<char*>(gameObj->meshList[i].colors.data()), colorcount * sizeof(ColorRGBA32));
         uint64_t normalcount = gameObj->meshList[i].normals.size();
         osData.write(reinterpret_cast<char*>(&normalcount), 8);
         osData.write(reinterpret_cast<char*>(gameObj->meshList[i].normals.data()), normalcount * sizeof(Vector3f));
@@ -196,8 +203,8 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
         osData.close();
     }
 
-    std::cout <<"MeshName: " << meshname << std::endl;
-    std::cout <<"MaterialName: " << materialname << std::endl;
+    std::cout << meshname << std::endl;
+    std::cout << materialname << std::endl;
     int meshtoindexlen = meshtomatindex.size();
     for (int i = 0; i < meshtoindexlen; i++)
     {
@@ -261,8 +268,8 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 		meshtomatindex.push_back(-1);
 	}
 
-	std::cout << "MeshName: " << meshname << std::endl;
-	std::cout << "MaterialName: " << materialname << std::endl;
+    std::cout << meshname << std::endl;
+    std::cout << materialname << std::endl;
 	int meshtoindexlen = meshtomatindex.size();
 	for (int i = 0; i < meshtoindexlen; i++)
 	{

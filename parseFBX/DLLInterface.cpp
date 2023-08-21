@@ -272,6 +272,11 @@ void ConvertFBXMesh(FbxMesh& fbx, FbxManager* sdkManager, FbxScene& fbxScene, Fb
 
     const int kMainLayer = 0;
     FbxLayer* const layer = fbx.GetLayer(kMainLayer);
+
+    if (layer && layer->GetVertexColors())
+    {
+        ExtractWedgeLayerData(layer->GetVertexColors(), mesh.colors, indices, polygonIndexCount, mesh.polygonSizes, polygonCount, vertexCount, "vertex Colors", meshName);
+    }
     if (layer && layer->GetNormals())
     {
         ExtractWedgeLayerData(layer->GetNormals(), mesh.normals, indices, polygonIndexCount, mesh.polygonSizes,
@@ -347,6 +352,7 @@ void InvertWinding(FBXImportMesh& mesh)
     InvertFaceWindings(mesh.polygons, mesh.polygonSizes);
     InvertFaceWindings(mesh.normals, mesh.polygonSizes);
     InvertFaceWindings(mesh.tangents, mesh.polygonSizes);
+	InvertFaceWindings(mesh.colors, mesh.polygonSizes);
     for (int uvIndex = 0; uvIndex < 2; uvIndex++)
     {
         InvertFaceWindings(mesh.uvs[uvIndex], mesh.polygonSizes);
@@ -403,6 +409,7 @@ void RemoveDegenerateFaces(FBXImportMesh& mesh)
 
     temp.tangents.reserve(indexCount);
     temp.normals.reserve(indexCount);
+	temp.colors.reserve(indexCount);
     for (int uvIndex = 0; uvIndex < 2; uvIndex++)
         temp.uvs[uvIndex].reserve(indexCount);
 
@@ -442,6 +449,7 @@ void RemoveDegenerateFaces(FBXImportMesh& mesh)
             AddFace(mesh.polygons, temp.polygons, idx, addIndices, addFaceSize);
             AddFace(mesh.normals, temp.normals, idx, addIndices, addFaceSize);
             AddFace(mesh.tangents, temp.tangents, idx, addIndices, addFaceSize);
+			AddFace(mesh.colors, temp.colors, idx, addIndices, addFaceSize);
             for (int uvIndex = 0; uvIndex < 2; uvIndex++)
                 AddFace(mesh.uvs[uvIndex], temp.uvs[uvIndex], idx, addIndices, addFaceSize);
             if (addFaceSize == 4)
@@ -455,6 +463,7 @@ void RemoveDegenerateFaces(FBXImportMesh& mesh)
     mesh.polygonSizes.swap(temp.polygonSizes);
     mesh.normals.swap(temp.normals);
     mesh.tangents.swap(temp.tangents);
+	mesh.colors.swap(temp.colors);
     for (int uvIndex = 0; uvIndex < 2; uvIndex++)
         mesh.uvs[uvIndex].swap(temp.uvs[uvIndex]);
 
@@ -575,6 +584,8 @@ struct SplitMeshImplementation
     {
         if (!srcMesh.normals.empty())
             dstMesh.normals[dstIndex] = srcMesh.normals[wedgeIndex];
+		if (!srcMesh.colors.empty())
+            dstMesh.colors[dstIndex] = srcMesh.colors[wedgeIndex];
         for (int uvIndex = 0; uvIndex < 2; uvIndex++)
             if (!srcMesh.uvs[uvIndex].empty())
                 dstMesh.uvs[uvIndex][dstIndex] = srcMesh.uvs[uvIndex][wedgeIndex];
@@ -591,6 +602,8 @@ struct SplitMeshImplementation
     {
         if (!srcMesh.normals.empty())
             dstMesh.normals.push_back(srcMesh.normals[srcAttributeIndex]);
+        if (!srcMesh.colors.empty())
+            dstMesh.colors.push_back(srcMesh.colors[srcAttributeIndex]);
         for (int uvIndex = 0; uvIndex < 2; uvIndex++)
             if (!srcMesh.uvs[uvIndex].empty())
                 dstMesh.uvs[uvIndex].push_back(srcMesh.uvs[uvIndex][srcAttributeIndex]);
@@ -616,6 +629,8 @@ struct SplitMeshImplementation
     inline bool NeedsSplitAttributes(int srcIndex, int dstIndex)
     {
         if (!srcMesh.normals.empty() && Dot(srcMesh.normals[srcIndex], dstMesh.normals[dstIndex]) < normalDotAngle)
+            return true;
+        if (!srcMesh.colors.empty() && srcMesh.colors[srcIndex] != dstMesh.colors[dstIndex])
             return true;
         for (int uvIndex = 0; uvIndex < 2; uvIndex++)
             if (!srcMesh.uvs[uvIndex].empty() && !CompareApproximately(srcMesh.uvs[uvIndex][srcIndex], dstMesh.uvs[uvIndex][dstIndex], uvEpsilon))
@@ -646,6 +661,8 @@ struct SplitMeshImplementation
         // Initialize attributes to some sane default values
         if (!srcMesh.normals.empty())
             dstMesh.normals.resize(srcMesh.vertices.size(), Vector3f(1.0F, 1.0F, 1.0F));
+        if (!srcMesh.colors.empty())
+            dstMesh.colors.resize(srcMesh.vertices.size(), ColorRGBA32(0xFFFFFFFF));
         for (int uvIndex = 0; uvIndex < 2; uvIndex++)
         {
             if (!srcMesh.uvs[uvIndex].empty())
@@ -728,6 +745,11 @@ static void FillLodMeshData(const FBXImportMesh& splitMesh, FBXMesh& lodMesh, st
 
     lodMesh.vertices.clear();
     lodMesh.vertices.insert(lodMesh.vertices.end(), splitMesh.vertices.begin(), splitMesh.vertices.end());
+
+
+    lodMesh.colors.clear();
+    lodMesh.colors.insert(lodMesh.colors.end(), splitMesh.colors.begin(), splitMesh.colors.end());
+
     lodMesh.uv1.clear();
     lodMesh.uv1.insert(lodMesh.uv1.end(), splitMesh.uvs[0].begin(), splitMesh.uvs[0].end());
     if (splitMesh.uvs->size() > 1)
@@ -958,10 +980,22 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
     }
 
     FBXGameObject gameObject;
+	std::string outIndexMesh = "";
 
     for (int i = 0; i < outputScene.meshes.size(); i++)
     {
         InstantiateImportMesh(i, gameObject, outputScene, outdir);
+
+        if (outputScene.meshes[i].polygons.size() > 90000)
+        {
+            outIndexMesh += "[" + outputScene.meshes[i].name + "]  ";
+        }
+    }
+	if (outIndexMesh != "")
+    {
+        outIndexMesh += "  Mesh Triangular Size Out Of 30000!\n      ! Please Rebuild !";
+        std::string title = "Error";
+        MessageBox(NULL, std::wstring(outIndexMesh.begin(), outIndexMesh.end()).c_str(), std::wstring(title.begin(), title.end()).c_str(), MB_OK);
     }
     gameObject.meshCount = outputScene.meshes.size();
 

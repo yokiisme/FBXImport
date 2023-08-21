@@ -109,6 +109,22 @@ inline Vector2f FBXToUnityBasicType(const FbxVector2& t)
 	);
 }
 
+inline ColorRGBAf FBXColorToColorRGBA(const FbxColor& vec)
+{
+	return ColorRGBAf(
+		static_cast<float>(vec.mRed),
+		static_cast<float>(vec.mGreen),
+		static_cast<float>(vec.mBlue),
+		static_cast<float>(vec.mAlpha)
+	);
+}
+
+inline ColorRGBA32 FBXToUnityBasicType(const FbxColor& t)
+{
+	return FBXColorToColorRGBA(t);
+}
+
+
 inline Vector3f FBXToUnityBasicType(const FbxVector4& t)
 {
 	return FBXPointToVector3Remap(t);

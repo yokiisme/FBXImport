@@ -16,7 +16,7 @@ public:
 	float x, y, z;
 	Vector3f() {}
 	Vector3f(float u, float v, float w) { x = u; y = v; z = w; }
-	float& operator[](int i) //应该有一个Assert
+	float& operator[](int i) //应锟斤拷锟斤拷一锟斤拷Assert
 	{
 		return (&x)[i];
 	}

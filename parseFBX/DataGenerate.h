@@ -264,11 +264,21 @@ void BuildMeshBody(FBXMesh& meshData, MeshBody& bodyinfo, std::ofstream& osData)
 	DebugMeshInfo(meshData, bodyinfo);
 #endif // DebugMeshInfoOutput
 
+	std::string version = "vernum";
+	uint32_t versioncode = 1;
+	osData.write(version.c_str(), version.length());
+	osData.write(reinterpret_cast<char*>(&versioncode), sizeof(versioncode));
+
 	osData.write(reinterpret_cast<char*>(&bodyinfo.NameLength), 8);
 	osData.write(meshData.name, bodyinfo.NameLength);
 
 	osData.write(reinterpret_cast<char*>(&bodyinfo.VerticesLength), 8);
 	osData.write(reinterpret_cast<char*>(meshData.vertices.data()), bodyinfo.VerticesLength * sizeof(Vector3f));
+
+	//color
+	uint64_t colorcount = meshData.colors.size();
+	osData.write(reinterpret_cast<char*>(&colorcount), 8);
+	osData.write(reinterpret_cast<char*>(meshData.colors.data()), colorcount * sizeof(ColorRGBA32));
 
 	osData.write(reinterpret_cast<char*>(&bodyinfo.NormalLength), 8);
 	osData.write(reinterpret_cast<char*>(meshData.normals.data()), bodyinfo.NormalLength * sizeof(Vector3f));

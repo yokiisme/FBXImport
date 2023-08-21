@@ -9,7 +9,7 @@ this software in either electronic or hard copy form.
 * ***************************************************************************************/
 
 #include "Common.h"
-#include <iostream>
+
 #ifdef IOS_REF
 #undef  IOS_REF
 #define IOS_REF (*(pManager->GetIOSettings()))

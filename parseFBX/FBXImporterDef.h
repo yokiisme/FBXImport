@@ -657,6 +657,7 @@ public:
 	FBXMesh() {}
 	char* name;
 	std::vector<Vector3f> vertices;
+	std::vector<ColorRGBA32> colors;
 	std::vector<Vector3f> normals;
 	std::vector<Vector4f> tangents;
 	std::vector<Vector2f> uv1;
