@@ -198,7 +198,7 @@ void BuildMeshHead(FBXMesh& meshData, message::UGCResSkinnedMeshExtData& extData
 	body.VerticesHeadLength = 8;
 	body.VerticesLength = meshData.vertices.size();
 
-	body.ColorPos = body.VerticesPos + body.VerticesHeadLength + body.VerticesLength*sizeof(Vector3f);
+	body.ColorPos += body.VerticesPos + body.VerticesHeadLength + body.VerticesLength*sizeof(Vector3f);
 	body.ColorHeadLength = 8;
 	body.ColorLength = meshData.colors.size();
 
