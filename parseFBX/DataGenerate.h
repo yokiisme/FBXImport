@@ -49,6 +49,9 @@ struct MeshBody
 	int VerticesPos;
 	int VerticesHeadLength;//8
 	uint64_t VerticesLength;
+	int ColorPos;
+	int ColorHeadLength;//8
+	uint64_t ColorLength;
 	int NormalPos;
 	int NormalHeadLength;//8
 	uint64_t NormalLength;
@@ -73,6 +76,9 @@ struct MeshBody
 		VerticesPos(0),
 		VerticesHeadLength(0),
 		VerticesLength(0),
+		ColorPos(0),
+		ColorHeadLength(0),
+		ColorLength(0),
 		NormalPos(0),
 		NormalHeadLength(0),
 		NormalLength(0),
@@ -192,7 +198,11 @@ void BuildMeshHead(FBXMesh& meshData, message::UGCResSkinnedMeshExtData& extData
 	body.VerticesHeadLength = 8;
 	body.VerticesLength = meshData.vertices.size();
 
-	body.NormalPos += body.VerticesPos + body.VerticesHeadLength + body.VerticesLength * sizeof(Vector3f);
+	body.ColorPos = body.VerticesPos + body.VerticesHeadLength + body.VerticesLength*sizeof(Vector3f);
+	body.ColorHeadLength = 8;
+	body.ColorLength = meshData.colors.size();
+
+	body.NormalPos += body.ColorPos + body.ColorHeadLength + body.ColorLength * sizeof(ColorRGBA32);
 	body.NormalHeadLength = 8;
 	body.NormalLength = meshData.normals.size();
 
@@ -264,21 +274,15 @@ void BuildMeshBody(FBXMesh& meshData, MeshBody& bodyinfo, std::ofstream& osData)
 	DebugMeshInfo(meshData, bodyinfo);
 #endif // DebugMeshInfoOutput
 
-	std::string version = "vernum";
-	uint32_t versioncode = 1;
-	osData.write(version.c_str(), version.length());
-	osData.write(reinterpret_cast<char*>(&versioncode), sizeof(versioncode));
-
 	osData.write(reinterpret_cast<char*>(&bodyinfo.NameLength), 8);
 	osData.write(meshData.name, bodyinfo.NameLength);
 
 	osData.write(reinterpret_cast<char*>(&bodyinfo.VerticesLength), 8);
 	osData.write(reinterpret_cast<char*>(meshData.vertices.data()), bodyinfo.VerticesLength * sizeof(Vector3f));
 
-	//color
-	uint64_t colorcount = meshData.colors.size();
-	osData.write(reinterpret_cast<char*>(&colorcount), 8);
-	osData.write(reinterpret_cast<char*>(meshData.colors.data()), colorcount * sizeof(ColorRGBA32));
+	//color	
+	osData.write(reinterpret_cast<char*>(&bodyinfo.ColorLength), 8);
+	osData.write(reinterpret_cast<char*>(meshData.colors.data()), bodyinfo.ColorLength * sizeof(ColorRGBA32));
 
 	osData.write(reinterpret_cast<char*>(&bodyinfo.NormalLength), 8);
 	osData.write(reinterpret_cast<char*>(meshData.normals.data()), bodyinfo.NormalLength * sizeof(Vector3f));
