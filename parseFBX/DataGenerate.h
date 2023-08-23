@@ -6,6 +6,7 @@
 
 static std::map<std::string, std::string> gNodePath2Name;
 static std::map<std::string, std::vector<std::string>> gNodeName2BoneName;
+static std::map<std::string, std::vector<Matrix4x4f>> gNodeName2BoneBindePose;
 
 //Build Ref Maps
 void BuildBoneNameMap(FBXImportNode& node, std::map<std::string, std::string>& path2name, std::string parentpath = "");
@@ -70,6 +71,13 @@ struct MeshBody
 	int MatPos;
 	int MatHeadLength;//8
 	uint64_t MatLength;
+	int BindPosesPos;
+	int BindPosesHeadLength;//8
+	uint64_t BindPosesLength;
+	int BoneWeightPos;
+	int BoneWeightHeadLength;//8
+	uint64_t BoneWeightLength;
+
 	MeshBody() :NamePos(0),
 		NameHeadLength(0),
 		NameLength(0),
@@ -96,7 +104,13 @@ struct MeshBody
 		IndexLength(0),
 		MatPos(0),
 		MatHeadLength(0),
-		MatLength(0)
+		MatLength(0),
+		BindPosesPos(0),
+		BindPosesHeadLength(0),
+		BindPosesLength(0),
+		BoneWeightPos(0),
+		BoneWeightHeadLength(0),
+		BoneWeightLength(0)
 	{}
 
 
@@ -138,27 +152,32 @@ void BuildAllBoneNameMap(FBXImportScene& scene)
 void BuildMeshBoneRefMap(FBXImportScene& scene)
 {
 	gNodeName2BoneName.clear();
+	gNodeName2BoneBindePose.clear();
 	auto meshes = scene.meshes;
 	for (auto i = 0; i < meshes.size(); i++)
 	{
 		auto singleMeshBones = meshes[i].bones;
 		std::vector<std::string> boneNames;
+		std::vector<Matrix4x4f> boneBindPoses;
+
 		boneNames.clear();
+		boneBindPoses.clear();
 		for (auto j = 0; j < singleMeshBones.size(); j++)
 		{
 			std::string name = singleMeshBones[j].node->name;
+			Matrix4x4f& bindpos = singleMeshBones[j].bindpose;
 			boneNames.push_back(name);
+			boneBindPoses.push_back(bindpos);
 		}
 		if (boneNames.size() > 0)
 			gNodeName2BoneName.insert(std::pair<std::string, std::vector<std::string>>(meshes[i].name, boneNames));
+
+		if (boneBindPoses.size() > 0)
+			gNodeName2BoneBindePose.insert(std::pair<std::string, std::vector<Matrix4x4f >>(meshes[i].name, boneBindPoses));
 	}
-	//for (auto it = name2bone.begin();it!=name2bone.end();it++)
-	//{
-	//	std::cout << it->first << " has bone count: " << it->second.size() << std::endl;
-	//}
 }
 
-void BuildSingleMesh(FBXMesh& meshData,std::string& filename, const char* outdir)
+void BuildSingleMesh(FBXMesh& meshData, std::string& filename, const char* outdir)
 {
 	bool isSkinnedMesh = false;
 	message::UGCResSkinnedMeshExtData extData = BuildMeshExtData(meshData.name);
@@ -198,7 +217,7 @@ void BuildMeshHead(FBXMesh& meshData, message::UGCResSkinnedMeshExtData& extData
 	body.VerticesHeadLength = 8;
 	body.VerticesLength = meshData.vertices.size();
 
-	body.ColorPos += body.VerticesPos + body.VerticesHeadLength + body.VerticesLength*sizeof(Vector3f);
+	body.ColorPos += body.VerticesPos + body.VerticesHeadLength + body.VerticesLength * sizeof(Vector3f);
 	body.ColorHeadLength = 8;
 	body.ColorLength = meshData.colors.size();
 
@@ -226,8 +245,16 @@ void BuildMeshHead(FBXMesh& meshData, message::UGCResSkinnedMeshExtData& extData
 	body.MatHeadLength = 8;
 	body.MatLength = meshData.materialindex.size();
 
+	body.BindPosesPos += body.MatPos + body.MatHeadLength + body.MatLength * sizeof(uint32_t);
+	body.BindPosesHeadLength = 8;
+	body.BindPosesLength = meshData.bindPoses.size();
+
+	body.BoneWeightPos += body.BindPosesPos + body.BindPosesHeadLength + body.BindPosesLength * sizeof(Matrix4x4f);
+	body.BoneWeightHeadLength = 8;
+	body.BoneWeightLength = meshData.boneWeights.size();
+
 	head.MeshDataStartPos = body.NamePos;
-	head.MeshDataExtPos = body.MatPos + body.MatHeadLength + body.MatLength * sizeof(uint32_t);
+	head.MeshDataExtPos = body.BoneWeightPos + body.BoneWeightHeadLength + body.BoneWeightLength * sizeof(BoneWeights4);
 	head.MeshDataSize = head.MeshDataExtPos - head.MeshDataStartPos;
 
 	if (extData.bonenames_size() > 0)
@@ -302,6 +329,14 @@ void BuildMeshBody(FBXMesh& meshData, MeshBody& bodyinfo, std::ofstream& osData)
 	osData.write(reinterpret_cast<char*>(&bodyinfo.MatLength), 8);
 	osData.write(reinterpret_cast<char*>(meshData.materialindex.data()), bodyinfo.MatLength * sizeof(uint32_t));
 
+	//bindPose
+	osData.write(reinterpret_cast<char*>(&bodyinfo.BindPosesLength), 8);
+	osData.write(reinterpret_cast<char*>(meshData.bindPoses.data()), bodyinfo.BindPosesLength * sizeof(Matrix4x4f));
+
+	//BoneWeights4
+	osData.write(reinterpret_cast<char*>(&bodyinfo.BoneWeightLength), 8);
+	osData.write(reinterpret_cast<char*>(meshData.boneWeights.data()), bodyinfo.BoneWeightLength * sizeof(BoneWeights4));
+
 }
 message::UGCResSkinnedMeshExtData BuildMeshExtData(std::string meshName)
 {
@@ -318,20 +353,20 @@ message::UGCResSkinnedMeshExtData BuildMeshExtData(std::string meshName)
 }
 
 //Build Anim
-void BuildSingleAnimProtoFile(FBXImportAnimationClip& clip,float samplerate, const char* outdir)
+void BuildSingleAnimProtoFile(FBXImportAnimationClip& clip, float samplerate, const char* outdir)
 {
 	auto floatCurves = clip.floatAnimations;
 	auto nodeCurves = clip.nodeAnimations;
 	message::UGCResAnimClipData AnimClipProto;
-	
+
 
 	AnimClipProto.set_name(clip.name);
 	AnimClipProto.set_bakestart(clip.bakeStart);
 	AnimClipProto.set_bakestop(clip.bakeStop);
 	AnimClipProto.set_samplerate(samplerate);
-	
+
 	//Add Float Animation
-	for (auto it = floatCurves.begin();it!=floatCurves.end();it++)
+	for (auto it = floatCurves.begin(); it != floatCurves.end(); it++)
 	{
 		message::UGCResAnimFloatCurves* curFloatProto = AnimClipProto.add_floatanim();
 		curFloatProto->set_classname(it->className);
@@ -349,7 +384,7 @@ void BuildSingleAnimProtoFile(FBXImportAnimationClip& clip,float samplerate, con
 			keyframeProto->set_inslope(curKeyFrame.inSlope);
 			keyframeProto->set_outslope(curKeyFrame.outSlope);
 			keyframeProto->set_inweight(curKeyFrame.inWeight);
-			keyframeProto->set_outweight(curKeyFrame.outWeight);			
+			keyframeProto->set_outweight(curKeyFrame.outWeight);
 		}
 	}
 	//Add Node Animation
@@ -368,7 +403,7 @@ void BuildSingleAnimProtoFile(FBXImportAnimationClip& clip,float samplerate, con
 		curNodeProto->set_name(nodeName);
 
 		auto& rotCurves = it->rotation;
-		for (auto i = 0;i<4;i++)
+		for (auto i = 0; i < 4; i++)
 		{
 			auto& curve = rotCurves[i];
 			auto& keyFrames = curve.m_Curve;
@@ -640,6 +675,7 @@ void DebugMeshInfo(FBXMesh& meshData, MeshBody& bodyinfo)
 	uint64_t indicecount = meshData.indices.size();
 	uint64_t matcount = meshData.materialindex.size();
 	std::cout << "////////////////////////////////////////////////////////////////////////" << std::endl;
+	std::cout << "name: " << meshData.name << std::endl;
 	std::cout << "namecount: " << namecount << std::endl;
 	std::cout << "vertexcount: " << vertexcount << std::endl;
 	std::cout << "normalcount: " << normalcount << std::endl;
@@ -673,6 +709,12 @@ void DebugMeshInfo(FBXMesh& meshData, MeshBody& bodyinfo)
 	std::cout << "bodyinfo.MatPos :" << bodyinfo.MatPos << std::endl;
 	std::cout << "bodyinfo.MatHeadLength :" << bodyinfo.MatHeadLength << std::endl;
 	std::cout << "bodyinfo.MatLength :" << bodyinfo.MatLength << std::endl;
+	std::cout << "bodyinfo.BindPosesPos :" << bodyinfo.BindPosesPos << std::endl;
+	std::cout << "bodyinfo.BindPosesHeadLength :" << bodyinfo.BindPosesHeadLength << std::endl;
+	std::cout << "bodyinfo.BindPosesLength :" << bodyinfo.BindPosesLength << std::endl;
+	std::cout << "bodyinfo.BoneWeightPos :" << bodyinfo.BoneWeightPos << std::endl;
+	std::cout << "bodyinfo.BoneWeightHeadLength :" << bodyinfo.BoneWeightHeadLength << std::endl;
+	std::cout << "bodyinfo.BoneWeightLength :" << bodyinfo.BoneWeightLength << std::endl;
 
 }
 void ParseAnimProto(message::UGCResAnimClipData& msg)
