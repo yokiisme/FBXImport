@@ -667,6 +667,9 @@ public:
 	std::vector<uint32_t> indices;
 	std::vector<std::string> materials;
 	std::vector<uint32_t> materialindex;
+
+	std::vector<BoneWeights4> boneWeights;
+	std::vector<Matrix4x4f> bindPoses;
 };
 
 struct FBXGameObject

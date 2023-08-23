@@ -378,6 +378,8 @@ void RemoveUnusedVertices(FBXImportMesh& mesh)
         remap[i] = allocated;
         mesh.vertices[allocated] = mesh.vertices[i];
 
+        if (!mesh.skin.empty())
+            mesh.skin[allocated] = mesh.skin[i];
         allocated += usedVertices[i];
     }
 
@@ -469,7 +471,18 @@ void RemoveDegenerateFaces(FBXImportMesh& mesh)
 
 }
 
-int weld(std::vector<Vector3f>& vertices, std::vector<int>& remap)
+inline bool CompareBone(const BoneWeights4& lhs, const BoneWeights4& rhs)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        if (!CompareApproximately(lhs.weight[i], rhs.weight[i]) || lhs.boneIndex[i] != rhs.boneIndex[i])
+            return false;
+    }
+    return true;
+}
+
+
+int weld(std::vector<Vector3f>& vertices,std::vector<BoneWeights4>&skin, std::vector<int>& remap)
 {
     const int NIL = -1;                               // linked list terminator symbol
     int     outputCount = 0;                                // # of output vertices
@@ -490,6 +503,9 @@ int weld(std::vector<Vector3f>& vertices, std::vector<int>& remap)
         {
             bool euqals = (vertices[offset] == v);
 
+            if (euqals && !skin.empty() && !CompareBone(skin[i], skin[offset]))
+                euqals = false;
+
             if (euqals)
                 break;
 
@@ -500,6 +516,9 @@ int weld(std::vector<Vector3f>& vertices, std::vector<int>& remap)
         {
             remap[i] = outputCount;
             vertices[outputCount] = v;                    // copy vertex
+            
+            if (!skin.empty())
+                skin[outputCount] = skin[i];
 
             next[outputCount] = hashTable[hashValue]; // link to hash table
             hashTable[hashValue] = outputCount++;        // update hash heads and increase output counter
@@ -514,6 +533,8 @@ int weld(std::vector<Vector3f>& vertices, std::vector<int>& remap)
     if (outputCount < vertices.size())
     {
         vertices.resize(outputCount);
+        if (!skin.empty())
+            skin.resize(outputCount);
         return true;
     }
     else
@@ -523,7 +544,7 @@ int weld(std::vector<Vector3f>& vertices, std::vector<int>& remap)
 void WeldVertices(FBXImportMesh& mesh)
 {
     std::vector<int> remap;
-    if (weld(mesh.vertices, remap))
+    if (weld(mesh.vertices,mesh.skin, remap))
     {
         uint32_t* indices = &mesh.polygons[0];
         for (int i = 0; i < mesh.polygons.size(); i++)
@@ -597,6 +618,8 @@ struct SplitMeshImplementation
     void AddVertexByIndex(const FBXImportMesh& srcMesh, FBXImportMesh& dstMesh, int srcVertexIndex)
     {
         dstMesh.vertices.push_back(srcMesh.vertices[srcVertexIndex]);
+        if (!srcMesh.skin.empty())
+            dstMesh.skin.push_back(srcMesh.skin[srcVertexIndex]);
     }
     void AddPolygonAttribute(const FBXImportMesh& srcMesh, FBXImportMesh& dstMesh, int srcAttributeIndex)
     {
@@ -657,6 +680,7 @@ struct SplitMeshImplementation
         dstMesh.vertices = srcMesh.vertices;
         dstMesh.materials = srcMesh.materials;
         dstMesh.name = srcMesh.name;
+        dstMesh.skin = srcMesh.skin;
 
         // Initialize attributes to some sane default values
         if (!srcMesh.normals.empty())
@@ -807,6 +831,10 @@ static void FillLodMeshData(const FBXImportMesh& splitMesh, FBXMesh& lodMesh, st
             lodMesh.topologytype.push_back(subsetTopology[i] == kPrimitiveQuads ? 4 : 3);
             lodMesh.indices.insert(lodMesh.indices.end(), splitFaces[i].begin(), splitFaces[i].end());
         }
+        //Add bone weights & bindpose
+        lodMesh.boneWeights = splitMesh.skin;
+        if (gNodeName2BoneBindePose.find(splitMesh.name) != gNodeName2BoneBindePose.end())
+            lodMesh.bindPoses = gNodeName2BoneBindePose[splitMesh.name];
     }
 }
 
@@ -833,7 +861,7 @@ void GenerateMeshData(const FBXImportMesh& constantMesh, const Matrix4x4f& trans
 
     CleanUpMesh(originalMesh);
     TransformMesh(originalMesh, transform);
-    FBXImportMesh splitMesh;
+    FBXImportMesh splitMesh;    
     SplitMesh(originalMesh, splitMesh);
     FillLodMeshData(splitMesh, lodMesh, lodMeshMaterials);
 }
@@ -979,26 +1007,6 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
             outputScene.sceneInfo.hasSkeleton = true;
     }
 
-    FBXGameObject gameObject;
-	std::string outIndexMesh = "";
-
-    for (int i = 0; i < outputScene.meshes.size(); i++)
-    {
-        InstantiateImportMesh(i, gameObject, outputScene, outdir);
-
-        if (outputScene.meshes[i].polygons.size() > 90000)
-        {
-            outIndexMesh += "[" + outputScene.meshes[i].name + "]  ";
-        }
-    }
-	if (outIndexMesh != "")
-    {
-        outIndexMesh += "  Mesh Triangular Size Out Of 30000!\n      ! Please Rebuild !";
-        std::string title = "Error";
-        MessageBox(NULL, std::wstring(outIndexMesh.begin(), outIndexMesh.end()).c_str(), std::wstring(title.begin(), title.end()).c_str(), MB_OK);
-    }
-    gameObject.meshCount = outputScene.meshes.size();
-
     //WriteSceneOutputFiles(outputScene, outdir);
 
     //WriteMeshFileNew(&gameObject, outputScene, outdir);
@@ -1085,6 +1093,29 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
 
     BuildAllBoneNameMap(outputScene);
     BuildMeshBoneRefMap(outputScene);
+
+    //Build Mesh
+    FBXGameObject gameObject;
+    std::string outIndexMesh = "";
+
+    for (int i = 0; i < outputScene.meshes.size(); i++)
+    {
+        InstantiateImportMesh(i, gameObject, outputScene, outdir);
+
+        if (outputScene.meshes[i].polygons.size() > 90000)
+        {
+            outIndexMesh += "[" + outputScene.meshes[i].name + "]  ";
+        }
+    }
+    if (outIndexMesh != "")
+    {
+        outIndexMesh += "  Mesh Triangular Size Out Of 30000!\n      ! Please Rebuild !";
+        std::string title = "Error";
+        MessageBox(NULL, std::wstring(outIndexMesh.begin(), outIndexMesh.end()).c_str(), std::wstring(title.begin(), title.end()).c_str(), MB_OK);
+    }
+    gameObject.meshCount = outputScene.meshes.size();
+
+
     //WriteMeshFileNew(&gameObject, outputScene, outdir);
     WriteMeshAllFile(&gameObject, outputScene, outdir);
 	WriteAnimClipProtoBuf(outputScene, outdir);
