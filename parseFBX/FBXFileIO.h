@@ -303,7 +303,7 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
     auto allnodes = scene.nodes;
     for (auto i = 0; i < allnodes.size(); i++)
     {
-        BuildBoneNodeData(allnodes[i], root);
+        BuildBoneNodeData(scene,allnodes[i], root);
     }
 
     std::string directory(outdir);
