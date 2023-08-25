@@ -120,9 +120,9 @@ void BuildMeshHead(FBXMesh& meshData, message::UGCResSkinnedMeshExtData& extData
 message::UGCResSkinnedMeshExtData BuildMeshExtData(std::string meshName);
 void BuildMeshBody(FBXMesh& meshData, MeshBody& bodyinfo, std::ofstream& osData);
 //Build Anim
-void BuildSingleAnimProtoFile(FBXImportAnimationClip& clip, const char* outdir);
+void BuildSingleAnimProtoFile(FBXImportScene& scene, FBXImportAnimationClip& clip, const char* outdir);
 //Build Bones
-void BuildBoneNodeData(FBXImportNode& node, message::UGCResBoneNodeData* parent);
+void BuildBoneNodeData(FBXImportScene& scene, FBXImportNode& node, message::UGCResBoneNodeData* parent);
 
 //Debug Only
 void ParseSingleMesh(std::string meshfile);
@@ -154,6 +154,7 @@ void BuildMeshBoneRefMap(FBXImportScene& scene)
 	gNodeName2BoneName.clear();
 	gNodeName2BoneBindePose.clear();
 	auto meshes = scene.meshes;
+	auto scale = scene.fileScaleFactor;
 	for (auto i = 0; i < meshes.size(); i++)
 	{
 		auto singleMeshBones = meshes[i].bones;
@@ -166,14 +167,19 @@ void BuildMeshBoneRefMap(FBXImportScene& scene)
 		{
 			std::string name = singleMeshBones[j].node->name;
 			Matrix4x4f& bindpos = singleMeshBones[j].bindpose;
+			//Apply FileScale to Transfrom
+			Matrix4x4f newPose = bindpos;
+			newPose[12] *= scale;
+			newPose[13] *= scale;
+			newPose[14] *= scale;
 			boneNames.push_back(name);
-			boneBindPoses.push_back(bindpos);
+			boneBindPoses.push_back(newPose);
 		}
 		if (boneNames.size() > 0)
 			gNodeName2BoneName.insert(std::pair<std::string, std::vector<std::string>>(meshes[i].name, boneNames));
 
 		if (boneBindPoses.size() > 0)
-			gNodeName2BoneBindePose.insert(std::pair<std::string, std::vector<Matrix4x4f >>(meshes[i].name, boneBindPoses));
+			gNodeName2BoneBindePose.insert(std::pair<std::string, std::vector<Matrix4x4f>>(meshes[i].name, boneBindPoses));
 	}
 }
 
@@ -353,17 +359,19 @@ message::UGCResSkinnedMeshExtData BuildMeshExtData(std::string meshName)
 }
 
 //Build Anim
-void BuildSingleAnimProtoFile(FBXImportAnimationClip& clip, float samplerate, const char* outdir)
+void BuildSingleAnimProtoFile(FBXImportScene& scene, FBXImportAnimationClip& clip, const char* outdir)
 {
 	auto floatCurves = clip.floatAnimations;
 	auto nodeCurves = clip.nodeAnimations;
 	message::UGCResAnimClipData AnimClipProto;
 
+	auto sampleRate = scene.sceneInfo.sampleRate;
+	auto fileScale = scene.fileScaleFactor;
 
 	AnimClipProto.set_name(clip.name);
 	AnimClipProto.set_bakestart(clip.bakeStart);
 	AnimClipProto.set_bakestop(clip.bakeStop);
-	AnimClipProto.set_samplerate(samplerate);
+	AnimClipProto.set_samplerate(sampleRate);
 
 	//Add Float Animation
 	for (auto it = floatCurves.begin(); it != floatCurves.end(); it++)
@@ -433,7 +441,7 @@ void BuildSingleAnimProtoFile(FBXImportAnimationClip& clip, float samplerate, co
 				message::UGCResAnimKeyFrameFloat* keyframeProto = floatAnimCurveProto->add_keyframes();
 				keyframeProto->set_time(curKeyFrame.time);
 				keyframeProto->set_weightedmode(curKeyFrame.weightedMode);
-				keyframeProto->set_value(curKeyFrame.value);
+				keyframeProto->set_value(curKeyFrame.value * fileScale);
 				keyframeProto->set_inslope(curKeyFrame.inSlope);
 				keyframeProto->set_outslope(curKeyFrame.outSlope);
 				keyframeProto->set_inweight(curKeyFrame.inWeight);
@@ -480,7 +488,7 @@ void BuildSingleAnimProtoFile(FBXImportAnimationClip& clip, float samplerate, co
 #endif
 }
 //Build Bones
-void BuildBoneNodeData(FBXImportNode& node, message::UGCResBoneNodeData* parent)
+void BuildBoneNodeData(FBXImportScene& scene, FBXImportNode& node, message::UGCResBoneNodeData* parent)
 {
 	message::UGCResBoneNodeData* msg_node = parent->add_childbones();
 	message::UGCResBoneNodeCapsuleData root_capsule;
@@ -488,8 +496,8 @@ void BuildBoneNodeData(FBXImportNode& node, message::UGCResBoneNodeData* parent)
 	message::ProtoBuffVector3* msg_pos = new message::ProtoBuffVector3();
 	message::ProtoBuffVector3* msg_scale = new message::ProtoBuffVector3();
 	message::ProtoBuffQuaternion* msg_quat = new message::ProtoBuffQuaternion();
-
-	msg_pos->set_x(node.position.x); msg_pos->set_y(node.position.y); msg_pos->set_z(node.position.z);
+	auto scale = scene.fileScaleFactor;
+	msg_pos->set_x(node.position.x * scale); msg_pos->set_y(node.position.y * scale); msg_pos->set_z(node.position.z * scale);
 	msg_scale->set_x(node.scale.x); msg_scale->set_y(node.scale.y); msg_scale->set_z(node.scale.z);
 	msg_quat->set_x(node.rotation.x); msg_quat->set_y(node.rotation.y); msg_quat->set_z(node.rotation.z); msg_quat->set_w(node.rotation.w);
 
@@ -502,7 +510,7 @@ void BuildBoneNodeData(FBXImportNode& node, message::UGCResBoneNodeData* parent)
 	for (auto i = 0; i < node.children.size(); i++)
 	{
 		auto nextNode = node.children[i];
-		BuildBoneNodeData(nextNode, msg_node);
+		BuildBoneNodeData(scene, nextNode, msg_node);
 	}
 }
 
