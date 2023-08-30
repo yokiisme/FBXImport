@@ -12,7 +12,9 @@ void WriteMeshFile(FBXGameObject* gameObj, const char* outdir);
 void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir);
 
 //Write All Mesh Data
-void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir);
+void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir, std::string filename);
+//Write Manifest File
+void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, const char* outdir, std::string filename);
 //Write Sk File
 void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename);
 //Write Anim Clip File
@@ -218,7 +220,7 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
 	}
 
 }
-void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir)
+void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir,std::string filename)
 {
 	if (_access(outdir, 0) == -1)
 	{
@@ -281,7 +283,38 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 		std::cout << std::endl;
 		std::cout << "import fbx success" << std::endl;
 	}
+	WriteManifest(gameObj, materialnamelist, outdir, filename);
 }
+void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, const char* outdir, std::string filename)
+{	
+	std::string directory(outdir);
+	auto outputfilename = directory + "/" + filename + ".manifest";
+	std::ofstream osData(outputfilename, std::ios_base::out);
+	osData << "FBX File Name: " << filename << std::endl;
+	//Material Details
+	osData << "Material Count: " << materials.size() << std::endl;
+	osData << "Material Detail: " << std::endl;
+
+	for (int i = 0; i < materials.size(); i++)
+	{
+		osData << "-Material Index[" <<i <<"]: "<< materials[i] << std::endl;
+	}
+	//Mesh Details
+	osData << "Mesh Count: " << gameObj->meshCount << std::endl;
+	osData << "Material Detail: " << std::endl;
+	for (int i = 0; i < gameObj->meshCount; i++)
+	{
+		osData << "-MeshName : " << gameObj->meshList[i].name << std::endl;
+		auto index = gameObj->meshList[i].materialindex;
+		osData << "--Material : ";
+		for (int j = 0; j < index.size(); j++)
+			osData << index[j] << " ";
+		osData << std::endl;
+	}
+
+	osData.close();
+}
+
 void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename)
 {
 	message::UGCResSkeletonData* sk = new message::UGCResSkeletonData();
@@ -340,7 +373,8 @@ void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 
 	for (auto i = 0; i < anim.size(); i++)
 	{
-		BuildSingleAnimProtoFile(scene, anim[i], outdir);
+		if (anim[i].HasAnimations())
+			BuildSingleAnimProtoFile(scene, anim[i], outdir);
 	}
 }
 

@@ -1117,9 +1117,12 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
 
 
     //WriteMeshFileNew(&gameObject, outputScene, outdir);
-    WriteMeshAllFile(&gameObject, outputScene, outdir);
+    WriteMeshAllFile(&gameObject, outputScene, outdir, gFBXFileName);
 	WriteAnimClipProtoBuf(outputScene, outdir);
-	WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
+    if (outputScene.sceneInfo.hasSkeleton && gNodeName2BoneBindePose.size()!=0 && gNodeName2BoneName.size()!=0)
+    {
+        WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
+    }
 }
 
 
@@ -1158,25 +1161,4 @@ void ParseFBX(char* fbxpath, char* outdir)
     {
         std::cout << " File Type is Error " << std::endl;
     }
-}
-   
-
-//
-//void ImportAnimationClipsInfo(FbxScene& scene, ImportScene& importScene)
-//{
-//    FbxArray<FbxString*> animStacks;
-//
-//    int count = scene.GetSrcObjectCount<FbxAnimStack>();
-//    importScene.animationClips.reserve(count);
-//    for (int i = 0; i < count; ++i)
-//    {
-//        FbxAnimStack* animStack = scene.GetSrcObject<FbxAnimStack>(i);
-//
-//        if (!IsTakeEmpty(*animStack))
-//        {
-//            ImportAnimationClip clip;
-//            clip.name = animStack->GetName();
-//            importScene.animationClips.push_back(clip);
-//        }
-//    }
-//}
+}   
