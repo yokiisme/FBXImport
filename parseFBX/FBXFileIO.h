@@ -286,32 +286,51 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 	WriteManifest(gameObj, materialnamelist, outdir, filename);
 }
 void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, const char* outdir, std::string filename)
-{	
+{
 	std::string directory(outdir);
-	auto outputfilename = directory + "/" + filename + ".manifest";
+	auto outputfilename = directory + "/" + filename + ".json";
 	std::ofstream osData(outputfilename, std::ios_base::out);
-	osData << "FBX File Name: " << filename << std::endl;
+	osData << "{" << std::endl;
+
+	osData << "    \"FBXName\" : \"" << filename << "\"," << std::endl;
 	//Material Details
-	osData << "Material Count: " << materials.size() << std::endl;
-	osData << "Material Detail: " << std::endl;
+	osData << "    \"MaterialCount\" : " << materials.size() << "," << std::endl;
+	osData << "    \"MaterialDetail\" : [" << std::endl;
 
 	for (int i = 0; i < materials.size(); i++)
 	{
-		osData << "-Material Index[" <<i <<"]: "<< materials[i] << std::endl;
-	}
-	//Mesh Details
-	osData << "Mesh Count: " << gameObj->meshCount << std::endl;
-	osData << "Material Detail: " << std::endl;
-	for (int i = 0; i < gameObj->meshCount; i++)
-	{
-		osData << "-MeshName : " << gameObj->meshList[i].name << std::endl;
-		auto index = gameObj->meshList[i].materialindex;
-		osData << "--Material : ";
-		for (int j = 0; j < index.size(); j++)
-			osData << index[j] << " ";
+		osData << "    {" << std::endl;
+		osData << "        \"Index\" : " << i << "," << std::endl;
+		osData << "        \"MaterialName\" :  \"" << materials[i] << "\"" << std::endl;
+		osData << "    }";
+		if (i != (materials.size() - 1))
+			osData << ",";
 		osData << std::endl;
 	}
+	osData <<"    ]," << std::endl;
+	//Mesh Details
+	osData << "    \"MeshCount\" : " << gameObj->meshCount << "," << std::endl;
+	osData << "    \"MeshDetail\" : [" << std::endl;
 
+	for (int i = 0; i < gameObj->meshCount; i++)
+	{
+		osData << "    {" << std::endl;
+		osData << "        \"MeshName\" : \"" << gameObj->meshList[i].name << "\"," << std::endl;
+		osData << "        \"MaterialIndex\" : [";
+
+		auto index = gameObj->meshList[i].materialindex;
+		for (int j = 0; j < index.size() - 1; j++)
+			osData << index[j] << ",";
+		osData << index[index.size() - 1]<<"]" << std::endl;
+		osData << "    }";
+
+
+		if (i != (gameObj->meshCount - 1))
+			osData << ",";
+		osData << std::endl;
+	}
+	osData << "    ]" << std::endl;
+	osData << "}" << std::endl;
 	osData.close();
 }
 
