@@ -1119,7 +1119,7 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
     //WriteMeshFileNew(&gameObject, outputScene, outdir);
     WriteMeshAllFile(&gameObject, outputScene, outdir, gFBXFileName);
 	WriteAnimClipProtoBuf(outputScene, outdir);
-    if (outputScene.sceneInfo.hasSkeleton && gNodeName2BoneBindePose.size()!=0 && gNodeName2BoneName.size()!=0)
+    if (outputScene.sceneInfo.hasSkeleton || (gNodeName2BoneBindePose.size()!=0 && gNodeName2BoneName.size()!=0))
     {
         WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
     }
