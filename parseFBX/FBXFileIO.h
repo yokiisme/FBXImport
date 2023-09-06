@@ -293,6 +293,7 @@ void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, 
 	osData << "{" << std::endl;
 
 	osData << "    \"FBXName\" : \"" << filename << "\"," << std::endl;
+	osData << "    \"ImportSucceeded\" : "  << "true," << std::endl;
 	//Material Details
 	osData << "    \"MaterialCount\" : " << materials.size() << "," << std::endl;
 	osData << "    \"MaterialDetail\" : [" << std::endl;
@@ -334,6 +335,43 @@ void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, 
 	osData.close();
 }
 
+void WriteManifestErrorInput(const char* outdir, std::string filename,std::vector<std::string> errormesh)
+{
+	std::string directory(outdir);
+	auto outputfilename = directory + "/" + filename + ".json";
+	std::ofstream osData(outputfilename, std::ios_base::out);
+	osData << "{" << std::endl;
+
+	osData << "    \"FBXName\" : \"" << filename << "\"," << std::endl;
+	osData << "    \"ImportSucceeded\" : " << "false," << std::endl;
+	//Material Details
+	osData << "    \"MaterialCount\" : " << "0," << std::endl;
+	osData << "    \"MaterialDetail\" : []" << std::endl;
+
+	//Mesh Details
+	osData << "    \"MeshCount\" : " <<  "0," << std::endl;
+	osData << "    \"MeshDetail\" : []" << std::endl;
+
+	//Error Mesh
+	osData << "    \"ErrorMeshCount\" : " << errormesh.size() << "," << std::endl;
+	osData << "    \"ErrorMeshDetail\" : [" << std::endl;
+
+	for (int i = 0; i < errormesh.size(); i++)
+	{
+		osData << "        \"" << errormesh[i] << "\"" ;
+		
+		if (i != (errormesh.size() - 1))
+			osData << ",";
+		osData << std::endl;
+	}
+	osData << "    ]" << std::endl;
+	osData << "}" << std::endl;
+
+
+	osData << "}" << std::endl;
+	osData.close();
+
+}
 void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename)
 {
 	message::UGCResSkeletonData* sk = new message::UGCResSkeletonData();

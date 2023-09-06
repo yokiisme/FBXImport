@@ -1096,33 +1096,37 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
 
     //Build Mesh
     FBXGameObject gameObject;
-    std::string outIndexMesh = "";
-
+    std::vector<std::string> outIndexMesh;
+    outIndexMesh.clear();
     for (int i = 0; i < outputScene.meshes.size(); i++)
     {
         InstantiateImportMesh(i, gameObject, outputScene, outdir);
 
         if (outputScene.meshes[i].polygons.size() > 90000)
         {
-            outIndexMesh += "[" + outputScene.meshes[i].name + "]  ";
+            outIndexMesh.push_back(outputScene.meshes[i].name);
         }
     }
-    if (outIndexMesh != "")
+
+    if (outIndexMesh.size() > 0)
     {
-        outIndexMesh += "  Mesh Triangular Size Out Of 30000!\n      ! Please Rebuild !";
-        std::string title = "Error";
-        MessageBox(NULL, std::wstring(outIndexMesh.begin(), outIndexMesh.end()).c_str(), std::wstring(title.begin(), title.end()).c_str(), MB_OK);
+        WriteManifestErrorInput(outdir, gFBXFileName,outIndexMesh);
+        std::cout << "Error : Triangles Out of Limitation!" << std::endl;
     }
-    gameObject.meshCount = outputScene.meshes.size();
+    else
+    {
+        gameObject.meshCount = outputScene.meshes.size();
+
+        //WriteMeshFileNew(&gameObject, outputScene, outdir);
+        WriteMeshAllFile(&gameObject, outputScene, outdir, gFBXFileName);
+        WriteAnimClipProtoBuf(outputScene, outdir);
+        if (outputScene.sceneInfo.hasSkeleton || (gNodeName2BoneBindePose.size()!=0 && gNodeName2BoneName.size()!=0))
+        {
+            WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
+        }
+    }
 
 
-    //WriteMeshFileNew(&gameObject, outputScene, outdir);
-    WriteMeshAllFile(&gameObject, outputScene, outdir, gFBXFileName);
-	WriteAnimClipProtoBuf(outputScene, outdir);
-    if (outputScene.sceneInfo.hasSkeleton || (gNodeName2BoneBindePose.size()!=0 && gNodeName2BoneName.size()!=0))
-    {
-        WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
-    }
 }
 
 
