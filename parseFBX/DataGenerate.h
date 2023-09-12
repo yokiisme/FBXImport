@@ -132,7 +132,9 @@ void ParseAnimProto(message::UGCResAnimClipData& msg);
 void BuildBoneNameMap(FBXImportNode& node, std::map<std::string, std::string>& path2name, std::string parentpath)
 {
 	std::string NodeName = node.name;
-	std::string NodePath = parentpath + "/" + NodeName;
+	std::string NodePath = NodeName;
+	if(parentpath != "")
+		NodePath = parentpath + "/" + NodeName;
 	//std::cout << NodeName << " and path :: " << NodePath << std::endl;
 	path2name.insert(std::pair<std::string, std::string>(NodePath, NodeName));
 	for (auto i = 0; i < node.children.size(); i++)
