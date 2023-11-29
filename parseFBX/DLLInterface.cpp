@@ -296,7 +296,19 @@ void RecursiveImportNodes(FbxManager* fbxManager, FbxScene& fbxScene, FbxNode* n
     outNode.position = FBXPointToVector3Remap(node->LclTranslation.EvaluateValue(0));
     outNode.scale = FBXPointToVector3(node->LclScaling.EvaluateValue(0));
     outNode.visibility = !CompareApproximately(node->Visibility.Get(), 0.0);
-    outNode.name = node->GetNameWithoutNameSpacePrefix();
+
+    FbxNode* current = node;
+    FbxNode* parent = node->GetParent();
+    while (outNode.visibility && parent != NULL && !CompareApproximately(current->VisibilityInheritance.Get(), 0.0))
+    {
+        outNode.visibility = outNode.visibility && !CompareApproximately(parent->Visibility.Get(), 0.0);
+        current = parent;
+        parent = current->GetParent();
+    }
+
+    //todo: parse user data
+    //ExtractCustomProperties(outNode, node, settings);
+    outNode.name = node->GetNameWithoutNameSpacePrefix();   
     gFBXNodeMap[node] = &outNode;
 
     if (node->GetMesh())

@@ -384,17 +384,42 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
 	message::ProtoBuffVector3* pos = new message::ProtoBuffVector3();
 	message::ProtoBuffVector3* scale = new message::ProtoBuffVector3();
 	message::ProtoBuffQuaternion* quat = new message::ProtoBuffQuaternion();
+	auto scaleFactor = scene.fileScaleFactor;
 	pos->set_x(0.0f); pos->set_y(0.0f); pos->set_z(0.0f);
 	scale->set_x(1.0f); scale->set_y(1.0f); scale->set_z(1.0f);
 	quat->set_x(0.0f); quat->set_y(0.0f); quat->set_z(0.0f); quat->set_w(1.0f);
 	root->set_allocated_localposition(pos);
 	root->set_allocated_localscale(scale);
 	root->set_allocated_localrotation(quat);
+
 	auto allnodes = scene.nodes;
-	for (auto i = 0; i < allnodes.size(); i++)
+	if (allnodes.size() > 1)
 	{
-		BuildBoneNodeData(scene, allnodes[i], root);
+		// multi root - add an "root" node to ensure a single root tree
+		for (auto i = 0; i < allnodes.size(); i++)
+		{
+			BuildBoneNodeData(scene, allnodes[i], root);
+		}
 	}
+	else if (allnodes.size() == 1 )
+	{
+		// single root- rename the single name as root
+		auto rootnode = allnodes[0];
+		pos->set_x(rootnode.position.x * scaleFactor); pos->set_y(rootnode.position.y * scaleFactor); pos->set_z(rootnode.position.z * scaleFactor);
+		scale->set_x(rootnode.scale.x); scale->set_y(rootnode.scale.y); scale->set_z(rootnode.scale.z);
+		quat->set_x(rootnode.rotation.x); quat->set_y(rootnode.rotation.y); quat->set_z(rootnode.rotation.z); quat->set_w(rootnode.rotation.w);
+
+		auto childnodes = rootnode.children;
+		for (auto i = 0; i < childnodes.size(); i++)
+		{
+			BuildBoneNodeData(scene, childnodes[i], root);
+		}
+	}
+	//else
+	//{
+	//	// no root, create dummy root
+	//}
+
 
 	std::string directory(outdir);
 
@@ -407,21 +432,6 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
 		std::cout << "Error when Serializing" << std::endl;
 	}
 	output.close();
-	//std::string ss;
-	//sk->SerializeToString(&ss);
-	//std::cout << "The size of sk is : " << ss.size() << std::endl;
-	//message::UGCResSkeletonData* sk_new = new message::UGCResSkeletonData();
-	//std::string ss1;
-	//sk_new->SerializeToString(&ss1);
-	//std::cout << "The size of sknew is : " << ss1.size() << std::endl;
-
-	//message::UGCResSkeletonData* sk_new = new message::UGCResSkeletonData();
-	//message::UGCResBoneNodeData* root_new = new message::UGCResBoneNodeData();
-	//std::fstream input(filename, std::ios::in|std::ios::binary);
-	//sk_new->ParseFromIstream(&input);
-	//input.close();
-	//*root_new = sk_new->rootbone();
-	//DisplayBone(*root_new);
 	google::protobuf::ShutdownProtobufLibrary();
 }
 void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
@@ -691,15 +701,15 @@ void WriteAnimClipFileTest(FBXImportScene& scene, const char* outdir)
 		}
 	}
 }
-void PrintBone(const message::UGCResBoneNodeData& node)
+void PrintBone(const message::UGCResBoneNodeData& node,std::string parent)
 {
 	auto name = node.bonename();
 	auto pos = node.localposition();
 	auto scale = node.localscale();
 	auto quat = node.localrotation();
 	auto childsize = node.childbones_size();
-
-	std::cout << " Bone Name: " << name << " Has " << childsize << " Children" << std::endl;
+	parent = parent + name + "/";
+	std::cout << " Bone Name: " << parent << " Has " << childsize << " Children" << std::endl;
 	std::cout << "      Pos:" << pos.x() << " , " << pos.y() << " , " << pos.z() << std::endl;
 	std::cout << "      Scale:" << scale.x() << " , " << scale.y() << " , " << scale.z() << std::endl;
 	std::cout << "      Quat:" << quat.x() << " , " << quat.y() << " , " << quat.z() << " , " << quat.w() << std::endl;
@@ -707,7 +717,7 @@ void PrintBone(const message::UGCResBoneNodeData& node)
 	for (auto i = 0; i < childsize; i++)
 	{
 		const message::UGCResBoneNodeData& next = node.childbones(i);
-		PrintBone(next);
+		PrintBone(next, parent);
 	}
 }
 void PrintAnimFile(FBXImportScene& importScene, const char* outdir)
