@@ -146,9 +146,23 @@ void BuildAllBoneNameMap(FBXImportScene& scene)
 {
 	gNodePath2Name.clear();
 	auto allnodes = scene.nodes;
-	for (auto i = 0; i < allnodes.size(); i++)
+	// when it has extra roots then put an "root" to make sure a single root object
+	// when it has only one root then rename the root as "root"
+	// when it has no node then create at least one dummy "root"
+	if (allnodes.size() > 1)
 	{
-		BuildBoneNameMap(allnodes[i], gNodePath2Name);
+		for (auto i = 0; i < allnodes.size(); i++)
+		{
+			BuildBoneNameMap(allnodes[i], gNodePath2Name);
+		}
+	}
+	else if (allnodes.size() == 1)
+	{
+		auto children = allnodes[0].children;
+		for (auto i = 0; i < children.size(); i++)
+		{
+			BuildBoneNameMap(children[i], gNodePath2Name);
+		}
 	}
 }
 void BuildMeshBoneRefMap(FBXImportScene& scene)
