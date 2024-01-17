@@ -264,7 +264,7 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 	for (int i = 0; i < meshcount; i++)
 	{
 		std::string meshfilename;
-		BuildSingleMesh(gameObj->meshList[i], meshfilename, outdir);
+		BuildSingleMesh(gameObj->meshList[i], importScene,meshfilename, outdir);
 		meshname += meshfilename + "\n";
 		meshtomatindex.insert(meshtomatindex.end(), gameObj->meshList[i].materialindex.begin(), gameObj->meshList[i].materialindex.end());
 		meshtomatindex.push_back(-1);

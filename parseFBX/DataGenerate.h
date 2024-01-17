@@ -7,6 +7,7 @@
 static std::map<std::string, std::string> gNodePath2Name;
 static std::map<std::string, std::vector<std::string>> gNodeName2BoneName;
 static std::map<std::string, std::vector<Matrix4x4f>> gNodeName2BoneBindePose;
+static std::map<std::string, std::string> gBlendShapeMesh2Bone;
 
 //Build Ref Maps
 void BuildBoneNameMap(FBXImportNode& node, std::map<std::string, std::string>& path2name, std::string parentpath = "");
@@ -117,7 +118,7 @@ struct MeshBody
 
 };
 void BuildMeshHead(FBXMesh& meshData, message::UGCResSkinnedMeshExtData& extData, MeshBody& body, std::ofstream& osData);
-message::UGCResSkinnedMeshExtData BuildMeshExtData(std::string meshName);
+message::UGCResSkinnedMeshExtData BuildMeshExtData(FBXMesh& meshData);
 void BuildMeshBody(FBXMesh& meshData, MeshBody& bodyinfo, std::ofstream& osData);
 //Build Anim
 void BuildSingleAnimProtoFile(FBXImportScene& scene, FBXImportAnimationClip& clip, const char* outdir);
@@ -198,15 +199,53 @@ void BuildMeshBoneRefMap(FBXImportScene& scene)
 			gNodeName2BoneBindePose.insert(std::pair<std::string, std::vector<Matrix4x4f>>(meshes[i].name, boneBindPoses));
 	}
 }
+void BuildBlendShapeBoneMap(FBXImportScene& scene)
+{
+	auto allMesh = scene.meshes;
+	for (auto it = allMesh.begin(); it != allMesh.end(); it++)
+	{
+		if (it->shapes.size() > 0 && it->vertices.size() > 0)
+		{
+			auto blendShapeMeshName = it->name;
+			for (const auto& pair : gNodePath2Name) {
+				if (pair.second == blendShapeMeshName) {
+					auto bonename = pair.first;
+					size_t pos = bonename.rfind('/');
+					if (pos != std::string::npos) 
+					{
+						bonename = bonename.substr(pos + 1);
+					}
+					gBlendShapeMesh2Bone.insert(std::pair<std::string, std::string>(pair.second, bonename));
+					break; 
+				}
+			}
+		}
+	}
 
-void BuildSingleMesh(FBXMesh& meshData, std::string& filename, const char* outdir)
+
+}
+void PrebuildFBXMeshForBlendShape(FBXMesh& meshData)
+{
+	if (meshData.vertices.size() > 0)
+	{
+		//add bone weight
+		auto allBoneWeights = meshData.boneWeights;
+		BoneWeights4 boneWeights = { {1.0f, 0.0f, 0.0f, 0.0f}, {0, 0, 0, 0} };
+		allBoneWeights.resize(meshData.vertices.size(), boneWeights);
+		//add bindpose
+		Matrix4x4f ident;
+		ident.SetIdentity();
+		meshData.bindPoses.push_back(ident);
+	}
+}
+
+void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string& filename, const char* outdir)
 {
 	bool isSkinnedMesh = false;
-	message::UGCResSkinnedMeshExtData extData = BuildMeshExtData(meshData.name);
+	message::UGCResSkinnedMeshExtData extData = BuildMeshExtData(meshData);
 	if (extData.bonenames_size() > 0)
 	{
 		isSkinnedMesh = true;
-		//std::cout << meshData.name << " Has bone count: " << gNodeName2BoneName[meshData.name].size() << ",repeat time: " << extData.bonenames_size() << std::endl;
 	}
 	std::string meshfilename(meshData.name);
 	std::string directory(outdir);
@@ -360,8 +399,9 @@ void BuildMeshBody(FBXMesh& meshData, MeshBody& bodyinfo, std::ofstream& osData)
 	osData.write(reinterpret_cast<char*>(meshData.boneWeights.data()), bodyinfo.BoneWeightLength * sizeof(BoneWeights4));
 
 }
-message::UGCResSkinnedMeshExtData BuildMeshExtData(std::string meshName)
+message::UGCResSkinnedMeshExtData BuildMeshExtData(FBXMesh& meshData)
 {
+	std::string meshName = meshData.name;
 	message::UGCResSkinnedMeshExtData ext;
 	if (gNodeName2BoneName.find(meshName) != gNodeName2BoneName.end())
 	{
@@ -370,6 +410,13 @@ message::UGCResSkinnedMeshExtData BuildMeshExtData(std::string meshName)
 		{
 			ext.add_bonenames(bones[i]);
 		}
+	}
+	// For BlendShape Mesh Add bone
+	if (gBlendShapeMesh2Bone.find(meshName) != gBlendShapeMesh2Bone.end())
+	{
+		auto bone = gBlendShapeMesh2Bone[meshName];
+		ext.add_bonenames(bone);
+		PrebuildFBXMeshForBlendShape(meshData);
 	}
 	return ext;
 }
