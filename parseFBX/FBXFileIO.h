@@ -264,7 +264,7 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 	for (int i = 0; i < meshcount; i++)
 	{
 		std::string meshfilename;
-		BuildSingleMesh(gameObj->meshList[i], meshfilename, outdir);
+		BuildSingleMesh(gameObj->meshList[i], importScene,meshfilename, outdir);
 		meshname += meshfilename + "\n";
 		meshtomatindex.insert(meshtomatindex.end(), gameObj->meshList[i].materialindex.begin(), gameObj->meshList[i].materialindex.end());
 		meshtomatindex.push_back(-1);
@@ -441,7 +441,8 @@ void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 	for (auto i = 0; i < anim.size(); i++)
 	{
 		if (anim[i].HasAnimations())
-			BuildSingleAnimProtoFile(scene, anim[i], outdir);
+			//BuildSingleAnimProtoFile(scene, anim[i], outdir);
+			BuildSingleAnimBinaryFile(scene, anim[i], outdir);
 	}
 }
 

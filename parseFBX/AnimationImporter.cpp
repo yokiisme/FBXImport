@@ -2,12 +2,15 @@
 #include "AnimationImporter.h"
 #include "floatConversion.h"
 #include "AnimationCurveUtility.h"
+#include "AnimationCurve.h"
+#include "AnimationKeyFrameReducer.h"
 #include "Components.h"
 #include "Constraints.h"
 #include <sstream>
 #include <format>
 #include <set>
 
+template void FitTangents(FBXAnimationCurve& key0, FBXAnimationCurve& key1, float time1, float time2, const FBXAnimationCurve& value1, const FBXAnimationCurve& value2);
 namespace
 {
 	float EvaluateCurve(FbxAnimCurve* curve, FbxTime fbxtime, float defaultValue, bool remap, int coordIndex, int* lastCurveIndex, CurveFlags& flags)
@@ -443,6 +446,8 @@ static void MergeVisibilityAnimCurve(
 
 static const Quaternionf FBXCameraRotationOffset = EulerToQuaternion(Vector3f(.0f, -90.0f, .0f) * kDeg2Rad, kOrderUnityDefault);
 static const Quaternionf FBXLightRotationOffset = EulerToQuaternion(Vector3f(90.0f, .0f, .0f) * kDeg2Rad, kOrderUnityDefault);
+
+void EnsureQuaternionContinuity(FBXAnimationCurve** curves);
 
 bool EvaluateForEulerToQuat(FbxNode* node)
 {
@@ -1060,8 +1065,6 @@ void ConvertCurves(FBXAnimationCurve& curve, Converter converter, ConverterData&
 		key.weightedMode = kNotWeighted;
 	}
 }
-
-
 
 bool IsTakeEmpty(const FbxAnimStack& animStack)
 {

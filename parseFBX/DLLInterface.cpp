@@ -137,7 +137,8 @@ int ConvertFBXToImportMaterial(FbxSurfaceMaterial* fbxMaterial, FBXImportScene& 
         return found->second;
 
     fbxMaterialLookup[fbxMaterial] = static_cast<int>(scene.materials.size());
-    std::string matname = fbxMaterial->GetName();
+
+    std::string matname = fbxMaterial!= NULL? fbxMaterial->GetName():"";
     scene.materials.push_back(matname);
     return static_cast<int>(scene.materials.size()) - 1;
 }
@@ -1105,6 +1106,7 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
 
     BuildAllBoneNameMap(outputScene);
     BuildMeshBoneRefMap(outputScene);
+    BuildBlendShapeBoneMap(outputScene);
 
     //Build Mesh
     FBXGameObject gameObject;

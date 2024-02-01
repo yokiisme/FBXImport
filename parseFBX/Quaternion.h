@@ -29,6 +29,9 @@ public:
 	}
 	void Set(const float* array) { x = array[0]; y = array[1]; z = array[2]; w = array[3]; }
 
+	//friend Quaternionf Normalize(const Quaternionf& q) { return q / Magnitude(q); }
+	friend Quaternionf NormalizeSafe(const Quaternionf& q);
+
 	bool operator==(const Quaternionf& q) const { return x == q.x && y == q.y && z == q.z && w == q.w; }
 	bool operator!=(const Quaternionf& q) const { return x != q.x || y != q.y || z != q.z || w != q.w; }
 
@@ -464,3 +467,16 @@ inline Quaternionf ExtractQuaternionFromFBXEulerOld(FbxVector4 euler)
 	return q;
 }
 
+inline Quaternionf NormalizeSafe(const Quaternionf& q)
+{
+	float mag = Magnitude(q);
+	if (mag < Vector3f::epsilon)
+		return Quaternionf::identity();
+	else
+		return q / mag;
+}
+
+inline bool IsFinite(const Quaternionf& f)
+{
+	return IsFinite(f.x) & IsFinite(f.y) & IsFinite(f.z) & IsFinite(f.w);
+}

@@ -753,3 +753,11 @@ inline int RoundToNearestPowerOfTwo(float v)
 {
     return (int)Pow(2, Roundf(std::max<float>(Log2(v), 0.0f)));
 }
+
+static float pi() { return 3.14159265358979323846f; }                              // pi
+static float pi_over_two() { return 1.57079632679489661923f; }                     // pi / 2
+static float pi_over_three() { return 1.0471975511965977461542144610932f; }        // pi / 3
+static float pi_over_four() { return 0.785398163397448309615660845819875721f; }    // pi / 4
+static float pi_over_six() { return 0.52359877559829887307710723054658f; }         // pi / 6
+static float one_over_pi() { return 0.31830988618379067153776752674503f; }         // 1 / pi
+static float one_over_two_pi() { return 0.159154943091895335768883763372514362f; } // 1 / 2*pi
