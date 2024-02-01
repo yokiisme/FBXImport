@@ -173,4 +173,17 @@ inline Vector2f operator-(const Vector2f& lhs, const Vector2f& rhs) { return Vec
 inline float Dot(const Vector2f& lhs, const Vector2f& rhs) { return lhs.x * rhs.x + lhs.y * rhs.y; }
 
 
+inline bool IsFinite(const Vector2f& f)
+{
+	return IsFinite(f.x) & IsFinite(f.y);
+}
 
+inline bool IsFinite(const Vector3f& f)
+{
+	return IsFinite(f.x) & IsFinite(f.y) & IsFinite(f.z);
+}
+
+inline bool IsFinite(const Vector4f& f)
+{
+	return IsFinite(f.x) & IsFinite(f.y) & IsFinite(f.z) && IsFinite(f.w);
+}

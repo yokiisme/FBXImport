@@ -56,6 +56,15 @@ struct Matrix4x4f
 };
 
 
+inline bool IsFinite(const Matrix4x4f& f)
+{
+	return
+		IsFinite(f.m_Data[0]) & IsFinite(f.m_Data[1]) & IsFinite(f.m_Data[2]) &
+		IsFinite(f.m_Data[4]) & IsFinite(f.m_Data[5]) & IsFinite(f.m_Data[6]) &
+		IsFinite(f.m_Data[8]) & IsFinite(f.m_Data[9]) & IsFinite(f.m_Data[10]) &
+		IsFinite(f.m_Data[12]) & IsFinite(f.m_Data[13]) & IsFinite(f.m_Data[14]) & IsFinite(f.m_Data[15]);
+}
+
 struct Matrix3x3f
 {
 	Matrix3x3f() {}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Utility.h"
+#include "AnimationKeyFrameReducer.h"
 #include "FBXImporterDef.h"
 #include "proto/ProtoBuffUGCResource.pb.h"
 #define DebugMeshInfoOutput 0
@@ -129,6 +130,7 @@ void BuildBoneNodeData(FBXImportScene& scene, FBXImportNode& node, message::UGCR
 void ParseSingleMesh(std::string meshfile);
 void DebugMeshInfo(FBXMesh& meshData, MeshBody& bodyinfo);
 void ParseAnimProto(message::UGCResAnimClipData& msg);
+void ParseSingleAnim(std::string animfile);
 
 void BuildBoneNameMap(FBXImportNode& node, std::map<std::string, std::string>& path2name, std::string parentpath)
 {
@@ -424,45 +426,47 @@ message::UGCResSkinnedMeshExtData BuildMeshExtData(FBXMesh& meshData)
 //Build Anim
 void BuildSingleAnimProtoFile(FBXImportScene& scene, FBXImportAnimationClip& clip, const char* outdir)
 {
-	auto floatCurves = clip.floatAnimations;
-	auto nodeCurves = clip.nodeAnimations;
+	auto& floatCurves = clip.floatAnimations;
+	auto& nodeCurves = clip.nodeAnimations;
 	message::UGCResAnimClipData AnimClipProto;
 
 	auto sampleRate = scene.sceneInfo.sampleRate;
 	auto fileScale = scene.fileScaleFactor;
-
+	//::ReduceKeyframes(clip, 0.5f, 0.5f, 0.5f, 0.5f);
+	ReduceKeyframes(clip, sampleRate, 0.5f, 0.5f, 0.5f, 0.5f);
 	AnimClipProto.set_name(clip.name);
 	AnimClipProto.set_bakestart(clip.bakeStart);
 	AnimClipProto.set_bakestop(clip.bakeStop);
 	AnimClipProto.set_samplerate(sampleRate);
 
-	//Add Float Animation
-	for (auto it = floatCurves.begin(); it != floatCurves.end(); it++)
-	{
-		message::UGCResAnimFloatCurves* curFloatProto = AnimClipProto.add_floatanim();
-		curFloatProto->set_classname(it->className);
-		curFloatProto->set_propertyname(it->propertyName);
-		auto& curve = it->curve;
-		auto& keyFrames = curve.m_Curve;
-		message::FBXAnimationCurve* floatAnimCurveProto = curFloatProto->add_curve();
-		for (auto i = 0; i < keyFrames.size(); i++)
-		{
-			auto& curKeyFrame = keyFrames[i];
-			message::UGCResAnimKeyFrameFloat* keyframeProto = floatAnimCurveProto->add_keyframes();
-			keyframeProto->set_time(curKeyFrame.time);
-			keyframeProto->set_weightedmode(curKeyFrame.weightedMode);
-			keyframeProto->set_value(curKeyFrame.value);
-			keyframeProto->set_inslope(curKeyFrame.inSlope);
-			keyframeProto->set_outslope(curKeyFrame.outSlope);
-			keyframeProto->set_inweight(curKeyFrame.inWeight);
-			keyframeProto->set_outweight(curKeyFrame.outWeight);
-		}
-	}
+	////Add Float Animation
+	//for (auto it = floatCurves.begin(); it != floatCurves.end(); it++)
+	//{
+	//	message::UGCResAnimFloatCurves* curFloatProto = AnimClipProto.add_floatanim();
+	//	curFloatProto->set_classname(it->className);
+	//	curFloatProto->set_propertyname(it->propertyName);
+	//	auto& curve = it->curve;
+	//	auto& keyFrames = curve.m_Curve;
+	//	message::FBXAnimationCurve* floatAnimCurveProto = curFloatProto->add_curve();
+	//	for (auto i = 0; i < keyFrames.size(); i++)
+	//	{
+	//		auto& curKeyFrame = keyFrames[i];
+	//		message::UGCResAnimKeyFrameFloat* keyframeProto = floatAnimCurveProto->add_keyframes();
+	//		keyframeProto->set_time(curKeyFrame.time);
+	//		keyframeProto->set_weightedmode(curKeyFrame.weightedMode);
+	//		keyframeProto->set_value(curKeyFrame.value);
+	//		keyframeProto->set_inslope(curKeyFrame.inSlope);
+	//		keyframeProto->set_outslope(curKeyFrame.outSlope);
+	//		keyframeProto->set_inweight(curKeyFrame.inWeight);
+	//		keyframeProto->set_outweight(curKeyFrame.outWeight);
+	//	}
+	//}
 	//Add Node Animation
 	for (auto it = nodeCurves.begin(); it != nodeCurves.end(); it++)
 	{
 		message::UGCResAnimNodeCurves* curNodeProto = AnimClipProto.add_nodeanim();
 		auto nodeName = it->node->name;
+
 		for (auto it = gNodePath2Name.begin(); it != gNodePath2Name.end(); it++)
 		{
 			if (it->second == nodeName)
@@ -532,7 +536,6 @@ void BuildSingleAnimProtoFile(FBXImportScene& scene, FBXImportAnimationClip& cli
 			}
 		}
 	}
-
 	std::string directory(outdir);
 	std::string filename(clip.name);
 
@@ -550,6 +553,135 @@ void BuildSingleAnimProtoFile(FBXImportScene& scene, FBXImportAnimationClip& cli
 	ParseAnimProto(AnimClipProto);
 #endif
 }
+void BuildSingleAnimBinaryFile(FBXImportScene& scene, FBXImportAnimationClip& clip, const char* outdir)
+{
+	// create ostream
+	std::string Animfilename(clip.name);
+	std::string directory(outdir);
+	Animfilename = directory + "/" + Animfilename + ".Anim";
+	std::ofstream osData(Animfilename, std::ios_base::out | std::ios_base::binary);
+	osData.precision(8);
+
+
+	//build head
+	byte MagicNumber1 = 100;
+	byte MagicNumber2 = 98;
+	byte MagicNumber3 = 158;
+	byte MagicNumber4 = 134;
+	int Version = 1009715;
+
+	float BakeStart = clip.bakeStart;
+	float BakeStop = clip.bakeStop;
+	float SampleRate = scene.sceneInfo.sampleRate;
+	auto fileScale = scene.fileScaleFactor;
+	int NameLength = clip.name.size();
+	std::string Name = clip.name;
+
+	//WriteHead
+	osData.write(reinterpret_cast<char*>(&MagicNumber1), sizeof(byte));
+	osData.write(reinterpret_cast<char*>(&MagicNumber2), sizeof(byte));
+	osData.write(reinterpret_cast<char*>(&MagicNumber3), sizeof(byte));
+	osData.write(reinterpret_cast<char*>(&MagicNumber4), sizeof(byte));
+	osData.write(reinterpret_cast<char*>(&Version), sizeof(int));
+	osData.write(reinterpret_cast<char*>(&BakeStart), sizeof(float));
+	osData.write(reinterpret_cast<char*>(&BakeStop), sizeof(float));
+	osData.write(reinterpret_cast<char*>(&SampleRate), sizeof(float));
+	osData.write(reinterpret_cast<char*>(&NameLength), sizeof(int));
+	osData.write(Name.data(),NameLength);
+	
+	ReduceKeyframes(clip, SampleRate, 0.5f, 0.5f, 0.5f, 0.5f);
+
+	//Node Anim
+	auto& nodeCurves = clip.nodeAnimations;
+	int NodeAnimCurveCount = clip.nodeAnimations.size();
+	osData.write(reinterpret_cast<char*>(&NodeAnimCurveCount), sizeof(int));
+
+	for (auto it = nodeCurves.begin(); it != nodeCurves.end(); it++)
+	{
+		auto nodeName = it->node->name;
+
+		for (auto it = gNodePath2Name.begin(); it != gNodePath2Name.end(); it++)
+		{
+			if (it->second == nodeName)
+			{
+				nodeName = it->first;
+				break;
+			}
+		}
+		int NodeNameLength = nodeName.size();
+		osData.write(reinterpret_cast<char*>(&NodeNameLength), sizeof(int));
+		osData.write(nodeName.data(), NodeNameLength);
+
+
+		auto& rotCurves = it->rotation;
+		for (auto i = 0; i < 4; i++)
+		{
+			auto& curve = rotCurves[i];
+			auto& keyFrames = curve.m_Curve;
+			int RotKeyFrameCount = keyFrames.size();
+			osData.write(reinterpret_cast<char*>(&RotKeyFrameCount), sizeof(int));
+			for (auto i = 0; i < keyFrames.size(); i++)
+			{
+				auto& curKeyFrame = keyFrames[i];
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.weightedMode), sizeof(int));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.time), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.value), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.inSlope), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.outSlope), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.inWeight), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.outWeight), sizeof(float));
+
+			}
+		}
+		auto& scaleCurves = it->scale;
+		for (auto i = 0; i < 3; i++)
+		{
+			auto& curve = scaleCurves[i];
+			auto& keyFrames = curve.m_Curve;
+			int ScaleKeyFrameCount = keyFrames.size();
+			osData.write(reinterpret_cast<char*>(&ScaleKeyFrameCount), sizeof(int));
+			for (auto i = 0; i < keyFrames.size(); i++)
+			{
+				auto& curKeyFrame = keyFrames[i];
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.weightedMode), sizeof(int));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.time), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.value), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.inSlope), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.outSlope), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.inWeight), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.outWeight), sizeof(float));
+			}
+		}
+		auto& transCurves = it->translation;
+		for (auto i = 0; i < 3; i++)
+		{
+			auto& curve = transCurves[i];
+			auto& keyFrames = curve.m_Curve;
+			int TransKeyFrameCount = keyFrames.size();
+			osData.write(reinterpret_cast<char*>(&TransKeyFrameCount), sizeof(int));
+			for (auto i = 0; i < keyFrames.size(); i++)
+			{
+				auto& curKeyFrame = keyFrames[i];
+				//apply scale
+				curKeyFrame.value = curKeyFrame.value * fileScale;
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.weightedMode), sizeof(int));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.time), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.value), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.inSlope), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.outSlope), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.inWeight), sizeof(float));
+				osData.write(reinterpret_cast<char*>(&curKeyFrame.outWeight), sizeof(float));
+
+			}
+		}
+	}
+
+	osData.close();
+
+	//ParseSingleAnim(Animfilename);
+
+}
+
 //Build Bones
 void BuildBoneNodeData(FBXImportScene& scene, FBXImportNode& node, message::UGCResBoneNodeData* parent)
 {
@@ -845,5 +977,153 @@ void ParseAnimProto(message::UGCResAnimClipData& msg)
 	}
 
 	std::cout << "*****************************End Parse Anim Proto!*********************************" << std::endl;
+}
+void ParseSingleAnim(std::string animfile)
+{
+	std::cout << "*******************************Begin Parse Single Anim**************************" << std::endl;
+	std::ifstream istream(animfile, std::ios_base::in | std::ios_base::binary);
+
+	byte MagicNum[4] = { 0,0,0,0 };
+	int Version = -1;
+	float BakeStart = 0;
+	float BakeStop = 0;
+	float SampleRate = 0;
+	int NameLength = 0;
+	std::string Name;
+
+
+
+	istream.read(reinterpret_cast<char*>(&MagicNum[0]), sizeof(byte));
+	istream.read(reinterpret_cast<char*>(&MagicNum[1]), sizeof(byte));
+	istream.read(reinterpret_cast<char*>(&MagicNum[2]), sizeof(byte));
+	istream.read(reinterpret_cast<char*>(&MagicNum[3]), sizeof(byte));
+	istream.read(reinterpret_cast<char*>(&Version), sizeof(int));
+	istream.read(reinterpret_cast<char*>(&BakeStart), sizeof(float));
+	istream.read(reinterpret_cast<char*>(&BakeStop), sizeof(float));
+	istream.read(reinterpret_cast<char*>(&SampleRate), sizeof(float));
+	istream.read(reinterpret_cast<char*>(&NameLength), sizeof(int));
+	Name.resize(NameLength);
+	istream.read(&Name[0], NameLength);
+
+
+
+	std::cout << "MagicNumber: " << (int)MagicNum[0] << "," << (int)MagicNum[1] << "," << (int)MagicNum[2] << "," << (int)MagicNum[3] << std::endl;
+	std::cout << "Version: " << Version << std::endl;
+	std::cout << "BakeStart: " << BakeStart << std::endl;
+	std::cout << "BakeStop: " << BakeStop << std::endl;
+	std::cout << "SampleRate: " << SampleRate << std::endl;
+	std::cout << "NameLength: " << NameLength << std::endl;
+	std::cout << "filename: " << Name << std::endl;
+	int NodeCount = 0;
+	istream.read(reinterpret_cast<char*>(&NodeCount), sizeof(int));
+	std::cout << "NodeCount: " << NodeCount << std::endl;
+	for (auto i = 0; i < NodeCount; i++)
+	{
+		int NodeNameLength = -1;
+		std::string NodeName;
+		istream.read(reinterpret_cast<char*>(&NodeNameLength), sizeof(int));
+		NodeName.resize(NodeNameLength);
+		istream.read(&NodeName[0], NodeNameLength);
+
+		//std::cout << "Node NodeNameLength: " << NodeNameLength << std::endl;
+		std::cout << "Node Name: " << NodeName << std::endl;
+	
+
+		int weightedMode = -1;
+		float time, value, inSlope, outSlope, inWeight, outWeight;
+
+		//Rot
+		for (auto channel = 0; channel < 4; channel++)
+		{
+			int RotKeyFrameCount = 0;
+			istream.read(reinterpret_cast<char*>(&RotKeyFrameCount), sizeof(int));
+			if (RotKeyFrameCount != 0)
+			{
+				std::cout << "Node RotKeyFrameCount channel : " << (int)channel << "Node RotKeyFrameCount: " << RotKeyFrameCount<<std::endl;
+			}
+			for (auto id = 0; id < RotKeyFrameCount; id++)
+			{
+				istream.read(reinterpret_cast<char*>(&weightedMode), sizeof(int));
+				istream.read(reinterpret_cast<char*>(&time), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&value), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&inSlope), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&outSlope), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&inWeight), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&outWeight), sizeof(float));
+				//std::cout << "	Rot :["<< i<<" ] channel: " << (int)channel << std::endl;
+				//std::cout << "		weightedMode: " << (int)weightedMode << std::endl;
+				std::cout << "		time: " << time << std::endl;
+				std::cout << "		value: " << value << std::endl;
+				//std::cout << "		inSlope: " << inSlope << std::endl;
+				//std::cout << "		outSlope: " << outSlope << std::endl;
+				//std::cout << "		inWeight: " << inWeight << std::endl;
+				//std::cout << "		outWeight: " << outWeight << std::endl;
+			}
+		}
+		//Scale
+		for (auto channel = 0; channel < 3; channel++)
+		{
+			int ScaleKeyFrameCount = 0;
+			istream.read(reinterpret_cast<char*>(&ScaleKeyFrameCount), sizeof(int));
+			if (ScaleKeyFrameCount != 0)
+			{
+				std::cout << "Node ScaleKeyFrameCount channel : " << (int)channel << "Node ScaleKeyFrameCount: " << ScaleKeyFrameCount << std::endl;
+			}
+
+
+			for (auto id = 0; id < ScaleKeyFrameCount; id++)
+			{
+				istream.read(reinterpret_cast<char*>(&weightedMode), sizeof(int));
+				istream.read(reinterpret_cast<char*>(&time), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&value), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&inSlope), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&outSlope), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&inWeight), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&outWeight), sizeof(float));
+				//std::cout << "	Scale :[" << i << " ] channel: " << (int)channel << std::endl;
+				//std::cout << "		weightedMode: " << (int)weightedMode << std::endl;
+				std::cout << "		time: " << time << std::endl;
+				std::cout << "		value: " << value << std::endl;
+				//std::cout << "		inSlope: " << inSlope << std::endl;
+				//std::cout << "		outSlope: " << outSlope << std::endl;
+				//std::cout << "		inWeight: " << inWeight << std::endl;
+				//std::cout << "		outWeight: " << outWeight << std::endl;
+			}
+		}
+		//Trans
+		for (auto channel = 0; channel < 3; channel++)
+		{
+			int TransKeyFrameCount = 0;
+			istream.read(reinterpret_cast<char*>(&TransKeyFrameCount), sizeof(int));
+			if (TransKeyFrameCount != 0)
+			{
+				std::cout << "Node TransKeyFrameCount channel : " << (int)channel << "Node TransKeyFrameCount: " << TransKeyFrameCount << std::endl;
+			}
+			for (auto id = 0; id < TransKeyFrameCount; id++)
+			{
+				istream.read(reinterpret_cast<char*>(&weightedMode), sizeof(int));
+				istream.read(reinterpret_cast<char*>(&time), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&value), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&inSlope), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&outSlope), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&inWeight), sizeof(float));
+				istream.read(reinterpret_cast<char*>(&outWeight), sizeof(float));
+				//std::cout << "	Trans :[" << i << " ] channel: " << (int)channel << std::endl;
+				//std::cout << "		weightedMode: " << (int)weightedMode << std::endl;
+				std::cout << "		time: " << time << std::endl;
+				std::cout << "		value: " << value << std::endl;
+				//std::cout << "		inSlope: " << inSlope << std::endl;
+				//std::cout << "		outSlope: " << outSlope << std::endl;
+				//std::cout << "		inWeight: " << inWeight << std::endl;
+				//std::cout << "		outWeight: " << outWeight << std::endl;
+			}
+		}
+
+	}
+
+
+
+	std::cout << "*******************************End Parse Single Mesh**************************" << std::endl;
+
 }
 #pragma endregion

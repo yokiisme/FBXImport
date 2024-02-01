@@ -441,7 +441,8 @@ void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 	for (auto i = 0; i < anim.size(); i++)
 	{
 		if (anim[i].HasAnimations())
-			BuildSingleAnimProtoFile(scene, anim[i], outdir);
+			//BuildSingleAnimProtoFile(scene, anim[i], outdir);
+			BuildSingleAnimBinaryFile(scene, anim[i], outdir);
 	}
 }
 

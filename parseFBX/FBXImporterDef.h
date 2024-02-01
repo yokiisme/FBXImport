@@ -9,7 +9,7 @@
 #include "Color.h"
 #include "ConstrainEnums.h"
 #include "ImportMeshDef.h"
-
+#include "AnimationCurve.h"
 
 struct FBXImportSettings;
 struct FBXImportMeshSetting;
@@ -36,24 +36,7 @@ struct FBXImportNodeUserData;
 
 
 
-enum WeightedMode
-{
-	kNotWeighted = 0,
-	kInWeighted = 1 << 0,
-	kOutWeighted = 1 << 1,
-	kBothWeighted = kInWeighted | kOutWeighted
-};
-ENUM_FLAGS(WeightedMode);
 
-
-enum InternalWrapMode
-{
-	// Values are serialized in CompressedMesh and must be preserved
-	kInternalWrapModePingPong = 0,
-	kInternalWrapModeRepeat = 1,
-	kInternalWrapModeClamp = 2,
-	kInternalWrapModeDefault = 3
-};
 
 enum WrapMode
 {
@@ -416,74 +399,6 @@ struct FBXImportBaseAnimation
 {
 	FBXImportNode* node;
 };
-
-template<class T>
-struct FBXKeyFrameTpl
-{
-	float time;
-	int weightedMode;
-
-	T value;
-	T inSlope;
-	T outSlope;
-	T inWeight;
-	T outWeight;
-};
-
-template<class T>
-struct FBXAnimationCurveTpl
-{
-	typedef FBXKeyFrameTpl<T> FBXKeyframe;
-
-
-	std::vector<FBXKeyframe> m_Curve;
-	InternalWrapMode preInfinity;
-	InternalWrapMode postInfinity;
-	RotationOrder rotationOrder;
-
-	void SetRotationOrder(RotationOrder order) { rotationOrder = order; }
-	RotationOrder GetRotationOrder() const { return (RotationOrder)rotationOrder; }
-	int GetKeyCount() const { return (int)m_Curve.size(); }
-	FBXKeyframe& GetKey(int index) { return m_Curve[index]; }
-
-	int AddKey(const FBXKeyframe& key);
-	/// Performs no error checking. And doesn't invalidate the cache!
-	void AddKeyBackFast(const FBXKeyframe& key) { m_Curve.push_back(key); }
-	const FBXKeyframe& GetKey(int index) const { return m_Curve[index]; }
-
-
-	struct Cache
-	{
-		int index;
-		float time;
-		float timeEnd;
-		T coeff[4];
-
-		Cache() { time = std::numeric_limits<float>::infinity(); index = 0; timeEnd = 0.0f; memset(&coeff, 0, sizeof(coeff)); }
-		void Invalidate() { time = std::numeric_limits<float>::infinity(); index = 0; }
-	};
-	mutable Cache m_Cache;
-	mutable Cache m_ClampCache;
-	void InvalidateCache();
-
-};
-
-template<class T>
-void FBXAnimationCurveTpl<T>::InvalidateCache()
-{
-	m_Cache.time = std::numeric_limits<float>::infinity();
-	m_Cache.index = 0;
-	m_ClampCache.time = std::numeric_limits<float>::infinity();
-	m_ClampCache.index = 0;
-}
-
-
-typedef FBXAnimationCurveTpl<float>        FBXAnimationCurveBase;
-typedef FBXAnimationCurveTpl<float>        FBXAnimationCurve;
-typedef FBXAnimationCurveTpl<Quaternionf>  FBXAnimationCurveQuat;
-typedef FBXAnimationCurveTpl<Vector3f>     FBXAnimationCurveVec3;
-
-
 
 struct FBXImportNodeAnimation : public FBXImportBaseAnimation
 {

@@ -5,6 +5,10 @@
 #include "stringFormat.h"
 #include "Matrix.h"
 
+
+#define M_DEG_2_RAD  0.0174532925f
+#define M_RAD_2_DEG  57.295779513f
+
 inline FbxVector4 Vector3ToFBXPoint(const Vector3f& vec)
 {
 	return FbxVector4(vec[0], vec[1], vec[2]);
@@ -161,4 +165,15 @@ inline Matrix4x4f FBXMatrixToMatrix4x4(FbxAMatrix before)
 	converted[15] = static_cast<float>(beforePtr[15]);
 
 	return converted;
+}
+
+
+inline float radians(float deg)
+{
+	return M_DEG_2_RAD * deg;
+}
+
+inline float degrees(float rad)
+{
+	return M_RAD_2_DEG * rad;
 }
