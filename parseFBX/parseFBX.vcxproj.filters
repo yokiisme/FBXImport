@@ -60,6 +60,15 @@
     <ClCompile Include="proto\ugccommon.pb.cc">
       <Filter>protobuf</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationKeyFrameReducer.cpp">
+      <Filter>源文件\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationCurve.cpp">
+      <Filter>源文件\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationCurveUtility.cpp">
+      <Filter>源文件\Anim</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
@@ -163,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="DataGenerate.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationKeyFrameReducer.h">
+      <Filter>头文件\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationCurve.h">
+      <Filter>头文件\Anim</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

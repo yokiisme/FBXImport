@@ -10,8 +10,11 @@
 
 void main(int argc, char** argv)
 {
-	if (argc != 3) return;
+	if (argc != 3 && argc != 4) return;
 	char* str = argv[1];
 	char* outpath = argv[2];
-	ParseFBX(str, outpath);
+	char* paramater = nullptr;
+	if(argc == 4)
+		paramater = argv[3];
+	ParseFBX(str, outpath, paramater);
 }

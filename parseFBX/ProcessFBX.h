@@ -15,7 +15,7 @@ void RemoveInvalidTransformCurves(FbxScene& fbxScene, FbxNode* root);
 void SyncCurveNodeChannelValue(FbxNode* node);
 void Preprocess(FbxScene* scene, const float framerate);
 
-void ProcessFBXImport(FbxManager* fbxManager, FbxScene* fbxScene, FBXImportScene& outputScene);
+void ProcessFBXImport(FbxManager* fbxManager, FbxScene* fbxScene, FBXImportScene& outputScene, float globalscale);
 
 
 bool IsValidTimeRange(const char* const takeName, const char* const nodeName, const char* const curveName, const float minimum, const float maximum)
@@ -260,7 +260,7 @@ void Preprocess(FbxScene* scene, const float framerate)
 
 
 
-void ProcessFBXImport(FbxManager* fbxManager, FbxScene* fbxScene, FBXImportScene& outputScene)
+void ProcessFBXImport(FbxManager* fbxManager, FbxScene* fbxScene, FBXImportScene& outputScene, float globalscale)
 {
     FbxGlobalSettings& fbxGlobalSettings = fbxScene->GetGlobalSettings();
     float sceneScaleFactor = (float)fbxGlobalSettings.GetSystemUnit().GetScaleFactor();
@@ -272,7 +272,7 @@ void ProcessFBXImport(FbxManager* fbxManager, FbxScene* fbxScene, FBXImportScene
         options.mConvertRrsNodes = false; // Do not convert nodes that don't inherit scale from their parent.
         FbxSystemUnit(sceneScaleFactor).ConvertScene(fbxScene, options);
     }
-    outputScene.fileScaleFactor = sceneScaleFactor * 0.01f;
+    outputScene.fileScaleFactor = sceneScaleFactor * 0.01f * globalscale;
     outputScene.fileScaleUnit = sceneUnit.Buffer();
 
     outputScene.sceneInfo.fileScaleFactor = outputScene.fileScaleFactor;

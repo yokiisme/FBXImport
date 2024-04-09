@@ -149,11 +149,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;opengl32.lib;freeglut.lib;glew32s.lib;glfw3.lib;SDL2.lib;SDL2main.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\libs\freeglut\lib\x64;$(ProjectDir)..\libs\glew-2.1.0\lib\Release\x64;$(ProjectDir)..\libs\glfw-3.2.1\x64\lib-vc2015;$(ProjectDir)..\libs\SDL2-2.0.9\lib\x64;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\lib\vs2019\x64\release;D:\parseFBX\libs\protobuf\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\libs\freeglut\lib\x64;$(ProjectDir)..\libs\glew-2.1.0\lib\Release\x64;$(ProjectDir)..\libs\glfw-3.2.1\x64\lib-vc2015;$(ProjectDir)..\libs\SDL2-2.0.9\lib\x64;C:\Program Files\Autodesk\FBX\FBX SDK\2020.2.1\lib\vs2019\x64\release;$(ProjectDir)..\libs\protobuf\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationCurve.cpp" />
+    <ClCompile Include="AnimationCurveUtility.cpp" />
     <ClCompile Include="AnimationImporter.cpp" />
+    <ClCompile Include="AnimationKeyFrameReducer.cpp" />
     <ClCompile Include="Commom.cpp" />
     <ClCompile Include="Components.cpp" />
     <ClCompile Include="Constraints.cpp" />
@@ -166,8 +169,10 @@
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationCurve.h" />
     <ClInclude Include="AnimationCurveUtility.h" />
     <ClInclude Include="AnimationImporter.h" />
+    <ClInclude Include="AnimationKeyFrameReducer.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Components.h" />

@@ -26,6 +26,6 @@ typedef std::pair<int, GfxPrimitiveType> SubsetKey;
 typedef std::map<SubsetKey, int> SubsetLookup;
 
 
-EXPORT_DLL void ParseFBX(char* fbxpath, char* outdir);
+EXPORT_DLL void ParseFBX(char* fbxpath, char* outdir, char* parameter);
 
 

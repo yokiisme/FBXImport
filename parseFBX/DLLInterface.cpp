@@ -19,6 +19,7 @@
 static bool gIsBrokenLightwaveFile = false;
 static std::map<FbxNode*, FBXImportNode*> gFBXNodeMap;
 static std::string gFBXFileName = "";
+static float gGlobalScale = 1.0f;
 
 std::string CodeTUTF8(const char* str, int t)
 {
@@ -1001,7 +1002,7 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
 {
     gFBXNodeMap.clear();
     FBXImportScene outputScene;
-    ProcessFBXImport(fbxManager, &fbxScene, outputScene);
+    ProcessFBXImport(fbxManager, &fbxScene, outputScene, gGlobalScale);
 	
     FBXMeshToInfoMap fbxMeshToInfoMap;
 	FBXMaterialLookup fbxMaterialLookup;
@@ -1139,17 +1140,53 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
             WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
         }
     }
+}
 
 
+
+void Stringsplit(const std::string& str, const std::string& splits, std::vector<std::string>& res)
+{
+    if (str == "")	
+        return;
+
+    std::string strs = str + splits;
+    size_t pos = strs.find(splits);
+    int step = splits.size();
+
+    while (pos != strs.npos)
+    {
+        std::string temp = strs.substr(0, pos);
+        res.push_back(temp);
+        strs = strs.substr(pos + step, strs.size());
+        pos = strs.find(splits);
+    }
+}
+
+
+
+void SplitParameter(char* parameter)
+{
+    if (parameter == nullptr)
+        return;
+
+    std::string pUTF8 = CodeTUTF8(parameter, CP_ACP);
+    std::vector<std::string> plist;
+    Stringsplit(pUTF8, ";", plist);
+    for (int i = 0; i < plist.size(); i++)
+    {
+        std::vector<std::string> pResult;
+        Stringsplit(plist[i], "=", pResult);
+        if (pResult[0] == "globalscale")
+        {
+            gGlobalScale = atof(pResult[1].c_str());
+        }
+    }
 }
 
 
 
 
-
-
-
-void ParseFBX(char* fbxpath, char* outdir)
+void ParseFBX(char* fbxpath, char* outdir, char* paramater)
 {
     FbxManager* lSdkManager = NULL;
     FbxScene* lScene = NULL;
@@ -1162,7 +1199,7 @@ void ParseFBX(char* fbxpath, char* outdir)
 	std::string ImgName = fbxUTF8.substr(iPos, fbxUTF8.length() - iPos);
 	gFBXFileName = ImgName.substr(0, ImgName.rfind("."));
 	
-    
+    SplitParameter(paramater);
     if (!lFilePath.IsEmpty())
     {
         bool lResult = LoadScene(lSdkManager, lScene, lFilePath.Buffer());
