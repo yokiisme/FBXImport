@@ -241,6 +241,73 @@ void PrebuildFBXMeshForBlendShape(FBXMesh& meshData)
 	}
 }
 
+void BuildMeshTxt(FBXMesh& meshData, FBXImportScene& importScene, const char* outdir)
+{
+	std::string meshfilename(meshData.name);
+	std::string directory(outdir);
+	meshfilename = directory + "/" + meshfilename + ".txt";
+	std::ofstream osData(meshfilename);
+	osData.precision(8);
+	osData << "MeshName: " << meshData.name << std::endl;
+
+	osData << "*********************************************************" << std::endl;
+	auto& bw = meshData.boneWeights;
+	osData << "Mesh boneweight Count: " << bw.size() << std::endl;
+	for (auto i = 0; i < bw.size(); i++)
+	{
+		auto currentbw = bw[i];
+		osData << "BoneWeight No. " << i << " weight [ " << currentbw.weight[0] << ", " << currentbw.weight[1] << ", " << currentbw.weight[2] << ", " << currentbw.weight[3] << "]" << std::endl;
+		osData << "BoneWeight No. " << i << " boneIndex [ " << currentbw.boneIndex[0] << ", " << currentbw.boneIndex[1] << ", " << currentbw.boneIndex[2] << ", " << currentbw.boneIndex[3] << "]" << std::endl;
+	}
+	osData << "*********************************************************" << std::endl;
+	osData << "Mesh bindPoses Count: " << meshData.bindPoses.size() << std::endl;
+	for (auto i = 0; i < meshData.bindPoses.size(); i++)
+	{
+		auto mat = meshData.bindPoses[i];
+		osData << "*********************************************************" << std::endl;
+		osData << "[ " << mat[0] << " , " << mat[1] << " , " << mat[2]<< " , " << mat[3] <<" ]" << std::endl;
+		osData << "[ " << mat[4] << " , " << mat[5] << " , " << mat[6] << " , " << mat[7] << " ]" << std::endl;
+		osData << "[ " << mat[8] << " , " << mat[9] << " , " << mat[10] << " , " << mat[11] << " ]" << std::endl;
+		osData << "[ " << mat[12] << " , " << mat[13] << " , " << mat[14] << " , " << mat[15] << " ]" << std::endl;
+		osData << "*********************************************************" << std::endl;
+	}
+	osData << "*********************************************************" << std::endl;
+	osData << "Vert Count : " << meshData.vertices.size() << std::endl;
+	for (auto i = 0; i < meshData.vertices.size(); i++)
+	{
+		osData << "Vertex No. " << i << "[ " << meshData.vertices[i].x << ", " << meshData.vertices[i].y << ", " << meshData.vertices[i].z << "]" << std::endl;
+	}
+	osData << "*********************************************************" << std::endl;
+	osData << "Norl Count : " << meshData.normals.size() << std::endl;
+	for (auto i = 0; i < meshData.normals.size(); i++)
+	{
+		osData << "Norl No. " << i << "[ " << meshData.normals[i].x << ", " << meshData.normals[i].y << ", " << meshData.normals[i].z << "]" << std::endl;
+	}
+	osData << "*********************************************************" << std::endl;
+	osData << "uv Count : " << meshData.uv1.size() << std::endl;
+	for (auto i = 0; i < meshData.uv1.size(); i++)
+	{
+		osData << "UV1 No. " << i << "[ " << meshData.uv1[i].x << ", " << meshData.uv1[i].y << "]" << std::endl;
+	}
+	osData << "*********************************************************" << std::endl;
+	osData << "index Count : " << meshData.indices.size() << std::endl;
+	for (auto i = 0; i < meshData.indices.size(); i++)
+	{
+		osData << "Index No. " << i << "[ " << meshData.indices[i] << "]" << std::endl;
+	}
+	osData << "*********************************************************" << std::endl;
+	osData.close();
+	//osData << "Mesh boneWeights Count: " << meshData.bindPoses.size() << std::endl;
+
+	//osData.write(reinterpret_cast<char*>(&bodyinfo.BindPosesLength), 8);
+	//osData.write(reinterpret_cast<char*>(meshData.bindPoses.data()), bodyinfo.BindPosesLength * sizeof(Matrix4x4f));
+
+	////BoneWeights4
+	//osData.write(reinterpret_cast<char*>(&bodyinfo.BoneWeightLength), 8);
+	//osData.write(reinterpret_cast<char*>(meshData.boneWeights.data()), bodyinfo.BoneWeightLength * sizeof(BoneWeights4));
+}
+
+
 void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string& filename, const char* outdir)
 {
 	bool isSkinnedMesh = false;
@@ -265,6 +332,7 @@ void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string
 		extData.SerializePartialToOstream(&osData);
 	osData.close();
 #if DebugMeshInfoOutput
+	BuildMeshTxt(meshData, importScene, outdir);
 	ParseSingleMesh(meshfilename);
 #endif
 }
@@ -681,6 +749,124 @@ void BuildSingleAnimBinaryFile(FBXImportScene& scene, FBXImportAnimationClip& cl
 	//ParseSingleAnim(Animfilename);
 
 }
+
+void WriteNodeAnimationsToText(FBXImportScene& scene, FBXImportAnimationClip& clip, const char* outdir)
+{
+	std::string Animfilename(clip.name);
+	std::string directory(outdir);
+	Animfilename = directory + "/" + Animfilename + "_anim.txt";
+	std::ofstream osData(Animfilename);
+
+
+	float fileScale = scene.fileScaleFactor;
+	auto& nodeCurves = clip.nodeAnimations;
+	int NodeAnimCurveCount = nodeCurves.size();
+
+
+	//build head
+	byte MagicNumber1 = 100;
+	byte MagicNumber2 = 98;
+	byte MagicNumber3 = 158;
+	byte MagicNumber4 = 134;
+	int Version = 1009715;
+
+	float BakeStart = clip.bakeStart;
+	float BakeStop = clip.bakeStop;
+	float SampleRate = scene.sceneInfo.sampleRate;
+	int NameLength = clip.name.size();
+	std::string Name = clip.name;
+
+	osData << MagicNumber1 << std::endl;
+	osData << MagicNumber2 << std::endl;
+	osData << MagicNumber3 << std::endl;
+	osData << MagicNumber4 << std::endl;
+	osData << Version << std::endl;
+	osData << BakeStart << std::endl;
+	osData << BakeStop << std::endl;
+	osData << SampleRate << std::endl;
+	osData << NameLength << std::endl;
+	osData << Name.data() << std::endl;
+
+
+
+
+
+	osData << "**********************************************" << std::endl;
+	osData << "Node Anim Count: " << NodeAnimCurveCount << std::endl;
+
+	for (auto it = nodeCurves.begin(); it != nodeCurves.end(); it++) {
+		auto nodeName = it->node->name;
+		for (auto it = gNodePath2Name.begin(); it != gNodePath2Name.end(); it++) {
+			if (it->second == nodeName) {
+				nodeName = it->first;
+				break;
+			}
+		}
+		int NodeNameLength = nodeName.size();
+		osData << "Node Anim NodeNameLength: " << NodeNameLength << std::endl;
+		osData << "Node Anim NodeName: " << nodeName.data() << std::endl;
+
+		auto& rotCurves = it->rotation;
+		for (auto i = 0; i < 4; i++) {
+			auto& curve = rotCurves[i];
+			auto& keyFrames = curve.m_Curve;
+			int RotKeyFrameCount = keyFrames.size();
+			osData << "Node Anim RotKeyFrameCount: " << RotKeyFrameCount << std::endl;
+			for (auto j = 0; j < keyFrames.size(); j++) {
+				auto& curKeyFrame = keyFrames[j];
+
+				osData << "    Channel [" << i << " ] Num [ " << j << "] weightMode " << curKeyFrame.weightedMode << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] time " << curKeyFrame.time << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] value " << curKeyFrame.value << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] inSlope " << curKeyFrame.inSlope << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] outSlope " << curKeyFrame.outSlope << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] inWeight " << curKeyFrame.inWeight << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] outWeight " << curKeyFrame.outWeight << std::endl;
+			}
+		}
+
+		auto& scaleCurves = it->scale;
+		for (auto i = 0; i < 3; i++) {
+			auto& curve = scaleCurves[i];
+			auto& keyFrames = curve.m_Curve;
+			int ScaleKeyFrameCount = keyFrames.size();
+			osData << "Node Anim ScaleKeyFrameCount: " << ScaleKeyFrameCount << std::endl;
+			for (auto j = 0; j < keyFrames.size(); j++) {
+				auto& curKeyFrame = keyFrames[j];
+				osData << "    Channel [" << i << " ] Num [ " << j << "] weightMode " << curKeyFrame.weightedMode << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] time " << curKeyFrame.time << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] value " << curKeyFrame.value << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] inSlope " << curKeyFrame.inSlope << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] outSlope " << curKeyFrame.outSlope << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] inWeight " << curKeyFrame.inWeight << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] outWeight " << curKeyFrame.outWeight << std::endl;
+			}
+		}
+
+		auto& transCurves = it->translation;
+		for (auto i = 0; i < 3; i++) {
+			auto& curve = transCurves[i];
+			auto& keyFrames = curve.m_Curve;
+			int TransKeyFrameCount = keyFrames.size();
+			osData << "Node Anim TransKeyFrameCount: " << TransKeyFrameCount << std::endl;
+			for (auto j = 0; j < keyFrames.size(); j++) {
+				auto& curKeyFrame = keyFrames[j];
+				// apply scale
+				curKeyFrame.value = curKeyFrame.value * fileScale;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] weightMode " << curKeyFrame.weightedMode << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] time " << curKeyFrame.time << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] value " << curKeyFrame.value << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] inSlope " << curKeyFrame.inSlope << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] outSlope " << curKeyFrame.outSlope << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] inWeight " << curKeyFrame.inWeight << std::endl;
+				osData << "    Channel [" << i << " ] Num [ " << j << "] outWeight " << curKeyFrame.outWeight << std::endl;
+			}
+		}
+
+		osData << "***************************************" << std::endl;
+	}
+}
+
 
 //Build Bones
 void BuildBoneNodeData(FBXImportScene& scene, FBXImportNode& node, message::UGCResBoneNodeData* parent)

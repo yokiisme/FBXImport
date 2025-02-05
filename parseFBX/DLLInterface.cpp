@@ -864,7 +864,8 @@ void GenerateMeshData(const FBXImportMesh& constantMesh, const Matrix4x4f& trans
 
     Triangulate(*currentMesh, tmpMesh, importmeshsetting1, true);
     InvertWinding(tmpMesh); 
-    GenerateMikkTSpace(tmpMesh);  
+    if(!tmpMesh.normals.empty())
+        GenerateMikkTSpace(tmpMesh);  
     FBXImportMesh originalMesh;
 
     FBXImportMeshSetting importmeshsetting2;

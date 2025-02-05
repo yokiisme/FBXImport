@@ -6,7 +6,7 @@
 #include <fstream>
 
 #include "proto/ProtoBuffUGCResource.pb.h"
-
+#include <google/protobuf/text_format.h>
 
 void WriteMeshFile(FBXGameObject* gameObj, const char* outdir);
 void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir);
@@ -14,7 +14,7 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
 //Write All Mesh Data
 void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir, std::string filename);
 //Write Manifest File
-void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, const char* outdir, std::string filename);
+void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, FBXImportScene& importScene, const char* outdir, std::string filename);
 //Write Sk File
 void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename);
 //Write Anim Clip File
@@ -283,9 +283,16 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 		std::cout << std::endl;
 		std::cout << "import fbx success" << std::endl;
 	}
-	WriteManifest(gameObj, materialnamelist, outdir, filename);
+	WriteManifest(gameObj, materialnamelist, importScene, outdir, filename);
 }
-void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, const char* outdir, std::string filename)
+
+
+bool findNodeByName(const FBXImportNode& node, const std::string& targetName) {
+	return node.name == targetName;
+}
+
+
+void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, FBXImportScene& importScene, const char* outdir, std::string filename)
 {
 	std::string directory(outdir);
 	auto outputfilename = directory + "/" + filename + ".json";
@@ -312,17 +319,52 @@ void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, 
 	//Mesh Details
 	osData << "    \"MeshCount\" : " << gameObj->meshCount << "," << std::endl;
 	osData << "    \"MeshDetail\" : [" << std::endl;
-
+	auto nodes = importScene.nodes;
 	for (int i = 0; i < gameObj->meshCount; i++)
 	{
+		auto name = gameObj->meshList[i].name;
 		osData << "    {" << std::endl;
-		osData << "        \"MeshName\" : \"" << gameObj->meshList[i].name << "\"," << std::endl;
-		osData << "        \"MaterialIndex\" : [";
+		osData << "        \"MeshName\" : \"" << name << "\"," << std::endl;
+		osData << "        \"MaterialIndex\" : ";
 
 		auto index = gameObj->meshList[i].materialindex;
-		for (int j = 0; j < index.size() - 1; j++)
-			osData << index[j] << ",";
-		osData << index[index.size() - 1]<<"]" << std::endl;
+		if (index.empty()) {
+			osData << "[]" << std::endl;
+		}
+		else {
+			osData << "[";
+			for (size_t j = 0; j < index.size(); ++j) {
+				osData << index[j];
+				if (j < index.size() - 1) {
+					osData << ",";
+				}
+			}
+			osData << "]";
+		}
+		
+		auto it = std::find_if(nodes.begin(), nodes.end(),[&name](const FBXImportNode& node) { return findNodeByName(node, name); });
+		if (it != nodes.end()) {
+
+			osData<<"," << std::endl;
+			osData << "        \"Transform\" : {" << std::endl;
+			osData << "          \"Position\" : ["
+				<< it->position.x * importScene.fileScaleFactor << ", "
+				<< it->position.y * importScene.fileScaleFactor << ", "
+				<< it->position.z * importScene.fileScaleFactor << "]," << std::endl;
+			osData << "          \"Rotation\" : ["
+				<< it->rotation.x << ", "
+				<< it->rotation.y << ", "
+				<< it->rotation.z << ", "
+				<< it->rotation.w <<
+				"]," << std::endl;
+			osData << "          \"Scale\" : ["
+				<< it->scale.x << ", "
+				<< it->scale.y << ", "
+				<< it->scale.z << "]" << std::endl;
+			osData << "        }," << std::endl;
+		}
+		else
+			osData << std::endl;
 		osData << "    }";
 
 
@@ -432,6 +474,16 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
 		std::cout << "Error when Serializing" << std::endl;
 	}
 	output.close();
+#if DebugMeshInfoOutput
+	std::string text_string;
+	google::protobuf::TextFormat::PrintToString(*sk, &text_string);
+	std::ofstream output_file(directory + "/" + filename + "_sk.txt");
+	if (!output_file.is_open()) {
+		std::cerr << "Failed to open file for writing." << std::endl;
+	}
+	output_file << text_string;
+	output_file.close();
+#endif
 	google::protobuf::ShutdownProtobufLibrary();
 }
 void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
@@ -441,8 +493,14 @@ void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 	for (auto i = 0; i < anim.size(); i++)
 	{
 		if (anim[i].HasAnimations())
+		{
 			//BuildSingleAnimProtoFile(scene, anim[i], outdir);
 			BuildSingleAnimBinaryFile(scene, anim[i], outdir);
+#if DebugMeshInfoOutput
+			WriteNodeAnimationsToText(scene, anim[i], outdir);
+#endif
+		}
+
 	}
 }
 
