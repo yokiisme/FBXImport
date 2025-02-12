@@ -21,26 +21,6 @@ static std::map<FbxNode*, FBXImportNode*> gFBXNodeMap;
 static std::string gFBXFileName = "";
 static float gGlobalScale = 1.0f;
 
-std::string CodeTUTF8(const char* str, int t)
-{
-    std::string result;
-    WCHAR* strSrc;
-    LPSTR szRes;
-
-    int i = MultiByteToWideChar(t, 0, str, -1, NULL, 0);
-    strSrc = new WCHAR[i + 1];
-    MultiByteToWideChar(t, 0, str, -1, strSrc, i);
-
-    i = WideCharToMultiByte(CP_UTF8, 0, strSrc, -1, NULL, 0, NULL, NULL);
-    szRes = new CHAR[i + 1];
-    WideCharToMultiByte(CP_UTF8, 0, strSrc, -1, szRes, i, NULL, NULL);
-
-    result = szRes;
-    delete[]strSrc;
-    delete[]szRes;
-
-    return result;
-}
 
 void ZeroPivotsForSkinsRecursive(FbxScene* scene, FbxNode* node)
 {
