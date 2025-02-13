@@ -3,44 +3,12 @@
 #include "AnimationKeyFrameReducer.h"
 #include "FBXImporterDef.h"
 #include "proto/ProtoBuffUGCResource.pb.h"
-#include <filesystem>
-#include <locale>
-#include <codecvt>
-
-
 #define DebugMeshInfoOutput 0
 
 static std::map<std::string, std::string> gNodePath2Name;
 static std::map<std::string, std::vector<std::string>> gNodeName2BoneName;
 static std::map<std::string, std::vector<Matrix4x4f>> gNodeName2BoneBindePose;
 static std::map<std::string, std::string> gBlendShapeMesh2Bone;
-
-
-std::string CodeTUTF8(const char* str, int t)
-{
-	std::string result;
-	WCHAR* strSrc;
-	LPSTR szRes;
-
-	int i = MultiByteToWideChar(t, 0, str, -1, NULL, 0);
-	strSrc = new WCHAR[i + 1];
-	MultiByteToWideChar(t, 0, str, -1, strSrc, i);
-
-	i = WideCharToMultiByte(CP_UTF8, 0, strSrc, -1, NULL, 0, NULL, NULL);
-	szRes = new CHAR[i + 1];
-	WideCharToMultiByte(CP_UTF8, 0, strSrc, -1, szRes, i, NULL, NULL);
-
-	result = szRes;
-	delete[]strSrc;
-	delete[]szRes;
-
-	return result;
-}
-std::wstring ConvertToWide(const std::string& narrowStr) {
-	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-	return converter.from_bytes(narrowStr);
-}
-
 
 //Build Ref Maps
 void BuildBoneNameMap(FBXImportNode& node, std::map<std::string, std::string>& path2name, std::string parentpath = "");
@@ -355,11 +323,7 @@ void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string
 	else
 		meshfilename = directory + "/" + meshfilename + ".~@FFFUB";
 	filename = meshfilename;
-	
-	//Support Chinese
-	std::wstring meshfilenameW = ConvertToWide(meshfilename);
-	
-	std::ofstream osData(meshfilenameW, std::ios_base::out | std::ios_base::binary);
+	std::ofstream osData(meshfilename, std::ios_base::out | std::ios_base::binary);
 	osData.precision(8);
 	MeshBody body;
 	BuildMeshHead(meshData, extData, body, osData);
@@ -663,11 +627,7 @@ void BuildSingleAnimBinaryFile(FBXImportScene& scene, FBXImportAnimationClip& cl
 	std::string Animfilename(clip.name);
 	std::string directory(outdir);
 	Animfilename = directory + "/" + Animfilename + ".Anim";
-
-	//Support Chinese
-	std::wstring AnimfilenameW = ConvertToWide(Animfilename);
-
-	std::ofstream osData(AnimfilenameW, std::ios_base::out | std::ios_base::binary);
+	std::ofstream osData(Animfilename, std::ios_base::out | std::ios_base::binary);
 	osData.precision(8);
 
 

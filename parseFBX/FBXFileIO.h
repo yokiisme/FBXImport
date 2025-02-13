@@ -260,9 +260,6 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 	std::string meshname = "";
 	std::vector<int32_t> meshtomatindex;
 	std::string directory(outdir);
-	
-	std::wstringstream meshnameStream;
-
 
 	for (int i = 0; i < meshcount; i++)
 	{
@@ -293,31 +290,6 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 bool findNodeByName(const FBXImportNode& node, const std::string& targetName) {
 	return node.name == targetName;
 }
-
-
-const FBXImportNode* findMeshNodeRecursive(const FBXImportNode& currentNode, const std::string& name) {
-	if (findNodeByName(currentNode, name)) {
-		return &currentNode;
-	}
-	for (const auto& child : currentNode.children) {
-		const FBXImportNode* result = findMeshNodeRecursive(child, name);
-		if (result != nullptr) {
-			return result; 
-		}
-	}
-	return nullptr;
-}
-
-const FBXImportNode* findFirstMatchingMeshNode(const std::vector<FBXImportNode>& rootNodes, const std::string& name) {
-	for (const auto& rootNode : rootNodes) {
-		const FBXImportNode* result = findMeshNodeRecursive(rootNode, name);
-		if (result != nullptr) {
-			return result;
-		}
-	}
-	return nullptr;
-}
-
 
 
 void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, FBXImportScene& importScene, const char* outdir, std::string filename)
@@ -370,26 +342,26 @@ void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, 
 			osData << "]";
 		}
 		
-		const FBXImportNode* result = findFirstMatchingMeshNode(nodes, name);
-		if (result != nullptr) {
+		auto it = std::find_if(nodes.begin(), nodes.end(),[&name](const FBXImportNode& node) { return findNodeByName(node, name); });
+		if (it != nodes.end()) {
 
 			osData<<"," << std::endl;
 			osData << "        \"Transform\" : {" << std::endl;
 			osData << "          \"Position\" : ["
-				<< result->position.x * importScene.fileScaleFactor << ", "
-				<< result->position.y * importScene.fileScaleFactor << ", "
-				<< result->position.z * importScene.fileScaleFactor << "]," << std::endl;
+				<< it->position.x * importScene.fileScaleFactor << ", "
+				<< it->position.y * importScene.fileScaleFactor << ", "
+				<< it->position.z * importScene.fileScaleFactor << "]," << std::endl;
 			osData << "          \"Rotation\" : ["
-				<< result->rotation.x << ", "
-				<< result->rotation.y << ", "
-				<< result->rotation.z << ", "
-				<< result->rotation.w <<
+				<< it->rotation.x << ", "
+				<< it->rotation.y << ", "
+				<< it->rotation.z << ", "
+				<< it->rotation.w <<
 				"]," << std::endl;
 			osData << "          \"Scale\" : ["
-				<< result->scale.x << ", "
-				<< result->scale.y << ", "
-				<< result->scale.z << "]" << std::endl;
-			osData << "        }" << std::endl;
+				<< it->scale.x << ", "
+				<< it->scale.y << ", "
+				<< it->scale.z << "]" << std::endl;
+			osData << "        }," << std::endl;
 		}
 		else
 			osData << std::endl;
