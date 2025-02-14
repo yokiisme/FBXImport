@@ -21,26 +21,7 @@ static std::map<FbxNode*, FBXImportNode*> gFBXNodeMap;
 static std::string gFBXFileName = "";
 static float gGlobalScale = 1.0f;
 
-std::string CodeTUTF8(const char* str, int t)
-{
-    std::string result;
-    WCHAR* strSrc;
-    LPSTR szRes;
 
-    int i = MultiByteToWideChar(t, 0, str, -1, NULL, 0);
-    strSrc = new WCHAR[i + 1];
-    MultiByteToWideChar(t, 0, str, -1, strSrc, i);
-
-    i = WideCharToMultiByte(CP_UTF8, 0, strSrc, -1, NULL, 0, NULL, NULL);
-    szRes = new CHAR[i + 1];
-    WideCharToMultiByte(CP_UTF8, 0, strSrc, -1, szRes, i, NULL, NULL);
-
-    result = szRes;
-    delete[]strSrc;
-    delete[]szRes;
-
-    return result;
-}
 
 void ZeroPivotsForSkinsRecursive(FbxScene* scene, FbxNode* node)
 {
@@ -1141,6 +1122,11 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
             WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
         }
     }
+    //Clear Path
+    std::string outputPath(outdir);
+    std::wstring outputfilenameW = ConvertUTF8ToWide(outputPath);
+    DeleteEmptyFolders(outputPath, outputfilenameW);
+    
 }
 
 
@@ -1210,7 +1196,10 @@ void ParseFBX(char* fbxpath, char* outdir, char* paramater)
         }
         else
         {
-            ParseFBXScene(lSdkManager, *lScene, outdir);
+            auto outdirUtf8 = CodeTUTF8(outdir, CP_ACP);
+            std::vector<char> pathOutDir(outdirUtf8.begin(), outdirUtf8.end());
+            pathOutDir.push_back('\0');
+            ParseFBXScene(lSdkManager, *lScene, pathOutDir.data());
         }
     }
     else

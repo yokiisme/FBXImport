@@ -3,12 +3,179 @@
 #include "AnimationKeyFrameReducer.h"
 #include "FBXImporterDef.h"
 #include "proto/ProtoBuffUGCResource.pb.h"
-#define DebugMeshInfoOutput 0
+#include <locale>
+#include <codecvt>
 
+#define DebugMeshInfoOutput 0
 static std::map<std::string, std::string> gNodePath2Name;
 static std::map<std::string, std::vector<std::string>> gNodeName2BoneName;
 static std::map<std::string, std::vector<Matrix4x4f>> gNodeName2BoneBindePose;
 static std::map<std::string, std::string> gBlendShapeMesh2Bone;
+
+#pragma region FileProcess 
+std::string CodeTUTF8(const char* str, int t)
+{
+	std::string result;
+	WCHAR* strSrc;
+	LPSTR szRes;
+
+	int i = MultiByteToWideChar(t, 0, str, -1, NULL, 0);
+	strSrc = new WCHAR[i + 1];
+	MultiByteToWideChar(t, 0, str, -1, strSrc, i);
+
+	i = WideCharToMultiByte(CP_UTF8, 0, strSrc, -1, NULL, 0, NULL, NULL);
+	szRes = new CHAR[i + 1];
+	WideCharToMultiByte(CP_UTF8, 0, strSrc, -1, szRes, i, NULL, NULL);
+
+	result = szRes;
+	delete[]strSrc;
+	delete[]szRes;
+
+	return result; 
+}
+std::wstring ConvertToWide(const char* utf8Str) {
+	if (utf8Str == nullptr) {
+		return L"";
+	}
+
+	int sizeNeeded = MultiByteToWideChar(CP_UTF8, 0, utf8Str, -1, NULL, 0);
+	if (sizeNeeded <= 0) {
+		//std::wcerr << L"MultiByteToWideChar 转换失败！" << std::endl;
+		return L"";
+	}
+
+	std::wstring wideStr(sizeNeeded - 1, 0);
+	MultiByteToWideChar(CP_UTF8, 0, utf8Str, -1, &wideStr[0], sizeNeeded);
+
+	return wideStr;
+}
+std::wstring ConvertUTF8ToWide(const std::string& utf8Str) {
+	return ConvertToWide(utf8Str.c_str());
+}
+std::wstring MultiByteToWide(const std::string& multiByteStr, UINT codePage) {
+	int sizeNeeded = MultiByteToWideChar(codePage, 0, multiByteStr.c_str(), -1, NULL, 0);
+	if (sizeNeeded <= 0) {
+		//throw std::runtime_error("多字节字符串转宽字符失败");
+	}
+	std::wstring wideStr(sizeNeeded - 1, 0); 
+	MultiByteToWideChar(codePage, 0, multiByteStr.c_str(), -1, &wideStr[0], sizeNeeded);
+	return wideStr;
+}
+void EnsureDirectoryExists(const std::wstring& directoryPath) {
+	DWORD fileAttributes = GetFileAttributesW(directoryPath.c_str());
+
+	if (fileAttributes != INVALID_FILE_ATTRIBUTES) {
+		if (fileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+			return;
+		}
+		else {
+			//std::wcerr << L"路径存在，但不是目录: " << directoryPath << std::endl;
+			return;
+		}
+	}
+
+	std::size_t pos = directoryPath.find_last_of(L"\\/");
+	if (pos != std::wstring::npos) {
+		EnsureDirectoryExists(directoryPath.substr(0, pos));
+	}
+
+	if (CreateDirectoryW(directoryPath.c_str(), NULL)) {
+		//std::wcout << L"成功创建目录: " << directoryPath << std::endl;
+	}
+	else {
+		DWORD error = GetLastError();
+		if (error == ERROR_ALREADY_EXISTS) {
+			// 忽略目录已存在的错误
+			return;
+		}
+		else {
+			//std::wcerr << L"无法创建目录: " << directoryPath << L"，错误代码: " << error << std::endl;
+		}
+	}
+}
+void RenameFileToWide(const std::string& originalName, const std::wstring& newName) {
+	try {
+		std::wstring wideOriginalName = MultiByteToWide(originalName, CP_ACP);
+
+		std::size_t pos = newName.find_last_of(L"\\/");
+		if (pos != std::wstring::npos) {
+			std::wstring targetDirectory = newName.substr(0, pos);
+			EnsureDirectoryExists(targetDirectory);
+		}
+
+		if (MoveFileExW(wideOriginalName.c_str(), newName.c_str(), MOVEFILE_REPLACE_EXISTING)) {
+			//std::wcout << L"文件重命名成功！从 " << wideOriginalName << L" 到 " << newName << std::endl;
+		}
+		else {
+			//DWORD error = GetLastError();
+			//std::wcerr << L"文件重命名失败，错误代码: " << error << std::endl;
+		}
+	}
+	catch (const std::exception& e) {
+		//std::cerr << "错误: " << e.what() << std::endl;
+	}
+}
+bool IsDirectoryEmpty(const std::wstring& directoryPath) {
+	WIN32_FIND_DATAW findFileData;
+	std::wstring searchPath = directoryPath + L"\\*";
+
+	HANDLE hFind = FindFirstFileW(searchPath.c_str(), &findFileData);
+	if (hFind == INVALID_HANDLE_VALUE) {
+		//std::wcerr << L"无法打开目录: " << directoryPath << L"，错误代码: " << GetLastError() << std::endl;
+		return false;
+	}
+
+	bool isEmpty = true;
+	do {
+		if (wcscmp(findFileData.cFileName, L".") != 0 && wcscmp(findFileData.cFileName, L"..") != 0) {
+			isEmpty = false;
+			break;
+		}
+	} while (FindNextFileW(hFind, &findFileData));
+
+	FindClose(hFind);
+	return isEmpty;
+}
+bool IsSubPath(const std::wstring& sourcePath, const std::wstring& targetPath) {
+	if (targetPath.find(sourcePath) == 0 && (targetPath[sourcePath.length()] == L'\\' || targetPath[sourcePath.length()] == L'/')) {
+		return true;
+	}
+	return false;
+}
+void DeleteEmptyFolders(const std::string& sourcePath, const std::wstring& targetPath) {
+	
+	std::wstring currentPath = MultiByteToWide(sourcePath, CP_ACP);
+	while (!currentPath.empty()) {
+		if (IsSubPath(currentPath, targetPath)) {
+			//std::cout << "Finish Del at : " << currentPath.c_str() << std::endl;
+			break;
+		}
+
+		// 检查当前路径是否为空
+		if (IsDirectoryEmpty(currentPath)) {
+			if (RemoveDirectoryW(currentPath.c_str())) {
+				//std::cout << "Del: " << currentPath.c_str() << std::endl;
+			}
+			else {
+				//std::wcerr << L"无法删除文件夹: " << currentPath << L"，错误代码: " << GetLastError() << std::endl;
+				break;
+			}
+		}
+		else {
+			//std::wcout << L"文件夹不为空，停止删除: " << currentPath << std::endl;
+			break;
+		}
+
+		std::size_t pos = currentPath.find_last_of(L"\\/");
+		if (pos != std::wstring::npos) {
+			currentPath = currentPath.substr(0, pos);
+		}
+		else {
+			currentPath.clear();
+		}
+	}
+}
+#pragma endregion
 
 //Build Ref Maps
 void BuildBoneNameMap(FBXImportNode& node, std::map<std::string, std::string>& path2name, std::string parentpath = "");
@@ -305,11 +472,20 @@ void BuildMeshTxt(FBXMesh& meshData, FBXImportScene& importScene, const char* ou
 	////BoneWeights4
 	//osData.write(reinterpret_cast<char*>(&bodyinfo.BoneWeightLength), 8);
 	//osData.write(reinterpret_cast<char*>(meshData.boneWeights.data()), bodyinfo.BoneWeightLength * sizeof(BoneWeights4));
+
+
+	std::wstring meshfilenameW = ConvertUTF8ToWide(meshfilename);
+	RenameFileToWide(meshfilename, meshfilenameW);
+
 }
 
 
 void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string& filename, const char* outdir)
 {
+	if (_access(outdir, 0) == -1)
+	{
+		_mkdir(outdir);
+	}
 	bool isSkinnedMesh = false;
 	message::UGCResSkinnedMeshExtData extData = BuildMeshExtData(meshData);
 	if (extData.bonenames_size() > 0)
@@ -323,7 +499,13 @@ void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string
 	else
 		meshfilename = directory + "/" + meshfilename + ".~@FFFUB";
 	filename = meshfilename;
+
 	std::ofstream osData(meshfilename, std::ios_base::out | std::ios_base::binary);
+
+	if (!osData.is_open()) {
+		std::cout << "Error On Create File at " << meshfilename << std::endl;
+		return;
+	}
 	osData.precision(8);
 	MeshBody body;
 	BuildMeshHead(meshData, extData, body, osData);
@@ -331,6 +513,9 @@ void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string
 	if (isSkinnedMesh)
 		extData.SerializePartialToOstream(&osData);
 	osData.close();
+	//Rename To Support Chinese		
+	std::wstring meshfilenameW = ConvertUTF8ToWide(meshfilename);
+	RenameFileToWide(meshfilename, meshfilenameW);
 #if DebugMeshInfoOutput
 	BuildMeshTxt(meshData, importScene, outdir);
 	ParseSingleMesh(meshfilename);
@@ -616,6 +801,9 @@ void BuildSingleAnimProtoFile(FBXImportScene& scene, FBXImportAnimationClip& cli
 	}
 	output.close();
 
+	//Rename To Support Chinese		
+	std::wstring meshfilenameW = ConvertUTF8ToWide(filename);
+	RenameFileToWide(filename, meshfilenameW);
 
 #if DebugMeshInfoOutput
 	ParseAnimProto(AnimClipProto);
@@ -745,7 +933,9 @@ void BuildSingleAnimBinaryFile(FBXImportScene& scene, FBXImportAnimationClip& cl
 	}
 
 	osData.close();
-
+	//Rename To Support Chinese		
+	std::wstring AnimfilenameW = ConvertUTF8ToWide(Animfilename);
+	RenameFileToWide(Animfilename, AnimfilenameW);
 	//ParseSingleAnim(Animfilename);
 
 }
@@ -786,11 +976,6 @@ void WriteNodeAnimationsToText(FBXImportScene& scene, FBXImportAnimationClip& cl
 	osData << SampleRate << std::endl;
 	osData << NameLength << std::endl;
 	osData << Name.data() << std::endl;
-
-
-
-
-
 	osData << "**********************************************" << std::endl;
 	osData << "Node Anim Count: " << NodeAnimCurveCount << std::endl;
 
@@ -865,6 +1050,11 @@ void WriteNodeAnimationsToText(FBXImportScene& scene, FBXImportAnimationClip& cl
 
 		osData << "***************************************" << std::endl;
 	}
+
+	osData.close();
+	//Rename To Support Chinese		
+	std::wstring AnimfilenameW = ConvertUTF8ToWide(Animfilename);
+	RenameFileToWide(Animfilename, AnimfilenameW);
 }
 
 

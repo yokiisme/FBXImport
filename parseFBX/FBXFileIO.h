@@ -317,6 +317,10 @@ const FBXImportNode* findFirstMatchingMeshNode(const std::vector<FBXImportNode>&
 
 void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, FBXImportScene& importScene, const char* outdir, std::string filename)
 {
+	if (_access(outdir, 0) == -1)
+	{
+		_mkdir(outdir);
+	}
 	std::string directory(outdir);
 	auto outputfilename = directory + "/" + filename + ".json";
 	std::ofstream osData(outputfilename, std::ios_base::out | std::ios::binary);
@@ -398,10 +402,17 @@ void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, 
 	osData << "    ]" << std::endl;
 	osData << "}" << std::endl;
 	osData.close();
-}
 
+	//Rename To Support Chinese		
+	std::wstring outputfilenameW = ConvertUTF8ToWide(outputfilename);
+	RenameFileToWide(outputfilename, outputfilenameW);
+}
 void WriteManifestErrorInput(const char* outdir, std::string filename,std::vector<std::string> errormesh)
 {
+	if (_access(outdir, 0) == -1)
+	{
+		_mkdir(outdir);
+	}
 	std::string directory(outdir);
 	auto outputfilename = directory + "/" + filename + ".json";
 	std::ofstream osData(outputfilename, std::ios_base::out);
@@ -436,9 +447,18 @@ void WriteManifestErrorInput(const char* outdir, std::string filename,std::vecto
 	osData << "}" << std::endl;
 	osData.close();
 
+
+	//Rename To Support Chinese		
+	std::wstring outputfilenameW = ConvertUTF8ToWide(outputfilename);
+	RenameFileToWide(outputfilename, outputfilenameW);
+
 }
 void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename)
 {
+	if (_access(outdir, 0) == -1)
+	{
+		_mkdir(outdir);
+	}
 	message::UGCResSkeletonData* sk = new message::UGCResSkeletonData();
 
 	message::UGCResBoneNodeData* root = new message::UGCResBoneNodeData();
@@ -490,13 +510,18 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
 
 	auto OutputFileName = directory + "/" + filename + ".sk";
 	//Serialize
-	std::fstream output(OutputFileName, std::ios::out | std::ios::trunc | std::ios::binary);
+	std::ofstream output(OutputFileName, std::ios::out | std::ios::trunc | std::ios::binary);
 	bool flag = sk->SerializePartialToOstream(&output);
 	if (!flag)
 	{
 		std::cout << "Error when Serializing" << std::endl;
 	}
 	output.close();
+	//Rename To Support Chinese		
+	std::wstring OutputFileNameW = ConvertUTF8ToWide(OutputFileName);
+	RenameFileToWide(OutputFileName, OutputFileNameW);
+
+
 #if DebugMeshInfoOutput
 	std::string text_string;
 	google::protobuf::TextFormat::PrintToString(*sk, &text_string);
@@ -511,6 +536,10 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
 }
 void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 {
+	if (_access(outdir, 0) == -1)
+	{
+		_mkdir(outdir);
+	}
 	auto& anim = scene.animationClips;
 
 	for (auto i = 0; i < anim.size(); i++)
