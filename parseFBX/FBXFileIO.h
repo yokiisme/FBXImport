@@ -29,10 +29,7 @@ void WriteSkeletonFileTest(FBXImportScene& scene, const char* outdir);
 
 void WriteMeshFile(FBXGameObject* gameObj, const char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	uint64_t meshcount = gameObj->meshCount;
 	std::vector<std::string> materialList;
@@ -121,10 +118,7 @@ void WriteMeshFile(FBXGameObject* gameObj, const char* outdir)
 }
 void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	uint64_t meshcount = gameObj->meshCount;
 	std::string materialname = "";
@@ -222,10 +216,7 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
 }
 void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir,std::string filename)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	uint64_t meshcount = gameObj->meshCount;
 	std::string materialname = "";
@@ -260,9 +251,6 @@ void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const
 	std::string meshname = "";
 	std::vector<int32_t> meshtomatindex;
 	std::string directory(outdir);
-	
-	std::wstringstream meshnameStream;
-
 
 	for (int i = 0; i < meshcount; i++)
 	{
@@ -294,7 +282,6 @@ bool findNodeByName(const FBXImportNode& node, const std::string& targetName) {
 	return node.name == targetName;
 }
 
-
 const FBXImportNode* findMeshNodeRecursive(const FBXImportNode& currentNode, const std::string& name) {
 	if (findNodeByName(currentNode, name)) {
 		return &currentNode;
@@ -302,7 +289,7 @@ const FBXImportNode* findMeshNodeRecursive(const FBXImportNode& currentNode, con
 	for (const auto& child : currentNode.children) {
 		const FBXImportNode* result = findMeshNodeRecursive(child, name);
 		if (result != nullptr) {
-			return result; 
+			return result;
 		}
 	}
 	return nullptr;
@@ -319,12 +306,13 @@ const FBXImportNode* findFirstMatchingMeshNode(const std::vector<FBXImportNode>&
 }
 
 
-
 void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, FBXImportScene& importScene, const char* outdir, std::string filename)
 {
+	EnsureDirectoryExists(outdir);
+
 	std::string directory(outdir);
 	auto outputfilename = directory + "/" + filename + ".json";
-	std::ofstream osData(outputfilename, std::ios_base::out);
+	std::ofstream osData(outputfilename, std::ios_base::out | std::ios::binary);
 	osData << "{" << std::endl;
 
 	osData << "    \"FBXName\" : \"" << filename << "\"," << std::endl;
@@ -373,7 +361,7 @@ void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, 
 		const FBXImportNode* result = findFirstMatchingMeshNode(nodes, name);
 		if (result != nullptr) {
 
-			osData<<"," << std::endl;
+			osData << "," << std::endl;
 			osData << "        \"Transform\" : {" << std::endl;
 			osData << "          \"Position\" : ["
 				<< result->position.x * importScene.fileScaleFactor << ", "
@@ -403,10 +391,15 @@ void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, 
 	osData << "    ]" << std::endl;
 	osData << "}" << std::endl;
 	osData.close();
-}
 
+	//Rename To Support Chinese		
+	std::wstring outputfilenameW = ConvertUTF8ToWide(outputfilename);
+	RenameFileToWide(outputfilename, outputfilenameW);
+}
 void WriteManifestErrorInput(const char* outdir, std::string filename,std::vector<std::string> errormesh)
 {
+	EnsureDirectoryExists(outdir);
+
 	std::string directory(outdir);
 	auto outputfilename = directory + "/" + filename + ".json";
 	std::ofstream osData(outputfilename, std::ios_base::out);
@@ -441,9 +434,16 @@ void WriteManifestErrorInput(const char* outdir, std::string filename,std::vecto
 	osData << "}" << std::endl;
 	osData.close();
 
+
+	//Rename To Support Chinese		
+	std::wstring outputfilenameW = ConvertUTF8ToWide(outputfilename);
+	RenameFileToWide(outputfilename, outputfilenameW);
+
 }
 void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename)
 {
+	EnsureDirectoryExists(outdir);
+
 	message::UGCResSkeletonData* sk = new message::UGCResSkeletonData();
 
 	message::UGCResBoneNodeData* root = new message::UGCResBoneNodeData();
@@ -495,13 +495,18 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
 
 	auto OutputFileName = directory + "/" + filename + ".sk";
 	//Serialize
-	std::fstream output(OutputFileName, std::ios::out | std::ios::trunc | std::ios::binary);
+	std::ofstream output(OutputFileName, std::ios::out | std::ios::trunc | std::ios::binary);
 	bool flag = sk->SerializePartialToOstream(&output);
 	if (!flag)
 	{
 		std::cout << "Error when Serializing" << std::endl;
 	}
 	output.close();
+	//Rename To Support Chinese		
+	std::wstring OutputFileNameW = ConvertUTF8ToWide(OutputFileName);
+	RenameFileToWide(OutputFileName, OutputFileNameW);
+
+
 #if DebugMeshInfoOutput
 	std::string text_string;
 	google::protobuf::TextFormat::PrintToString(*sk, &text_string);
@@ -516,6 +521,8 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
 }
 void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 {
+	EnsureDirectoryExists(outdir);
+
 	auto& anim = scene.animationClips;
 
 	for (auto i = 0; i < anim.size(); i++)
@@ -536,10 +543,7 @@ void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 //-----------------------------------Output test-----------------------------------
 void WriteMeshOutputFiles(FBXMesh& mesh, std::vector<int>& lodMeshMaterials, char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	std::string directory(outdir);
 
@@ -604,10 +608,7 @@ void WriteMeshOutputFiles(FBXMesh& mesh, std::vector<int>& lodMeshMaterials, cha
 
 void WriteFBXMeshOutputFiles(const FBXImportMesh& mesh, char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	std::string directory(outdir);
 
@@ -665,10 +666,7 @@ void WriteFBXMeshOutputFiles(const FBXImportMesh& mesh, char* outdir)
 
 void WriteSceneOutputFiles(FBXImportScene& outputScene, char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	std::string directory(outdir);
 
@@ -809,10 +807,7 @@ void PrintBone(const message::UGCResBoneNodeData& node,std::string parent)
 }
 void PrintAnimFile(FBXImportScene& importScene, const char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	auto anims = importScene.animationClips;
 	for (auto i = 0; i < anims.size(); i++)

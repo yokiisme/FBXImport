@@ -22,6 +22,7 @@ static std::string gFBXFileName = "";
 static float gGlobalScale = 1.0f;
 
 
+
 void ZeroPivotsForSkinsRecursive(FbxScene* scene, FbxNode* node)
 {
     if (node)
@@ -1121,6 +1122,10 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
             WriteSkeletonProtoBuf(outputScene, outdir, gFBXFileName.c_str());
         }
     }
+    //Clear Path
+    std::string outputPath(outdir);
+    std::wstring outputfilenameW = ConvertUTF8ToWide(outputPath);
+    DeleteEmptyFolders(outputPath);   
 }
 
 
@@ -1190,7 +1195,10 @@ void ParseFBX(char* fbxpath, char* outdir, char* paramater)
         }
         else
         {
-            ParseFBXScene(lSdkManager, *lScene, outdir);
+            auto outdirUtf8 = CodeTUTF8(outdir, CP_ACP);
+            std::vector<char> pathOutDir(outdirUtf8.begin(), outdirUtf8.end());
+            pathOutDir.push_back('\0');
+            ParseFBXScene(lSdkManager, *lScene, pathOutDir.data());
         }
     }
     else
