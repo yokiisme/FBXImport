@@ -29,10 +29,7 @@ void WriteSkeletonFileTest(FBXImportScene& scene, const char* outdir);
 
 void WriteMeshFile(FBXGameObject* gameObj, const char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	uint64_t meshcount = gameObj->meshCount;
 	std::vector<std::string> materialList;
@@ -121,10 +118,7 @@ void WriteMeshFile(FBXGameObject* gameObj, const char* outdir)
 }
 void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	uint64_t meshcount = gameObj->meshCount;
 	std::string materialname = "";
@@ -222,10 +216,7 @@ void WriteMeshFileNew(FBXGameObject* gameObj, FBXImportScene& importScene, const
 }
 void WriteMeshAllFile(FBXGameObject* gameObj, FBXImportScene& importScene, const char* outdir,std::string filename)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	uint64_t meshcount = gameObj->meshCount;
 	std::string materialname = "";
@@ -317,10 +308,8 @@ const FBXImportNode* findFirstMatchingMeshNode(const std::vector<FBXImportNode>&
 
 void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, FBXImportScene& importScene, const char* outdir, std::string filename)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
+
 	std::string directory(outdir);
 	auto outputfilename = directory + "/" + filename + ".json";
 	std::ofstream osData(outputfilename, std::ios_base::out | std::ios::binary);
@@ -409,10 +398,8 @@ void WriteManifest(FBXGameObject* gameObj, std::vector<std::string>& materials, 
 }
 void WriteManifestErrorInput(const char* outdir, std::string filename,std::vector<std::string> errormesh)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
+
 	std::string directory(outdir);
 	auto outputfilename = directory + "/" + filename + ".json";
 	std::ofstream osData(outputfilename, std::ios_base::out);
@@ -455,10 +442,8 @@ void WriteManifestErrorInput(const char* outdir, std::string filename,std::vecto
 }
 void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char* filename)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
+
 	message::UGCResSkeletonData* sk = new message::UGCResSkeletonData();
 
 	message::UGCResBoneNodeData* root = new message::UGCResBoneNodeData();
@@ -536,10 +521,8 @@ void WriteSkeletonProtoBuf(FBXImportScene& scene, const char* outdir, const char
 }
 void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
+
 	auto& anim = scene.animationClips;
 
 	for (auto i = 0; i < anim.size(); i++)
@@ -560,10 +543,7 @@ void WriteAnimClipProtoBuf(FBXImportScene& scene, const char* outdir)
 //-----------------------------------Output test-----------------------------------
 void WriteMeshOutputFiles(FBXMesh& mesh, std::vector<int>& lodMeshMaterials, char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	std::string directory(outdir);
 
@@ -628,10 +608,7 @@ void WriteMeshOutputFiles(FBXMesh& mesh, std::vector<int>& lodMeshMaterials, cha
 
 void WriteFBXMeshOutputFiles(const FBXImportMesh& mesh, char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	std::string directory(outdir);
 
@@ -689,10 +666,7 @@ void WriteFBXMeshOutputFiles(const FBXImportMesh& mesh, char* outdir)
 
 void WriteSceneOutputFiles(FBXImportScene& outputScene, char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	std::string directory(outdir);
 
@@ -833,10 +807,7 @@ void PrintBone(const message::UGCResBoneNodeData& node,std::string parent)
 }
 void PrintAnimFile(FBXImportScene& importScene, const char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
 
 	auto anims = importScene.animationClips;
 	for (auto i = 0; i < anims.size(); i++)

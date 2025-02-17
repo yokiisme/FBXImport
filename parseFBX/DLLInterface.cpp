@@ -1125,8 +1125,7 @@ void ParseFBXScene(FbxManager* fbxManager, FbxScene& fbxScene, char* outdir)
     //Clear Path
     std::string outputPath(outdir);
     std::wstring outputfilenameW = ConvertUTF8ToWide(outputPath);
-    DeleteEmptyFolders(outputPath, outputfilenameW);
-    
+    DeleteEmptyFolders(outputPath);   
 }
 
 

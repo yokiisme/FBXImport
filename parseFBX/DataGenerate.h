@@ -93,6 +93,35 @@ void EnsureDirectoryExists(const std::wstring& directoryPath) {
 		}
 	}
 }
+void EnsureDirectoryExists(const std::string& directoryPath) {
+	DWORD fileAttributes = GetFileAttributesA(directoryPath.c_str());
+
+	if (fileAttributes != INVALID_FILE_ATTRIBUTES) {
+		if (fileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+			return;
+		}
+		else {
+			return;
+		}
+	}
+
+	std::size_t pos = directoryPath.find_last_of("\\/");
+	if (pos != std::string::npos) {
+		EnsureDirectoryExists(directoryPath.substr(0, pos));
+	}
+
+	if (CreateDirectoryA(directoryPath.c_str(), NULL)) {
+	}
+	else {
+		DWORD error = GetLastError();
+		if (error == ERROR_ALREADY_EXISTS) {
+			return;
+		}
+		else {
+
+		}
+	}
+}
 void RenameFileToWide(const std::string& originalName, const std::wstring& newName) {
 	try {
 		std::wstring wideOriginalName = MultiByteToWide(originalName, CP_ACP);
@@ -115,59 +144,52 @@ void RenameFileToWide(const std::string& originalName, const std::wstring& newNa
 		//std::cerr << "错误: " << e.what() << std::endl;
 	}
 }
-bool IsDirectoryEmpty(const std::wstring& directoryPath) {
-	WIN32_FIND_DATAW findFileData;
-	std::wstring searchPath = directoryPath + L"\\*";
-
-	HANDLE hFind = FindFirstFileW(searchPath.c_str(), &findFileData);
-	if (hFind == INVALID_HANDLE_VALUE) {
-		//std::wcerr << L"无法打开目录: " << directoryPath << L"，错误代码: " << GetLastError() << std::endl;
-		return false;
-	}
-
-	bool isEmpty = true;
-	do {
-		if (wcscmp(findFileData.cFileName, L".") != 0 && wcscmp(findFileData.cFileName, L"..") != 0) {
-			isEmpty = false;
-			break;
-		}
-	} while (FindNextFileW(hFind, &findFileData));
-
-	FindClose(hFind);
-	return isEmpty;
-}
 bool IsSubPath(const std::wstring& sourcePath, const std::wstring& targetPath) {
 	if (targetPath.find(sourcePath) == 0 && (targetPath[sourcePath.length()] == L'\\' || targetPath[sourcePath.length()] == L'/')) {
 		return true;
 	}
 	return false;
 }
-void DeleteEmptyFolders(const std::string& sourcePath, const std::wstring& targetPath) {
-	
-	std::wstring currentPath = MultiByteToWide(sourcePath, CP_ACP);
-	while (!currentPath.empty()) {
-		if (IsSubPath(currentPath, targetPath)) {
-			//std::cout << "Finish Del at : " << currentPath.c_str() << std::endl;
+bool IsDirectoryEmpty(const std::string& directoryPath) {
+	WIN32_FIND_DATAA findFileData;
+	std::string searchPath = directoryPath + "\\*";
+	HANDLE hFind = FindFirstFileA(searchPath.c_str(), &findFileData);
+
+	if (hFind == INVALID_HANDLE_VALUE) {
+		return false;
+	}
+
+	bool isEmpty = true;
+	do {
+		if (strcmp(findFileData.cFileName, ".") != 0 && strcmp(findFileData.cFileName, "..") != 0) {
+			isEmpty = false;
 			break;
 		}
+	} while (FindNextFileA(hFind, &findFileData) != 0);
 
-		// 检查当前路径是否为空
+	FindClose(hFind);
+	return isEmpty;
+}
+void DeleteEmptyFolders(const std::string& sourcePath) {
+	std::string currentPath = sourcePath;
+	while (!currentPath.empty()) {
 		if (IsDirectoryEmpty(currentPath)) {
-			if (RemoveDirectoryW(currentPath.c_str())) {
-				//std::cout << "Del: " << currentPath.c_str() << std::endl;
+			if (RemoveDirectoryA(currentPath.c_str())) {
+				//std::cout << "Deleted empty folder: " << currentPath << std::endl;
 			}
 			else {
-				//std::wcerr << L"无法删除文件夹: " << currentPath << L"，错误代码: " << GetLastError() << std::endl;
+				//std::cerr << "Failed to delete folder: " << currentPath
+				//	<< ", Error Code: " << GetLastError() << std::endl;
 				break;
 			}
 		}
 		else {
-			//std::wcout << L"文件夹不为空，停止删除: " << currentPath << std::endl;
+			//std::cout << "Folder is not empty, stopping deletion: " << currentPath << std::endl;
 			break;
 		}
 
-		std::size_t pos = currentPath.find_last_of(L"\\/");
-		if (pos != std::wstring::npos) {
+		std::size_t pos = currentPath.find_last_of("\\/");
+		if (pos != std::string::npos) {
 			currentPath = currentPath.substr(0, pos);
 		}
 		else {
@@ -482,10 +504,8 @@ void BuildMeshTxt(FBXMesh& meshData, FBXImportScene& importScene, const char* ou
 
 void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string& filename, const char* outdir)
 {
-	if (_access(outdir, 0) == -1)
-	{
-		_mkdir(outdir);
-	}
+	EnsureDirectoryExists(outdir);
+	
 	bool isSkinnedMesh = false;
 	message::UGCResSkinnedMeshExtData extData = BuildMeshExtData(meshData);
 	if (extData.bonenames_size() > 0)
@@ -503,7 +523,11 @@ void BuildSingleMesh(FBXMesh& meshData, FBXImportScene& importScene, std::string
 	std::ofstream osData(meshfilename, std::ios_base::out | std::ios_base::binary);
 
 	if (!osData.is_open()) {
-		std::cout << "Error On Create File at " << meshfilename << std::endl;
+
+		char errorMessage[256] = { 0 };
+		strerror_s(errorMessage, sizeof(errorMessage), errno);
+		std::cerr << "Error: Failed to create file at " << meshfilename << std::endl;
+		std::cerr << "Reason: " << errorMessage << std::endl;
 		return;
 	}
 	osData.precision(8);
